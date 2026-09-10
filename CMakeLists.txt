@@ -52,11 +52,23 @@ function(php_nano_configure_target target_name)
             PHP_NANO=1
             _POSIX_C_SOURCE=200809L
     )
+    if(CMAKE_SYSTEM_NAME STREQUAL "WASI")
+        target_compile_definitions(${target_name} PRIVATE ZEND_MM_ERROR=0)
+    endif()
     if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
         target_compile_options(
             ${target_name}
             PRIVATE -ffunction-sections -fdata-sections
         )
+        if(CMAKE_SYSTEM_NAME STREQUAL "WASI")
+            target_compile_options(
+                ${target_name}
+                PRIVATE
+                    -fwasm-exceptions
+                    "SHELL:-mllvm -wasm-enable-sjlj"
+                    "SHELL:-mllvm -wasm-use-legacy-eh=false"
+            )
+        endif()
     endif()
 endfunction()
 
@@ -78,7 +90,14 @@ if(PHP_NANO_BUILD_SMOKE)
     target_link_libraries(php-nano-smoke PRIVATE php-nano-runtime)
 
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-        if(APPLE)
+        if(CMAKE_SYSTEM_NAME STREQUAL "WASI")
+            set_target_properties(php-nano-smoke PROPERTIES SUFFIX ".wasm")
+            target_link_options(
+                php-nano-smoke
+                PRIVATE -fwasm-exceptions -Wl,--gc-sections
+            )
+            target_link_libraries(php-nano-smoke PRIVATE setjmp unwind)
+        elseif(APPLE)
             target_link_options(php-nano-smoke PRIVATE -Wl,-dead_strip)
         else()
             target_link_options(php-nano-smoke PRIVATE -Wl,--gc-sections)

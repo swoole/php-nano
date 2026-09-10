@@ -71,7 +71,8 @@ sources as C++17, and performs the final link with the C++ linker.
 The repository's `CMakeLists.txt` is only a CI/developer test harness. It reads
 the same Composer manifest and compiles all production sources into the
 `php-nano-runtime` test archive. Host builds also link `php-nano-smoke` and run
-it through CTest; iOS and Android CI compile-check the complete archive without
+it through CTest; WASI Preview 2 links the same smoke program and executes it
+with Wasmtime. iOS and Android CI compile-check the complete archive without
 trying to execute a cross-compiled program. The smoke executable uses a
 non-dispatching test host for the two dynamic-call ABI hooks that PHPX
 implements in a real TypePHP program. It is not installed or invoked by
@@ -79,9 +80,10 @@ TypePHP applications. There is no CMake,
 Autoconf, Automake, `configure`, or intermediate runtime archive in the native
 application build path. The current TypePHP source builder exposes
 the host-native and `wasm32-wasip2` targets. CI exercises Linux and macOS host
-builds, plus iPhoneOS `arm64` and Android `arm64-v8a` cross-compilation. Windows
-is intentionally not a php-nano runtime target: TypePHP uses its full PHP/PHPX
-DLL distribution and applies the Nano restrictions in the compiler.
+builds, WASI Preview 2 build/execution, plus iPhoneOS `arm64` and Android
+`arm64-v8a` cross-compilation. Windows is intentionally not a php-nano runtime
+target: TypePHP uses its full PHP/PHPX DLL distribution and applies the Nano
+restrictions in the compiler.
 
 For a standalone repository check:
 

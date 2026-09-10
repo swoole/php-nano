@@ -123,6 +123,7 @@ const STREAM_FILTER_WRITE = UNKNOWN;
  */
 const STREAM_FILTER_ALL = UNKNOWN;
 
+#ifndef PHP_NANO
 /**
  * @var int
  * @cvalue PHP_STREAM_CLIENT_PERSISTENT
@@ -434,6 +435,7 @@ const STREAM_SERVER_BIND = UNKNOWN;
  * @cvalue STREAM_XPORT_LISTEN
  */
 const STREAM_SERVER_LISTEN = UNKNOWN;
+#endif
 
 /**
  * @var int

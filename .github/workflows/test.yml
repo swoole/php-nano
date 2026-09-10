@@ -64,3 +64,39 @@ jobs:
             -DANDROID_PLATFORM=android-24 \
             -DPHP_NANO_BUILD_SMOKE=OFF
           cmake --build build/android --target php-nano-runtime --parallel 4
+
+  wasi-smoke:
+    name: WASI Preview 2
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install WASI SDK 34
+        env:
+          WASI_SDK_ARCHIVE: wasi-sdk-34.0-x86_64-linux.tar.gz
+          WASI_SDK_SHA256: b761e3a0721dbae9c09a0059e5fdb2bf917d1b4a8a7b430fb3b5aafb0984b2c4
+        run: |
+          curl --fail --location --retry 3 \
+            --output "$RUNNER_TEMP/$WASI_SDK_ARCHIVE" \
+            "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-34/$WASI_SDK_ARCHIVE"
+          echo "$WASI_SDK_SHA256  $RUNNER_TEMP/$WASI_SDK_ARCHIVE" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/wasi-sdk"
+          tar -xzf "$RUNNER_TEMP/$WASI_SDK_ARCHIVE" \
+            -C "$RUNNER_TEMP/wasi-sdk" --strip-components=1
+          echo "WASI_SDK_PATH=$RUNNER_TEMP/wasi-sdk" >> "$GITHUB_ENV"
+
+      - name: Install Wasmtime
+        uses: bytecodealliance/actions/wasmtime/setup@v1
+        with:
+          version: 47.0.3
+
+      - name: Build WASI runtime and smoke test
+        run: |
+          cmake -S . -B build/wasi \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE="$WASI_SDK_PATH/share/cmake/wasi-sdk-p2.cmake"
+          cmake --build build/wasi --parallel 4
+
+      - name: Run WASI smoke test
+        run: wasmtime build/wasi/php-nano-smoke.wasm nano-wasi-argument
