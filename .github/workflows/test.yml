@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   native-smoke:
-    name: ${{ matrix.os }} / Release
+    name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -31,7 +31,7 @@ jobs:
         run: ctest --test-dir build/tests --output-on-failure
 
   ios-compile:
-    name: iOS arm64 / Release
+    name: iOS arm64
     runs-on: macos-latest
 
     steps:
@@ -49,7 +49,7 @@ jobs:
           cmake --build build/ios --target php-nano-runtime --parallel 4
 
   android-compile:
-    name: Android arm64-v8a / Release
+    name: Android arm64-v8a
     runs-on: ubuntu-latest
 
     steps:
