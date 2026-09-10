@@ -50,7 +50,19 @@ up to 64 fractional decimal places and `Decimal` results with up to 50
 fractional decimal places; digits beyond those limits are truncated by
 libbcmath. Nano `Decimal::pow()` accepts integer exponents only. These limits
 are deliberate fallback semantics, not claims of bit-for-bit equivalence with
-the normal MPFR/mpdecimal backends.
+the normal GMP/MPFR/mpdecimal backends:
+
+- normal `Decimal` uses about 50 significant digits, whereas Nano uses a
+  50-place fixed decimal scale;
+- normal `BigFloat` uses a 256-bit binary significand and a floating exponent,
+  whereas Nano uses a 64-place fixed decimal scale;
+- rounding at the precision boundary, extreme scientific-notation ranges,
+  textual formatting, and performance are therefore allowed to differ;
+- applications requiring cross-backend reproducibility must constrain their
+  input range and decimal places and apply an explicit rounding policy.
+
+Nano `BigFloat` is a compatibility fallback for the TypePHP API. It MUST NOT be
+described as an MPFR-equivalent numeric model.
 
 Fiber and Generator are excluded from the registered class set. TypePHP rejects
 `yield` and `yield from` while compiling a Nano target, including generator
