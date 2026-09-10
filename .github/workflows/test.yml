@@ -1,0 +1,34 @@
+name: php-nano tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  native-smoke:
+    name: ${{ matrix.os }} / ${{ matrix.build_type }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        build_type:
+          - Debug
+          - Release
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure test build
+        run: cmake -S . -B build/tests -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+
+      - name: Build runtime and smoke test
+        run: cmake --build build/tests --parallel 4
+
+      - name: Run smoke test
+        run: ctest --test-dir build/tests --output-on-failure

@@ -1,0 +1,9 @@
+/build/
+/tests/build/
+/Makefile
+/CMakeFiles/
+/CMakeCache.txt
+/CTestTestfile.cmake
+/cmake_install.cmake
+/php-nano-smoke
+/.idea

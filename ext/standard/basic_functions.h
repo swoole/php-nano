@@ -1,0 +1,145 @@
+/*
+   +----------------------------------------------------------------------+
+   | Copyright © The PHP Group and Contributors.                          |
+   +----------------------------------------------------------------------+
+   | This source file is subject to the Modified BSD License that is      |
+   | bundled with this package in the file LICENSE, and is available      |
+   | through the World Wide Web at <https://www.php.net/license/>.        |
+   |                                                                      |
+   | SPDX-License-Identifier: BSD-3-Clause                                |
+   +----------------------------------------------------------------------+
+   | Authors: Andi Gutmans <andi@php.net>                                 |
+   |          Zeev Suraski <zeev@php.net>                                 |
+   +----------------------------------------------------------------------+
+*/
+
+#ifndef BASIC_FUNCTIONS_H
+#define BASIC_FUNCTIONS_H
+
+#include <wchar.h>
+
+#ifndef PHP_NANO
+#include <sys/stat.h>
+#include "php_filestat.h"
+
+#include "zend_highlight.h"
+
+#include "url_scanner_ex.h"
+#endif
+
+#include "basic_functions_decl.h"
+
+#if defined(_WIN32) && !defined(__clang__)
+#include <intrin.h>
+#endif
+
+extern zend_module_entry basic_functions_module;
+#define basic_functions_module_ptr &basic_functions_module
+
+PHP_MINIT_FUNCTION(basic);
+PHP_MSHUTDOWN_FUNCTION(basic);
+PHP_RINIT_FUNCTION(basic);
+PHP_RSHUTDOWN_FUNCTION(basic);
+PHP_MINFO_FUNCTION(basic);
+
+#ifndef PHP_NANO
+ZEND_API void php_get_highlight_struct(zend_syntax_highlighter_ini *syntax_highlighter_ini);
+
+PHP_MINIT_FUNCTION(poll);
+PHP_MINIT_FUNCTION(user_filters);
+PHP_RSHUTDOWN_FUNCTION(user_filters);
+PHP_RSHUTDOWN_FUNCTION(browscap);
+
+PHPAPI zend_result _php_error_log(int opt_err, const zend_string *message, const zend_string *opt, const zend_string *headers);
+#endif
+
+typedef struct _php_basic_globals {
+	HashTable *user_shutdown_function_names;
+	HashTable putenv_ht;
+	zend_string *strtok_string;
+	zend_string *ctype_string; /* current LC_CTYPE locale (or NULL for 'C') */
+	bool locale_changed;   /* locale was changed and has to be restored */
+	char *strtok_last;
+	char strtok_table[256];
+	size_t strtok_len;
+	zend_fcall_info user_compare_fci;
+	zend_fcall_info_cache user_compare_fci_cache;
+
+	/* var.c */
+	unsigned serialize_lock; /* whether to use the locally supplied var_hash instead (__sleep/__wakeup) */
+	struct {
+		struct php_serialize_data *data;
+		unsigned level;
+	} serialize;
+	struct {
+		struct php_unserialize_data *data;
+		unsigned level;
+	} unserialize;
+	zend_long unserialize_max_depth;
+
+	/* filestat.c && main/streams/streams.c */
+	zend_string *CurrentStatFile, *CurrentLStatFile;
+	php_stream_statbuf ssb, lssb;
+
+	/* file.c */
+#if defined(_REENTRANT)
+	mbstate_t mblen_state;
+#endif
+	int umask;
+#ifndef PHP_NANO
+	zend_llist *user_tick_functions;
+
+	zval active_ini_file_section;
+
+	/* http_fopen_wrapper.c */
+	zval last_http_headers;
+
+	/* pageinfo.c */
+	zend_long page_uid;
+	zend_long page_gid;
+	zend_long page_inode;
+	time_t page_mtime;
+
+	/* syslog.c */
+	char *syslog_device;
+
+	/* url_scanner_ex.re */
+	url_adapt_state_ex_t url_adapt_session_ex;
+	HashTable url_adapt_session_hosts_ht;
+	url_adapt_state_ex_t url_adapt_output_ex;
+	HashTable url_adapt_output_hosts_ht;
+	HashTable *user_filter_map;
+
+#endif
+} php_basic_globals;
+
+#ifdef ZTS
+#define BG(v) ZEND_TSRMG(basic_globals_id, php_basic_globals *, v)
+PHPAPI extern int basic_globals_id;
+#else
+#define BG(v) (basic_globals.v)
+PHPAPI extern php_basic_globals basic_globals;
+#endif
+
+PHPAPI zend_string *php_getenv(const char *str, size_t str_len);
+
+PHPAPI double php_get_nan(void);
+PHPAPI double php_get_inf(void);
+
+#ifndef PHP_NANO
+typedef struct _php_shutdown_function_entry {
+	zend_fcall_info_cache fci_cache;
+	zval *params;
+	uint32_t param_count;
+} php_shutdown_function_entry;
+
+PHPAPI extern bool register_user_shutdown_function(const char *function_name, size_t function_len, php_shutdown_function_entry *shutdown_function_entry);
+PHPAPI extern bool remove_user_shutdown_function(const char *function_name, size_t function_len);
+PHPAPI extern bool append_user_shutdown_function(php_shutdown_function_entry *shutdown_function_entry);
+
+PHPAPI void php_call_shutdown_functions(void);
+PHPAPI void php_free_shutdown_functions(void);
+#endif
+
+
+#endif /* BASIC_FUNCTIONS_H */

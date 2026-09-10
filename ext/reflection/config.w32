@@ -1,0 +1,4 @@
+// vim:ft=javascript
+
+EXTENSION("reflection", "php_reflection.c", false /* never shared */);
+PHP_REFLECTION="yes";

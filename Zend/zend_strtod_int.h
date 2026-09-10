@@ -1,0 +1,108 @@
+/*
+   +----------------------------------------------------------------------+
+   | Zend Engine                                                          |
+   +----------------------------------------------------------------------+
+   | Copyright © Zend Technologies Ltd., a subsidiary company of          |
+   |     Perforce Software, Inc., and Contributors.                       |
+   +----------------------------------------------------------------------+
+   | This source file is subject to the Modified BSD License that is      |
+   | bundled with this package in the file LICENSE, and is available      |
+   | through the World Wide Web at <https://www.php.net/license/>.        |
+   |                                                                      |
+   | SPDX-License-Identifier: BSD-3-Clause                                |
+   +----------------------------------------------------------------------+
+   | Authors: Anatol Belski <ab@php.net>                                  |
+   +----------------------------------------------------------------------+
+*/
+
+/* internal header; not supposed to be installed; FIXME but unfortunately is */
+
+#ifndef ZEND_STRTOD_INT_H
+#define ZEND_STRTOD_INT_H
+
+#ifdef ZTS
+#include <TSRM.h>
+#endif
+
+#include <stddef.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <stdarg.h>
+#include <math.h>
+
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+
+/* TODO check to undef this option, this might
+	make more perf. destroy_freelist()
+	should be adapted then. */
+#define Omit_Private_Memory 1
+
+/* HEX strings aren't supported as per
+	https://wiki.php.net/rfc/remove_hex_support_in_numeric_strings */
+#define NO_HEX_FP 1
+
+#include <inttypes.h>
+
+#ifdef USE_LOCALE
+#undef USE_LOCALE
+#endif
+
+#ifndef NO_INFNAN_CHECK
+#define NO_INFNAN_CHECK
+#endif
+
+#ifndef NO_ERRNO
+#define NO_ERRNO
+#endif
+
+#ifdef WORDS_BIGENDIAN
+#define IEEE_BIG_ENDIAN 1
+#else
+#define IEEE_LITTLE_ENDIAN 1
+#endif
+
+#if (defined(__APPLE__) || defined(__APPLE_CC__)) && (defined(__BIG_ENDIAN__) || defined(__LITTLE_ENDIAN__))
+# if defined(__LITTLE_ENDIAN__)
+#  undef WORDS_BIGENDIAN
+# else
+#  if defined(__BIG_ENDIAN__)
+#   define WORDS_BIGENDIAN
+#  endif
+# endif
+#endif
+
+#if defined(__arm__) && !defined(__VFP_FP__)
+/*
+ *  * Although the CPU is little endian the FP has different
+ *   * byte and word endianness. The byte order is still little endian
+ *    * but the word order is big endian.
+ *     */
+#define IEEE_BIG_ENDIAN
+#undef IEEE_LITTLE_ENDIAN
+#endif
+
+#ifdef __vax__
+#define VAX
+#undef IEEE_LITTLE_ENDIAN
+#endif
+
+#ifdef IEEE_LITTLE_ENDIAN
+#define IEEE_8087 1
+#endif
+
+#ifdef IEEE_BIG_ENDIAN
+#define IEEE_MC68k 1
+#endif
+
+#if defined(_MSC_VER)
+#ifndef int32_t
+#define int32_t __int32
+#endif
+#ifndef uint32_t
+#define uint32_t unsigned __int32
+#endif
+#endif
+
+#endif /* ZEND_STRTOD_INT_H */

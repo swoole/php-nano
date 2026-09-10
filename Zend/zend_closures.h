@@ -1,0 +1,46 @@
+/*
+   +----------------------------------------------------------------------+
+   | Zend Engine                                                          |
+   +----------------------------------------------------------------------+
+   | Copyright © Zend Technologies Ltd., a subsidiary company of          |
+   |     Perforce Software, Inc., and Contributors.                       |
+   +----------------------------------------------------------------------+
+   | This source file is subject to the Modified BSD License that is      |
+   | bundled with this package in the file LICENSE, and is available      |
+   | through the World Wide Web at <https://www.php.net/license/>.        |
+   |                                                                      |
+   | SPDX-License-Identifier: BSD-3-Clause                                |
+   +----------------------------------------------------------------------+
+   | Authors: Christian Seiler <chris_se@gmx.net>                         |
+   |          Dmitry Stogov <dmitry@php.net>                              |
+   +----------------------------------------------------------------------+
+*/
+
+#ifndef ZEND_CLOSURES_H
+#define ZEND_CLOSURES_H
+
+#include "zend_types.h"
+
+BEGIN_EXTERN_C()
+
+/* This macro depends on zend_closure structure layout */
+#define ZEND_CLOSURE_OBJECT(op_array) \
+	((zend_object*)((char*)(op_array) - sizeof(zend_object)))
+
+void zend_register_closure_ce(void);
+void zend_closure_bind_var(zval *closure_zv, zend_string *var_name, zval *var);
+void zend_closure_bind_var_ex(zval *closure_zv, uint32_t offset, zval *val);
+void zend_closure_from_frame(zval *closure_zv, const zend_execute_data *frame);
+
+extern ZEND_API zend_class_entry *zend_ce_closure;
+
+ZEND_API void zend_create_closure(zval *res, zend_function *op_array, zend_class_entry *scope, zend_class_entry *called_scope, zend_object *this_ptr);
+ZEND_API void zend_create_fake_closure(zval *res, zend_function *op_array, zend_class_entry *scope, zend_class_entry *called_scope, zend_object *this_ptr);
+ZEND_API void zend_create_partial_closure(zval *res, zend_function *func, zend_class_entry *scope, zend_class_entry *called_scope, zend_object *this_ptr, bool partial_of_closure);
+ZEND_API zend_function *zend_get_closure_invoke_method(zend_object *obj);
+ZEND_API const zend_function *zend_get_closure_method_def(zend_object *obj);
+ZEND_API zend_object* zend_get_closure_this_ptr(zval *obj);
+
+END_EXTERN_C()
+
+#endif

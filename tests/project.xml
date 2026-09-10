@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project mode="native" name="php-nano-tests">
+  <target>native</target>
+  <build-type>debug</build-type>
+  <output>php-nano-tests</output>
+  <sources>
+    <source>runtime_test.cpp</source>
+  </sources>
+</project>
