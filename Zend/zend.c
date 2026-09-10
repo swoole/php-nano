@@ -1308,12 +1308,10 @@ ZEND_API size_t zend_get_page_size(void)
 	SYSTEM_INFO system_info;
 	GetSystemInfo(&system_info);
 	return system_info.dwPageSize;
-#elif defined(__FreeBSD__) || defined(__APPLE__)
-	/* This returns the value obtained from
-	 * the auxv vector, avoiding a
-	 * syscall (on FreeBSD)/function call (on macOS). */
-	return getpagesize();
 #else
+	/* sysconf(_SC_PAGESIZE) is POSIX and remains visible when Nano is built
+	 * with a strict POSIX feature profile. In particular, macOS hides the
+	 * legacy getpagesize() declaration in that mode. */
 	return (size_t) sysconf(_SC_PAGESIZE);
 #endif
 }

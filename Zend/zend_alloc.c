@@ -457,10 +457,13 @@ static void *zend_mm_mmap_fixed(void *addr, size_t size)
 static void *zend_mm_mmap(size_t size)
 {
 	size_t allocation_size = ZEND_MM_ALIGNED_SIZE_EX(size, ZEND_MM_CHUNK_SIZE);
-	void *ptr = aligned_alloc(ZEND_MM_CHUNK_SIZE, allocation_size);
+	void *ptr = NULL;
+	if (posix_memalign(&ptr, ZEND_MM_CHUNK_SIZE, allocation_size) != 0) {
+		ptr = NULL;
+	}
 	if (ptr != NULL) {
 		/* Anonymous mmap returns zero-filled pages.  Preserve that contract
-		 * when Nano uses the C11 allocator, including for recycled blocks. */
+		 * when Nano uses the POSIX allocator, including for recycled blocks. */
 		memset(ptr, 0, allocation_size);
 	}
 	return ptr;

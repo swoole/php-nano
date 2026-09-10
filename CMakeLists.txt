@@ -37,31 +37,54 @@ endfunction()
 php_nano_read_manifest_array(PHP_NANO_SOURCES sources)
 php_nano_read_manifest_array(PHP_NANO_INCLUDE_DIRS include-dirs)
 
-add_executable(
-    php-nano-smoke
-    ${PHP_NANO_SOURCES}
-    tests/host_call_stubs.cpp
-    tests/runtime_test.cpp
-    tests/smoke_test.cpp
+option(
+    PHP_NANO_BUILD_SMOKE
+    "Build the runnable host smoke test (disable when cross-compiling)"
+    ON
 )
 
-target_include_directories(php-nano-smoke PRIVATE ${PHP_NANO_INCLUDE_DIRS})
-target_compile_definitions(
-    php-nano-smoke
-    PRIVATE
-        TYPEPHP_NATIVE=1
-        PHP_NANO=1
-        _POSIX_C_SOURCE=200809L
-)
-
-if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(php-nano-smoke PRIVATE -ffunction-sections -fdata-sections)
-    if(APPLE)
-        target_link_options(php-nano-smoke PRIVATE -Wl,-dead_strip)
-    else()
-        target_link_options(php-nano-smoke PRIVATE -Wl,--gc-sections)
+function(php_nano_configure_target target_name)
+    target_include_directories(${target_name} PRIVATE ${PHP_NANO_INCLUDE_DIRS})
+    target_compile_definitions(
+        ${target_name}
+        PRIVATE
+            TYPEPHP_NATIVE=1
+            PHP_NANO=1
+            _POSIX_C_SOURCE=200809L
+    )
+    if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+        target_compile_options(
+            ${target_name}
+            PRIVATE -ffunction-sections -fdata-sections
+        )
     endif()
-endif()
+endfunction()
 
-enable_testing()
-add_test(NAME php-nano-smoke COMMAND php-nano-smoke nano-argument)
+# Mobile CI builds this complete archive to compile-check every production
+# source without pretending that an iOS/Android executable can run on the
+# GitHub host. TypePHP applications still consume composer.json directly.
+add_library(php-nano-runtime STATIC ${PHP_NANO_SOURCES})
+set_target_properties(php-nano-runtime PROPERTIES OUTPUT_NAME php-nano)
+php_nano_configure_target(php-nano-runtime)
+
+if(PHP_NANO_BUILD_SMOKE)
+    add_executable(
+        php-nano-smoke
+        tests/host_call_stubs.cpp
+        tests/runtime_test.cpp
+        tests/smoke_test.cpp
+    )
+    php_nano_configure_target(php-nano-smoke)
+    target_link_libraries(php-nano-smoke PRIVATE php-nano-runtime)
+
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        if(APPLE)
+            target_link_options(php-nano-smoke PRIVATE -Wl,-dead_strip)
+        else()
+            target_link_options(php-nano-smoke PRIVATE -Wl,--gc-sections)
+        endif()
+    endif()
+
+    enable_testing()
+    add_test(NAME php-nano-smoke COMMAND php-nano-smoke nano-argument)
+endif()

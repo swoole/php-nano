@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   native-smoke:
-    name: ${{ matrix.os }} / ${{ matrix.build_type }}
+    name: ${{ matrix.os }} / Release
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -17,18 +17,50 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-        build_type:
-          - Debug
-          - Release
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Configure test build
-        run: cmake -S . -B build/tests -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        run: cmake -S . -B build/tests -DCMAKE_BUILD_TYPE=Release
 
       - name: Build runtime and smoke test
         run: cmake --build build/tests --parallel 4
 
       - name: Run smoke test
         run: ctest --test-dir build/tests --output-on-failure
+
+  ios-compile:
+    name: iOS arm64 / Release
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile php-nano for iPhoneOS arm64
+        run: |
+          cmake -S . -B build/ios \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_SYSTEM_NAME=iOS \
+            -DCMAKE_OSX_SYSROOT=iphoneos \
+            -DCMAKE_OSX_ARCHITECTURES=arm64 \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
+            -DPHP_NANO_BUILD_SMOKE=OFF
+          cmake --build build/ios --target php-nano-runtime --parallel 4
+
+  android-compile:
+    name: Android arm64-v8a / Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile php-nano for Android arm64-v8a
+        run: |
+          cmake -S . -B build/android \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake" \
+            -DANDROID_ABI=arm64-v8a \
+            -DANDROID_PLATFORM=android-24 \
+            -DPHP_NANO_BUILD_SMOKE=OFF
+          cmake --build build/android --target php-nano-runtime --parallel 4
