@@ -556,7 +556,7 @@ void php_init_config(void)
 			zend_stat_t statbuf = {0};
 
 			if (!VCWD_STAT(php_ini_file_name, &statbuf)) {
-				if (!((statbuf.st_mode & S_IFMT) == S_IFDIR)) {
+				if (!S_ISDIR(statbuf.st_mode)) {
 					fp = VCWD_FOPEN(php_ini_file_name, "r");
 					if (fp) {
 						filename = expand_filepath(php_ini_file_name, NULL);

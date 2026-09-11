@@ -64,7 +64,6 @@
 # include <pwd.h>
 #endif
 
-#include "fsock.h"
 #include "fopen_wrappers.h"
 #include "streamsfuncs.h" /* To define constants in the arg_info */
 

@@ -349,7 +349,6 @@ zend_module_entry basic_functions_module = {
 #include "zend_exceptions.h"
 #include "zend_ini.h"
 #include "zend_operators.h"
-#include "ext/standard/php_dns.h"
 #include "ext/standard/php_uuencode.h"
 #include "ext/standard/crc32_x86.h"
 

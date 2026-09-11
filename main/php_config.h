@@ -19,6 +19,9 @@
 #ifndef PHP_CONFIG_FILE_PATH
 #define PHP_CONFIG_FILE_PATH ""
 #endif
+#ifndef PHP_CONFIG_FILE_SCAN_DIR
+#define PHP_CONFIG_FILE_SCAN_DIR ""
+#endif
 
 #if defined(_WIN32)
 #error "php-nano does not target Windows; use TypePHP --nano with the full PHP/PHPX DLL runtime"

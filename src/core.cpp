@@ -84,6 +84,14 @@ ZEND_API void zend_html_puts(const char *value, size_t length)
     }
 }
 
+/* Kept byte-for-byte equivalent to main/main.c's forwarding layer. Nano does
+ * not compile the hosted PHP process bootstrap, but php_ini.c uses this ABI
+ * when rendering phpinfo() output. */
+PHPAPI void php_html_puts(const char *value, size_t length)
+{
+    zend_html_puts(value, length);
+}
+
 PHPAPI ZEND_COLD void php_verror(
     const char *docref, int type, const char *format, va_list args)
 {
