@@ -12,6 +12,14 @@
 /* Use PHP's portable C SHA-3 implementation on every Nano target. */
 #define HAVE_SLOW_HASH3 1
 
+/* Values normally emitted by php-src's configure-generated build-defs.h. */
+#ifndef PHP_UNAME
+#define PHP_UNAME "PHP Nano"
+#endif
+#ifndef PHP_CONFIG_FILE_PATH
+#define PHP_CONFIG_FILE_PATH ""
+#endif
+
 #if defined(_WIN32)
 #error "php-nano does not target Windows; use TypePHP --nano with the full PHP/PHPX DLL runtime"
 #endif
@@ -21,6 +29,10 @@
 #define HAVE_SYS_STAT_H 1
 #define HAVE_SYS_TYPES_H 1
 #define HAVE_SYS_TIME_H 1
+#define HAVE_LOCALTIME_R 1
+#define HAVE_GMTIME_R 1
+#define HAVE_CTIME_R 1
+#define HAVE_ASCTIME_R 1
 #define HAVE_FCNTL_H 1
 #define HAVE_UTIME_H 1
 #define HAVE_UTIME 1

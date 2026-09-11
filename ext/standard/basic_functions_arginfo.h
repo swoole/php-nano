@@ -1,5 +1,5 @@
 /* This is a generated file, edit basic_functions.stub.php instead.
- * Stub hash: 988a25b109da9e9bcd41d2c1504ddbb5aa7c35da
+ * Stub hash: fe71b86d8fd10419ab9892b46c42f241194d7761
  * Has decl header: yes */
 
 #include "zend_attributes.h"
@@ -1637,6 +1637,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_getimagesizefromstring, 0, 1, MA
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 	ZEND_ARG_INFO_WITH_DEFAULT_VALUE(1, image_info, "null")
 ZEND_END_ARG_INFO()
+#endif
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phpinfo, 0, 0, IS_TRUE, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, flags, IS_LONG, 0, "INFO_ALL")
@@ -1650,16 +1651,17 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phpcredits, 0, 0, IS_TRUE, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, flags, IS_LONG, 0, "CREDITS_ALL")
 ZEND_END_ARG_INFO()
 
-#define arginfo_php_sapi_name arginfo_get_include_path
+#define arginfo_php_sapi_name arginfo_ob_get_flush
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_php_uname, 0, 0, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, mode, IS_STRING, 0, "\"a\"")
 ZEND_END_ARG_INFO()
 
-#define arginfo_php_ini_scanned_files arginfo_get_include_path
+#define arginfo_php_ini_scanned_files arginfo_ob_get_flush
 
-#define arginfo_php_ini_loaded_file arginfo_get_include_path
+#define arginfo_php_ini_loaded_file arginfo_ob_get_flush
 
+#if !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_iptcembed, 0, 2, MAY_BE_STRING|MAY_BE_BOOL)
 	ZEND_ARG_TYPE_INFO(0, iptc_data, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, filename, IS_STRING, 0)
@@ -2961,6 +2963,7 @@ ZEND_FUNCTION(image_type_to_mime_type);
 ZEND_FUNCTION(image_type_to_extension);
 ZEND_FUNCTION(getimagesize);
 ZEND_FUNCTION(getimagesizefromstring);
+#endif
 ZEND_FUNCTION(phpinfo);
 ZEND_FUNCTION(phpversion);
 ZEND_FUNCTION(phpcredits);
@@ -2968,6 +2971,7 @@ ZEND_FUNCTION(php_sapi_name);
 ZEND_FUNCTION(php_uname);
 ZEND_FUNCTION(php_ini_scanned_files);
 ZEND_FUNCTION(php_ini_loaded_file);
+#if !defined(PHP_NANO)
 ZEND_FUNCTION(iptcembed);
 ZEND_FUNCTION(iptcparse);
 ZEND_FUNCTION(levenshtein);
@@ -3661,6 +3665,7 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("image_type_to_extension", zif_image_type_to_extension, arginfo_image_type_to_extension, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(getimagesize, arginfo_getimagesize)
 	ZEND_FE(getimagesizefromstring, arginfo_getimagesizefromstring)
+#endif
 	ZEND_FE(phpinfo, arginfo_phpinfo)
 	ZEND_RAW_FENTRY("phpversion", zif_phpversion, arginfo_phpversion, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(phpcredits, arginfo_phpcredits)
@@ -3668,6 +3673,7 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("php_uname", zif_php_uname, arginfo_php_uname, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(php_ini_scanned_files, arginfo_php_ini_scanned_files)
 	ZEND_FE(php_ini_loaded_file, arginfo_php_ini_loaded_file)
+#if !defined(PHP_NANO)
 	ZEND_FE(iptcembed, arginfo_iptcembed)
 	ZEND_FE(iptcparse, arginfo_iptcparse)
 	ZEND_FE(levenshtein, arginfo_levenshtein)

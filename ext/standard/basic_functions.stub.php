@@ -3229,6 +3229,8 @@ function getimagesize(string $filename, &$image_info = null): array|false {}
  */
 function getimagesizefromstring(string $string, &$image_info = null): array|false {}
 
+#endif
+
 /* info.c */
 
 function phpinfo(int $flags = INFO_ALL): true {} // make return type void
@@ -3258,6 +3260,8 @@ function php_ini_scanned_files(): string|false {}
 
 /** @refcount 1 */
 function php_ini_loaded_file(): string|false {}
+
+#ifndef PHP_NANO
 
 /* iptc.c */
 
