@@ -83,32 +83,52 @@ PHP_MINIT_FUNCTION(basic)
 #endif
 
 	register_basic_functions_symbols(module_number);
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR)
 	php_ce_incomplete_class = register_class___PHP_Incomplete_Class();
 	php_register_incomplete_class_handlers();
+#endif
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MATH)
 	rounding_mode_ce = register_class_RoundingMode();
+#endif
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY)
 	sort_direction_ce = register_class_SortDirection();
+#endif
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR)
 	if (PHP_MINIT(var)(INIT_FUNC_ARGS_PASSTHRU) != SUCCESS) {
 		return FAILURE;
 	}
+#endif
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)
 	if (PHP_MINIT(file)(INIT_FUNC_ARGS_PASSTHRU) != SUCCESS
 			|| PHP_MINIT(dir)(INIT_FUNC_ARGS_PASSTHRU) != SUCCESS
-			|| PHP_MINIT(stream_errors)(INIT_FUNC_ARGS_PASSTHRU) != SUCCESS
-			|| PHP_MINIT(array)(INIT_FUNC_ARGS_PASSTHRU) != SUCCESS) {
+			|| PHP_MINIT(stream_errors)(INIT_FUNC_ARGS_PASSTHRU) != SUCCESS) {
 		return FAILURE;
 	}
 	if (php_register_url_stream_wrapper("file", &php_plain_files_wrapper) != SUCCESS
 			|| php_register_url_stream_wrapper("glob", &php_glob_stream_wrapper) != SUCCESS) {
 		return FAILURE;
 	}
+#endif
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY)
+	if (PHP_MINIT(array)(INIT_FUNC_ARGS_PASSTHRU) != SUCCESS) {
+		return FAILURE;
+	}
+#endif
 	return SUCCESS;
 }
 
 PHP_MSHUTDOWN_FUNCTION(basic)
 {
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)
 	php_unregister_url_stream_wrapper("glob");
 	php_unregister_url_stream_wrapper("file");
 	PHP_MSHUTDOWN(file)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#endif
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY)
 	zend_result result = PHP_MSHUTDOWN(array)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#else
+	zend_result result = SUCCESS;
+#endif
 #ifdef ZTS
 	ts_free_id(basic_globals_id);
 #endif
@@ -117,6 +137,7 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 
 PHP_RINIT_FUNCTION(basic)
 {
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)
 	FG(default_context) = NULL;
 	FG(stream_wrappers) = NULL;
 	FG(stream_filters) = NULL;
@@ -124,12 +145,19 @@ PHP_RINIT_FUNCTION(basic)
 		return FAILURE;
 	}
 	return PHP_RINIT(dir)(INIT_FUNC_ARGS_PASSTHRU);
+#else
+	return SUCCESS;
+#endif
 }
 
 PHP_RSHUTDOWN_FUNCTION(basic)
 {
+#if !defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)
 	php_shutdown_stream_hashes();
 	return PHP_RSHUTDOWN(filestat)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#else
+	return SUCCESS;
+#endif
 }
 
 PHP_FUNCTION(ini_parse_quantity)

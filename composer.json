@@ -239,7 +239,212 @@
         "src/extension.cpp",
         "src/random.cpp",
         "src/time.cpp"
-      ]
+      ],
+      "components": {
+        "standard.core": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_CORE=1"],
+          "sources": [
+            "ext/standard/basic_functions.c"
+          ]
+        },
+        "standard.array": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_ARRAY=1"],
+          "requires": [
+            "standard.core",
+            "standard.string-api",
+            "standard.math-api",
+            "standard.type-api",
+            "random"
+          ]
+        },
+        "standard.string-api": {
+          "extension": "standard",
+          "sources": ["ext/standard/strnatcmp.c"]
+        },
+        "standard.string": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_STRING=1"],
+          "requires": ["standard.core", "random"],
+          "sources": ["ext/standard/strnatcmp.c"]
+        },
+        "standard.filesystem": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_FILESYSTEM=1"],
+          "requires": ["standard.core", "random"],
+          "sources": [
+            "ext/standard/dir.c",
+            "ext/standard/filestat.c",
+            "ext/standard/streamsfuncs.c"
+          ]
+        },
+        "standard.math": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_MATH=1"],
+          "requires": ["standard.core"],
+          "sources": ["ext/standard/math.c"]
+        },
+        "standard.math-api": {
+          "extension": "standard",
+          "sources": ["ext/standard/math.c"]
+        },
+        "standard.hash": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_HASH=1"],
+          "requires": ["standard.core", "standard.filesystem"],
+          "sources": [
+            "ext/standard/md5.c",
+            "ext/standard/sha1.c"
+          ]
+        },
+        "standard.encoding": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_ENCODING=1"],
+          "requires": ["standard.core"],
+          "sources": ["ext/standard/base64.c"]
+        },
+        "standard.format": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_FORMAT=1"],
+          "requires": ["standard.core"],
+          "sources": ["ext/standard/formatted_print.c"]
+        },
+        "standard.var": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_VAR=1"],
+          "requires": ["standard.core"],
+          "sources": [
+            "ext/standard/incomplete_class.c",
+            "ext/standard/var.c",
+            "ext/standard/var_unserializer.c"
+          ]
+        },
+        "standard.info": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_INFO=1"],
+          "requires": ["standard.core"],
+          "sources": [
+            "ext/standard/credits.c",
+            "ext/standard/css.c",
+            "ext/standard/info.c"
+          ]
+        },
+        "standard.type": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_TYPE=1"],
+          "requires": ["standard.core"],
+          "sources": ["ext/standard/type.c"]
+        },
+        "standard.type-api": {
+          "extension": "standard",
+          "sources": ["ext/standard/type.c"]
+        },
+        "standard.misc": {
+          "extension": "standard",
+          "module-entry": "basic_functions_module",
+          "defines": ["PHP_NANO_STANDARD_MISC=1"],
+          "requires": ["standard.core", "random"],
+          "sources": ["ext/standard/versioning.c"]
+        },
+        "date": {
+          "extension": "date",
+          "module-entry": "date_module_entry",
+          "sources": [
+            "ext/date/php_date.c", "ext/date/php_time.c", "ext/date/time_duration.c",
+            "ext/date/lib/astro.c", "ext/date/lib/dow.c", "ext/date/lib/duration.c",
+            "ext/date/lib/parse_date.c", "ext/date/lib/parse_tz.c", "ext/date/lib/parse_posix.c",
+            "ext/date/lib/timelib.c", "ext/date/lib/tm2unixtime.c", "ext/date/lib/unixtime2tm.c",
+            "ext/date/lib/parse_iso_intervals.c", "ext/date/lib/interval.c"
+          ]
+        },
+        "filter": {
+          "extension": "filter",
+          "module-entry": "filter_module_entry",
+          "sources": [
+            "ext/filter/callback_filter.c", "ext/filter/filter.c",
+            "ext/filter/logical_filters.c", "ext/filter/sanitizing_filters.c"
+          ]
+        },
+        "hash": {
+          "extension": "hash",
+          "module-entry": "hash_module_entry",
+          "sources": [
+            "ext/hash/hash.c", "ext/hash/hash_adler32.c", "ext/hash/hash_crc32.c",
+            "ext/hash/hash_fnv.c", "ext/hash/hash_gost.c", "ext/hash/hash_haval.c",
+            "ext/hash/hash_joaat.c", "ext/hash/hash_md.c", "ext/hash/hash_murmur.c",
+            "ext/hash/hash_ripemd.c", "ext/hash/hash_sha.c", "ext/hash/hash_sha3.c",
+            "ext/hash/hash_snefru.c", "ext/hash/hash_tiger.c", "ext/hash/hash_whirlpool.c",
+            "ext/hash/hash_xxhash.c", "ext/hash/murmur/PMurHash.c", "ext/hash/murmur/PMurHash128.c"
+          ]
+        },
+        "json": {
+          "extension": "json",
+          "module-entry": "json_module_entry",
+          "sources": [
+            "ext/json/json.c", "ext/json/json_encoder.c",
+            "ext/json/json_parser.tab.c", "ext/json/json_scanner.c"
+          ]
+        },
+        "pcre": {
+          "extension": "pcre",
+          "module-entry": "pcre_module_entry",
+          "sources": [
+            "ext/pcre/php_pcre.c", "ext/pcre/pcre2lib/pcre2_auto_possess.c",
+            "ext/pcre/pcre2lib/pcre2_chartables.c", "ext/pcre/pcre2lib/pcre2_chkdint.c",
+            "ext/pcre/pcre2lib/pcre2_compile.c", "ext/pcre/pcre2lib/pcre2_config.c",
+            "ext/pcre/pcre2lib/pcre2_context.c", "ext/pcre/pcre2lib/pcre2_convert.c",
+            "ext/pcre/pcre2lib/pcre2_dfa_match.c", "ext/pcre/pcre2lib/pcre2_error.c",
+            "ext/pcre/pcre2lib/pcre2_extuni.c", "ext/pcre/pcre2lib/pcre2_find_bracket.c",
+            "ext/pcre/pcre2lib/pcre2_jit_compile.c", "ext/pcre/pcre2lib/pcre2_maketables.c",
+            "ext/pcre/pcre2lib/pcre2_match_data.c", "ext/pcre/pcre2lib/pcre2_match.c",
+            "ext/pcre/pcre2lib/pcre2_newline.c", "ext/pcre/pcre2lib/pcre2_ord2utf.c",
+            "ext/pcre/pcre2lib/pcre2_pattern_info.c", "ext/pcre/pcre2lib/pcre2_script_run.c",
+            "ext/pcre/pcre2lib/pcre2_serialize.c", "ext/pcre/pcre2lib/pcre2_string_utils.c",
+            "ext/pcre/pcre2lib/pcre2_study.c", "ext/pcre/pcre2lib/pcre2_substitute.c",
+            "ext/pcre/pcre2lib/pcre2_substring.c", "ext/pcre/pcre2lib/pcre2_tables.c",
+            "ext/pcre/pcre2lib/pcre2_ucd.c", "ext/pcre/pcre2lib/pcre2_valid_utf.c",
+            "ext/pcre/pcre2lib/pcre2_xclass.c"
+          ]
+        },
+        "reflection": {
+          "extension": "reflection",
+          "module-entry": "reflection_module_entry",
+          "sources": ["ext/reflection/php_reflection.c"]
+        },
+        "random": {
+          "extension": "random",
+          "module-entry": "random_module_entry",
+          "sources": [
+            "ext/random/csprng.c", "ext/random/engine_mt19937.c",
+            "ext/random/engine_pcgoneseq128xslrr64.c", "ext/random/engine_secure.c",
+            "ext/random/engine_user.c", "ext/random/engine_xoshiro256starstar.c",
+            "ext/random/gammasection.c", "ext/random/random.c",
+            "ext/random/randomizer.c", "ext/random/zend_utils.c"
+          ]
+        },
+        "spl": {
+          "extension": "spl",
+          "module-entry": "spl_module_entry",
+          "requires": ["json"],
+          "sources": [
+            "ext/spl/php_spl.c", "ext/spl/spl_array.c", "ext/spl/spl_dllist.c",
+            "ext/spl/spl_exceptions.c", "ext/spl/spl_fixedarray.c", "ext/spl/spl_functions.c",
+            "ext/spl/spl_heap.c", "ext/spl/spl_iterators.c", "ext/spl/spl_observer.c"
+          ]
+        }
+      }
     }
   }
 }

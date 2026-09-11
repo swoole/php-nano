@@ -1,8 +1,10 @@
 /* This is a generated file, edit basic_functions.stub.php instead.
- * Stub hash: fe71b86d8fd10419ab9892b46c42f241194d7761
+ * Stub hash: ad07410b3d4e7ea56bf1e02d23352dc589f8f51a
  * Has decl header: yes */
 
+#if (!defined(PHP_NANO)) || (!defined(PHP_NANO) && defined(HAVE_STRPTIME)) || ((!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))) || ((!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)) || ((!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32)) && !defined(PHP_NANO)) || ((!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_TYPE))) || ((!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))) || ((!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR)))
 #include "zend_attributes.h"
+#endif
 #include "zend_constants.h"
 #include "zend_enum.h"
 
@@ -79,6 +81,7 @@ ZEND_END_ARG_INFO()
 #define arginfo_stream_wrapper_restore arginfo_stream_wrapper_unregister
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_array_push, 0, 1, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(1, array, IS_ARRAY, 0)
 	ZEND_ARG_VARIADIC_TYPE_INFO(0, values, IS_MIXED, 0)
@@ -201,13 +204,15 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_range, 0, 2, IS_ARRAY, 0)
 	ZEND_ARG_TYPE_MASK(0, end, MAY_BE_STRING|MAY_BE_LONG|MAY_BE_DOUBLE, NULL)
 	ZEND_ARG_TYPE_MASK(0, step, MAY_BE_LONG|MAY_BE_DOUBLE, "1")
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_shuffle, 0, 1, IS_TRUE, 0)
 	ZEND_ARG_TYPE_INFO(1, array, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_array_pop, 0, 1, IS_MIXED, 0)
 	ZEND_ARG_TYPE_INFO(1, array, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
@@ -338,14 +343,16 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_array_multisort, 0, 1, IS_TRUE, 
 	ZEND_ARG_INFO(ZEND_SEND_PREFER_REF, array)
 	ZEND_ARG_VARIADIC_INFO(ZEND_SEND_PREFER_REF, rest)
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_array_rand, 0, 1, MAY_BE_LONG|MAY_BE_STRING|MAY_BE_ARRAY)
 	ZEND_ARG_TYPE_INFO(0, array, IS_ARRAY, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, num, IS_LONG, 0, "1")
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_array_sum, 0, 1, MAY_BE_LONG|MAY_BE_DOUBLE)
 	ZEND_ARG_TYPE_INFO(0, array, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
@@ -405,7 +412,9 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_array_is_list, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, array, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
+#endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_base64_encode, 0, 1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 ZEND_END_ARG_INFO()
@@ -414,12 +423,15 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_base64_decode, 0, 1, MAY_BE_STRI
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, strict, _IS_BOOL, 0, "false")
 ZEND_END_ARG_INFO()
+#endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_constant, 0, 1, IS_MIXED, 0)
 	ZEND_ARG_TYPE_INFO(0, name, IS_STRING, 0)
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_ip2long, 0, 1, MAY_BE_LONG|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, ip, IS_STRING, 0)
 ZEND_END_ARG_INFO()
@@ -434,13 +446,13 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_getenv, 0, 0, MAY_BE_STRING|MAY_
 ZEND_END_ARG_INFO()
 #endif
 
-#if !defined(PHP_NANO) && defined(HAVE_PUTENV)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO) && defined(HAVE_PUTENV)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_putenv, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, assignment, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_getopt, 0, 1, MAY_BE_ARRAY|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, short_options, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, long_options, IS_ARRAY, 0, "[]")
@@ -459,7 +471,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_usleep, 0, 1, IS_VOID, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if !defined(PHP_NANO) && defined(HAVE_NANOSLEEP)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO) && defined(HAVE_NANOSLEEP)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_time_nanosleep, 0, 2, MAY_BE_ARRAY|MAY_BE_BOOL)
 	ZEND_ARG_TYPE_INFO(0, seconds, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, nanoseconds, IS_LONG, 0)
@@ -470,7 +482,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_time_sleep_until, 0, 1, _IS_BOOL
 ZEND_END_ARG_INFO()
 #endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_get_current_user, 0, 0, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 
@@ -526,6 +538,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_highlight_string, 0, 1, MAY_BE_S
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_ini_get, 0, 1, MAY_BE_STRING|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, option, IS_STRING, 0)
 ZEND_END_ARG_INFO()
@@ -549,8 +562,9 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ini_parse_quantity, 0, 1, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, shorthand, IS_STRING, 0)
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_set_include_path, 0, 1, MAY_BE_STRING|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, include_path, IS_STRING, 0)
 ZEND_END_ARG_INFO()
@@ -559,10 +573,12 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_get_include_path, 0, 0, MAY_BE_S
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_print_r, 0, 1, MAY_BE_STRING|MAY_BE_TRUE)
 	ZEND_ARG_TYPE_INFO(0, value, IS_MIXED, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, return, _IS_BOOL, 0, "false")
 ZEND_END_ARG_INFO()
+#endif
 
 #if !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_connection_aborted, 0, 0, IS_LONG, 0)
@@ -814,7 +830,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_headers_list, 0, 0, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if defined(PHP_NANO)
+#if defined(PHP_NANO) && (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_HASH))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_md5, 0, 1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, binary, _IS_BOOL, 0, "false")
@@ -828,7 +844,9 @@ ZEND_END_ARG_INFO()
 #define arginfo_sha1 arginfo_md5
 
 #define arginfo_sha1_file arginfo_md5_file
+#endif
 
+#if defined(PHP_NANO) && (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_sleep, 0, 1, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, seconds, IS_LONG, 0)
 ZEND_END_ARG_INFO()
@@ -851,6 +869,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_hrtime, 0, 0, MAY_BE_ARRAY|MAY_B
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_htmlspecialchars, 0, 1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, flags, IS_LONG, 0, "ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401")
@@ -876,6 +895,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_get_html_translation_table, 0, 0
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, flags, IS_LONG, 0, "ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401")
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, encoding, IS_STRING, 0, "\"UTF-8\"")
 ZEND_END_ARG_INFO()
+#endif
 
 #if !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_assert, 0, 1, _IS_BOOL, 0)
@@ -889,7 +909,10 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_assert_options, 0, 1, IS_MIXED, 
 ZEND_END_ARG_INFO()
 #endif
 
-#define arginfo_bin2hex arginfo_base64_encode
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_bin2hex, 0, 1, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
+ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_hex2bin, 0, 1, MAY_BE_STRING|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
@@ -903,13 +926,15 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_strspn, 0, 2, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
 #define arginfo_strcspn arginfo_strspn
+#endif
 
-#if defined(HAVE_NL_LANGINFO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_nl_langinfo, 0, 1, MAY_BE_STRING|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, item, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_strcoll, 0, 2, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, string1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, string2, IS_STRING, 0)
@@ -951,13 +976,13 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_strtok, 0, 1, MAY_BE_STRING|MAY_
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, token, IS_STRING, 1, "null")
 ZEND_END_ARG_INFO()
 
-#define arginfo_strtoupper arginfo_base64_encode
+#define arginfo_strtoupper arginfo_bin2hex
 
-#define arginfo_strtolower arginfo_base64_encode
+#define arginfo_strtolower arginfo_bin2hex
 
-#define arginfo_str_increment arginfo_base64_encode
+#define arginfo_str_increment arginfo_bin2hex
 
-#define arginfo_str_decrement arginfo_base64_encode
+#define arginfo_str_decrement arginfo_bin2hex
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_basename, 0, 1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, path, IS_STRING, 0)
@@ -1026,7 +1051,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_substr_replace, 0, 3, MAY_BE_STR
 	ZEND_ARG_TYPE_MASK(0, length, MAY_BE_ARRAY|MAY_BE_LONG|MAY_BE_NULL, "null")
 ZEND_END_ARG_INFO()
 
-#define arginfo_quotemeta arginfo_base64_encode
+#define arginfo_quotemeta arginfo_bin2hex
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ord, 0, 1, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, character, IS_STRING, 0)
@@ -1036,9 +1061,9 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_chr, 0, 1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, codepoint, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 
-#define arginfo_ucfirst arginfo_base64_encode
+#define arginfo_ucfirst arginfo_bin2hex
 
-#define arginfo_lcfirst arginfo_base64_encode
+#define arginfo_lcfirst arginfo_bin2hex
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_ucwords, 0, 1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
@@ -1051,7 +1076,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_strtr, 0, 2, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, to, IS_STRING, 1, "null")
 ZEND_END_ARG_INFO()
 
-#define arginfo_strrev arginfo_base64_encode
+#define arginfo_strrev arginfo_bin2hex
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_similar_text, 0, 2, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, string1, IS_STRING, 0)
@@ -1064,11 +1089,11 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_addcslashes, 0, 2, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, characters, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 
-#define arginfo_addslashes arginfo_base64_encode
+#define arginfo_addslashes arginfo_bin2hex
 
-#define arginfo_stripcslashes arginfo_base64_encode
+#define arginfo_stripcslashes arginfo_bin2hex
 
-#define arginfo_stripslashes arginfo_base64_encode
+#define arginfo_stripslashes arginfo_bin2hex
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_str_replace, 0, 3, MAY_BE_STRING|MAY_BE_ARRAY)
 	ZEND_ARG_TYPE_MASK(0, search, MAY_BE_ARRAY|MAY_BE_STRING, NULL)
@@ -1099,8 +1124,9 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_setlocale, 0, 2, MAY_BE_STRING|M
 	ZEND_ARG_INFO(0, locales)
 	ZEND_ARG_VARIADIC_INFO(0, rest)
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_parse_str, 0, 2, IS_VOID, 0)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 	ZEND_ARG_INFO(1, result)
@@ -1114,6 +1140,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_str_getcsv, 0, 1, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_str_repeat, 0, 2, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, times, IS_LONG, 0)
@@ -1126,7 +1153,8 @@ ZEND_END_ARG_INFO()
 
 #define arginfo_strnatcmp arginfo_strcoll
 
-#define arginfo_localeconv arginfo_ob_list_handlers
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_localeconv, 0, 0, IS_ARRAY, 0)
+ZEND_END_ARG_INFO()
 
 #define arginfo_strnatcasecmp arginfo_strcoll
 
@@ -1150,14 +1178,16 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_sscanf, 0, 2, MAY_BE_ARRAY|MAY_B
 	ZEND_ARG_VARIADIC_TYPE_INFO(1, vars, IS_MIXED, 0)
 ZEND_END_ARG_INFO()
 
-#define arginfo_str_rot13 arginfo_base64_encode
+#define arginfo_str_rot13 arginfo_bin2hex
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_str_shuffle, 0, 1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_str_word_count, 0, 1, MAY_BE_ARRAY|MAY_BE_LONG)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, format, IS_LONG, 0, "0")
@@ -1181,13 +1211,15 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_substr_compare, 0, 3, IS_LONG, 0
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, length, IS_LONG, 1, "null")
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, case_insensitive, _IS_BOOL, 0, "false")
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 #define arginfo_utf8_encode arginfo_str_shuffle
 
 #define arginfo_utf8_decode arginfo_str_shuffle
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_INFO_EX(arginfo_opendir, 0, 0, 1)
 	ZEND_ARG_TYPE_INFO(0, directory, IS_STRING, 0)
 	ZEND_ARG_INFO_WITH_DEFAULT_VALUE(0, context, "null")
@@ -1205,14 +1237,17 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_chdir, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, directory, IS_STRING, 0)
 ZEND_END_ARG_INFO()
+#endif
 
-#if (defined(HAVE_CHROOT) && !defined(ZTS) && defined(ENABLE_CHROOT_FUNC))
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_CHROOT) && !defined(ZTS) && defined(ENABLE_CHROOT_FUNC))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_chroot, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, directory, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#define arginfo_getcwd arginfo_ob_get_flush
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_getcwd, 0, 0, MAY_BE_STRING|MAY_BE_FALSE)
+ZEND_END_ARG_INFO()
 
 #define arginfo_rewinddir arginfo_closedir
 
@@ -1230,8 +1265,9 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_glob, 0, 1, MAY_BE_ARRAY|MAY_BE_
 	ZEND_ARG_TYPE_INFO(0, pattern, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, flags, IS_LONG, 0, "0")
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_exec, 0, 1, MAY_BE_STRING|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, command, IS_STRING, 0)
 	ZEND_ARG_INFO_WITH_DEFAULT_VALUE(1, output, "null")
@@ -1261,13 +1297,13 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_shell_exec, 0, 1, MAY_BE_STRING|
 ZEND_END_ARG_INFO()
 #endif
 
-#if !defined(PHP_NANO) && defined(HAVE_NICE)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO) && defined(HAVE_NICE)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_proc_nice, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, priority, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if !defined(__wasi__)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_flock, 0, 2, _IS_BOOL, 0)
 	ZEND_ARG_INFO(0, stream)
 	ZEND_ARG_TYPE_INFO(0, operation, IS_LONG, 0)
@@ -1275,12 +1311,14 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_flock, 0, 2, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_get_meta_tags, 0, 1, MAY_BE_ARRAY|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, filename, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, use_include_path, _IS_BOOL, 0, "false")
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_pclose, 0, 1, IS_LONG, 0)
 	ZEND_ARG_INFO(0, handle)
 ZEND_END_ARG_INFO()
@@ -1291,6 +1329,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_popen, 0, 0, 2)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_readfile, 0, 1, MAY_BE_LONG|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, filename, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, use_include_path, _IS_BOOL, 0, "false")
@@ -1305,13 +1344,15 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_rmdir, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, directory, IS_STRING, 0)
 	ZEND_ARG_INFO_WITH_DEFAULT_VALUE(0, context, "null")
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(__wasi__)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_umask, 0, 0, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, mask, IS_LONG, 1, "null")
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 #define arginfo_fclose arginfo_rewind
 
 #define arginfo_feof arginfo_rewind
@@ -1449,8 +1490,9 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_realpath, 0, 1, MAY_BE_STRING|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, path, IS_STRING, 0)
 ZEND_END_ARG_INFO()
+#endif
 
-#if defined(HAVE_FNMATCH)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(HAVE_FNMATCH)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_fnmatch, 0, 2, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, pattern, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, filename, IS_STRING, 0)
@@ -1458,6 +1500,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_fnmatch, 0, 2, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_sys_get_temp_dir, 0, 0, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 
@@ -1506,8 +1549,9 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_stat, 0, 1, MAY_BE_ARRAY|MAY_BE_
 ZEND_END_ARG_INFO()
 
 #define arginfo_lstat arginfo_stat
+#endif
 
-#if !defined(__wasi__)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_chown, 0, 2, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, filename, IS_STRING, 0)
 	ZEND_ARG_TYPE_MASK(0, user, MAY_BE_STRING|MAY_BE_LONG, NULL)
@@ -1519,7 +1563,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_chgrp, 0, 2, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if !defined(__wasi__) && defined(HAVE_LCHOWN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__) && defined(HAVE_LCHOWN)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_lchown, 0, 2, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, filename, IS_STRING, 0)
 	ZEND_ARG_TYPE_MASK(0, user, MAY_BE_STRING|MAY_BE_LONG, NULL)
@@ -1531,12 +1575,14 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_lchgrp, 0, 2, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_chmod, 0, 2, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, filename, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, permissions, IS_LONG, 0)
 ZEND_END_ARG_INFO()
+#endif
 
-#if defined(HAVE_UTIME)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(HAVE_UTIME)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_touch, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, filename, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, mtime, IS_LONG, 1, "null")
@@ -1544,6 +1590,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_touch, 0, 1, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_clearstatcache, 0, 0, IS_VOID, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, clear_realpath_cache, _IS_BOOL, 0, "false")
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, filename, IS_STRING, 0, "\"\"")
@@ -1557,10 +1604,14 @@ ZEND_END_ARG_INFO()
 
 #define arginfo_diskfreespace arginfo_disk_total_space
 
-#define arginfo_realpath_cache_get arginfo_ob_list_handlers
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_realpath_cache_get, 0, 0, IS_ARRAY, 0)
+ZEND_END_ARG_INFO()
 
-#define arginfo_realpath_cache_size arginfo_ob_get_level
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_realpath_cache_size, 0, 0, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+#endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FORMAT))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_sprintf, 0, 1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, format, IS_STRING, 0)
 	ZEND_ARG_VARIADIC_TYPE_INFO(0, values, IS_MIXED, 0)
@@ -1592,6 +1643,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_vfprintf, 0, 3, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, format, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, values, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
+#endif
 
 #if !defined(PHP_NANO)
 ZEND_BEGIN_ARG_INFO_EX(arginfo_fsockopen, 0, 0, 1)
@@ -1611,9 +1663,11 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_http_build_query, 0, 1, IS_STRIN
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, encoding_type, IS_LONG, 0, "PHP_QUERY_RFC1738")
 ZEND_END_ARG_INFO()
 
-#define arginfo_http_get_last_response_headers arginfo_error_get_last
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_http_get_last_response_headers, 0, 0, IS_ARRAY, 1)
+ZEND_END_ARG_INFO()
 
-#define arginfo_http_clear_last_response_headers arginfo_flush
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_http_clear_last_response_headers, 0, 0, IS_VOID, 0)
+ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_request_parse_body, 0, 0, IS_ARRAY, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, options, IS_ARRAY, 1, "null")
@@ -1639,6 +1693,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_getimagesizefromstring, 0, 1, MA
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_INFO))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phpinfo, 0, 0, IS_TRUE, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, flags, IS_LONG, 0, "INFO_ALL")
 ZEND_END_ARG_INFO()
@@ -1651,15 +1706,17 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phpcredits, 0, 0, IS_TRUE, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, flags, IS_LONG, 0, "CREDITS_ALL")
 ZEND_END_ARG_INFO()
 
-#define arginfo_php_sapi_name arginfo_ob_get_flush
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_php_sapi_name, 0, 0, MAY_BE_STRING|MAY_BE_FALSE)
+ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_php_uname, 0, 0, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, mode, IS_STRING, 0, "\"a\"")
 ZEND_END_ARG_INFO()
 
-#define arginfo_php_ini_scanned_files arginfo_ob_get_flush
+#define arginfo_php_ini_scanned_files arginfo_php_sapi_name
 
-#define arginfo_php_ini_loaded_file arginfo_ob_get_flush
+#define arginfo_php_ini_loaded_file arginfo_php_sapi_name
+#endif
 
 #if !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_iptcembed, 0, 2, MAY_BE_STRING|MAY_BE_BOOL)
@@ -1708,6 +1765,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_mail, 0, 3, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MATH))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_abs, 0, 1, MAY_BE_LONG|MAY_BE_DOUBLE)
 	ZEND_ARG_TYPE_MASK(0, num, MAY_BE_LONG|MAY_BE_DOUBLE, NULL)
 ZEND_END_ARG_INFO()
@@ -1844,6 +1902,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_fpow, 0, 2, IS_DOUBLE, 0)
 	ZEND_ARG_TYPE_INFO(0, num, IS_DOUBLE, 0)
 	ZEND_ARG_TYPE_INFO(0, exponent, IS_DOUBLE, 0)
 ZEND_END_ARG_INFO()
+#endif
 
 #if !defined(PHP_NANO) && defined(HAVE_GETTIMEOFDAY)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_microtime, 0, 0, MAY_BE_STRING|MAY_BE_DOUBLE)
@@ -1922,12 +1981,16 @@ ZEND_END_ARG_INFO()
 #endif
 
 #if !defined(PHP_NANO)
-#define arginfo_quoted_printable_decode arginfo_str_shuffle
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_quoted_printable_decode, 0, 1, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
+ZEND_END_ARG_INFO()
 
-#define arginfo_quoted_printable_encode arginfo_str_shuffle
+#define arginfo_quoted_printable_encode arginfo_quoted_printable_decode
 
-#define arginfo_soundex arginfo_str_shuffle
+#define arginfo_soundex arginfo_quoted_printable_decode
+#endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_stream_select, 0, 4, MAY_BE_LONG|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(1, read, IS_ARRAY, 1)
 	ZEND_ARG_TYPE_INFO(1, write, IS_ARRAY, 1)
@@ -1938,6 +2001,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_stream_select, 0, 4, MAY_BE_LONG
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_context_create, 0, 0, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, options, IS_ARRAY, 1, "null")
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, params, IS_ARRAY, 1, "null")
@@ -1988,8 +2052,9 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_filter_remove, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_INFO(0, stream_filter)
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_socket_client, 0, 0, 1)
 	ZEND_ARG_TYPE_INFO(0, address, IS_STRING, 0)
 	ZEND_ARG_INFO_WITH_DEFAULT_VALUE(1, error_code, "null")
@@ -2044,14 +2109,14 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_socket_get_crypto_status,
 ZEND_END_ARG_INFO()
 #endif
 
-#if !defined(PHP_NANO) && defined(HAVE_SHUTDOWN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO) && defined(HAVE_SHUTDOWN)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_socket_shutdown, 0, 2, _IS_BOOL, 0)
 	ZEND_ARG_INFO(0, stream)
 	ZEND_ARG_TYPE_INFO(0, mode, IS_LONG, 0)
 ZEND_END_ARG_INFO()
 #endif
 
-#if !defined(PHP_NANO) && defined(HAVE_SOCKETPAIR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO) && defined(HAVE_SOCKETPAIR)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_stream_socket_pair, 0, 3, MAY_BE_ARRAY|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, domain, IS_LONG, 0)
 	ZEND_ARG_TYPE_INFO(0, type, IS_LONG, 0)
@@ -2060,6 +2125,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_stream_socket_pair, 0, 3, MAY_BE
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_stream_copy_to_stream, 0, 2, MAY_BE_LONG|MAY_BE_FALSE)
 	ZEND_ARG_INFO(0, from)
 	ZEND_ARG_INFO(0, to)
@@ -2089,24 +2155,28 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_set_blocking, 0, 2, _IS_B
 	ZEND_ARG_INFO(0, stream)
 	ZEND_ARG_TYPE_INFO(0, enable, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_socket_set_blocking, 0, 2, _IS_BOOL, 0)
 	ZEND_ARG_INFO(0, stream)
 	ZEND_ARG_TYPE_INFO(0, enable, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_get_meta_data, 0, 1, IS_ARRAY, 0)
 	ZEND_ARG_INFO(0, stream)
 ZEND_END_ARG_INFO()
+#endif
 
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_socket_get_status, 0, 1, IS_ARRAY, 0)
 	ZEND_ARG_INFO(0, stream)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_stream_get_line, 0, 2, MAY_BE_STRING|MAY_BE_FALSE)
 	ZEND_ARG_INFO(0, stream)
 	ZEND_ARG_TYPE_INFO(0, length, IS_LONG, 0)
@@ -2115,34 +2185,40 @@ ZEND_END_ARG_INFO()
 
 #define arginfo_stream_resolve_include_path arginfo_filetype
 
-#define arginfo_stream_get_wrappers arginfo_ob_list_handlers
+#define arginfo_stream_get_wrappers arginfo_realpath_cache_get
 
-#define arginfo_stream_last_errors arginfo_ob_list_handlers
+#define arginfo_stream_last_errors arginfo_realpath_cache_get
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_clear_errors, 0, 0, IS_VOID, 0)
 ZEND_END_ARG_INFO()
-
-#if !defined(PHP_NANO)
-#define arginfo_stream_get_transports arginfo_headers_list
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_get_transports, 0, 0, IS_ARRAY, 0)
+ZEND_END_ARG_INFO()
+#endif
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_is_local, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_INFO(0, stream)
 	ZEND_ARG_INFO_WITH_DEFAULT_VALUE(0, context, "null")
 ZEND_END_ARG_INFO()
 
 #define arginfo_stream_isatty arginfo_rewind
+#endif
 
-#if defined(PHP_WIN32)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(PHP_WIN32)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_sapi_windows_vt100_support, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_INFO(0, stream)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, enable, _IS_BOOL, 1, "null")
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 #define arginfo_stream_set_chunk_size arginfo_stream_set_write_buffer
+#endif
 
-#if (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32))
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_set_timeout, 0, 2, _IS_BOOL, 0)
 	ZEND_ARG_INFO(0, stream)
 	ZEND_ARG_TYPE_INFO(0, seconds, IS_LONG, 0)
@@ -2150,7 +2226,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_set_timeout, 0, 2, _IS_BO
 ZEND_END_ARG_INFO()
 #endif
 
-#if (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32)) && !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32)) && !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_socket_set_timeout, 0, 2, _IS_BOOL, 0)
 	ZEND_ARG_INFO(0, stream)
 	ZEND_ARG_TYPE_INFO(0, seconds, IS_LONG, 0)
@@ -2158,7 +2234,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_socket_set_timeout, 0, 2, _IS_BO
 ZEND_END_ARG_INFO()
 #endif
 
-#if defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(PHP_NANO) && (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_microtime, 0, 0, MAY_BE_STRING|MAY_BE_DOUBLE)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, as_float, _IS_BOOL, 0, "false")
 ZEND_END_ARG_INFO()
@@ -2168,6 +2244,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_gettimeofday, 0, 0, MAY_BE_ARRAY
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_TYPE))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_gettype, 0, 1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, value, IS_MIXED, 0)
 ZEND_END_ARG_INFO()
@@ -2231,14 +2308,16 @@ ZEND_END_ARG_INFO()
 #define arginfo_is_iterable arginfo_boolval
 
 #define arginfo_is_countable arginfo_boolval
+#endif
 
-#if defined(PHP_NANO) || defined(HAVE_GETTIMEOFDAY)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC)) && defined(PHP_NANO) || defined(HAVE_GETTIMEOFDAY)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_uniqid, 0, 0, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, prefix, IS_STRING, 0, "\"\"")
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, more_entropy, _IS_BOOL, 0, "false")
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_parse_url, 0, 1, MAY_BE_LONG|MAY_BE_STRING|MAY_BE_ARRAY|MAY_BE_NULL|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, url, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, component, IS_LONG, 0, "-1")
@@ -2251,6 +2330,7 @@ ZEND_END_ARG_INFO()
 #define arginfo_rawurlencode arginfo_base64_encode
 
 #define arginfo_rawurldecode arginfo_base64_encode
+#endif
 
 #if !defined(PHP_NANO)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_get_headers, 0, 1, MAY_BE_ARRAY|MAY_BE_FALSE)
@@ -2282,13 +2362,14 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_stream_filter_register, 0, 2, _I
 	ZEND_ARG_TYPE_INFO(0, class, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 
-#define arginfo_convert_uuencode arginfo_str_shuffle
+#define arginfo_convert_uuencode arginfo_quoted_printable_decode
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_convert_uudecode, 0, 1, MAY_BE_STRING|MAY_BE_FALSE)
 	ZEND_ARG_TYPE_INFO(0, string, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 #endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_var_dump, 0, 1, IS_VOID, 0)
 	ZEND_ARG_TYPE_INFO(0, value, IS_MIXED, 0)
 	ZEND_ARG_VARIADIC_TYPE_INFO(0, values, IS_MIXED, 0)
@@ -2301,7 +2382,9 @@ ZEND_END_ARG_INFO()
 
 #define arginfo_debug_zval_dump arginfo_var_dump
 
-#define arginfo_serialize arginfo_gettype
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_serialize, 0, 1, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, value, IS_MIXED, 0)
+ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_unserialize, 0, 1, IS_MIXED, 0)
 	ZEND_ARG_TYPE_INFO(0, data, IS_STRING, 0)
@@ -2314,13 +2397,17 @@ ZEND_END_ARG_INFO()
 
 #define arginfo_memory_get_peak_usage arginfo_memory_get_usage
 
-#define arginfo_memory_reset_peak_usage arginfo_stream_clear_errors
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_memory_reset_peak_usage, 0, 0, IS_VOID, 0)
+ZEND_END_ARG_INFO()
+#endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_version_compare, 0, 2, MAY_BE_LONG|MAY_BE_BOOL)
 	ZEND_ARG_TYPE_INFO(0, version1, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, version2, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, operator, IS_STRING, 1, "null")
 ZEND_END_ARG_INFO()
+#endif
 
 #if !defined(PHP_NANO) && defined(PHP_WIN32)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_sapi_windows_cp_set, 0, 1, _IS_BOOL, 0)
@@ -2352,6 +2439,7 @@ ZEND_END_ARG_INFO()
 #endif
 
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 ZEND_FRAMELESS_FUNCTION(min, 2);
 static const zend_frameless_function_info frameless_function_infos_min[] = {
 	{ ZEND_FRAMELESS_FUNCTION_NAME(min, 2), 2 },
@@ -2377,7 +2465,9 @@ static const zend_frameless_function_info frameless_function_infos_in_array[] = 
 	{ ZEND_FRAMELESS_FUNCTION_NAME(in_array, 3), 3 },
 	{ 0 },
 };
+#endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 ZEND_FRAMELESS_FUNCTION(trim, 1);
 ZEND_FRAMELESS_FUNCTION(trim, 2);
 static const zend_frameless_function_info frameless_function_infos_trim[] = {
@@ -2485,18 +2575,23 @@ static const zend_frameless_function_info frameless_function_infos_str_replace[]
 	{ ZEND_FRAMELESS_FUNCTION_NAME(str_replace, 3), 3 },
 	{ 0 },
 };
+#endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MATH))
 ZEND_FRAMELESS_FUNCTION(dechex, 1);
 static const zend_frameless_function_info frameless_function_infos_dechex[] = {
 	{ ZEND_FRAMELESS_FUNCTION_NAME(dechex, 1), 1 },
 	{ 0 },
 };
+#endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_TYPE))
 ZEND_FRAMELESS_FUNCTION(is_numeric, 1);
 static const zend_frameless_function_info frameless_function_infos_is_numeric[] = {
 	{ ZEND_FRAMELESS_FUNCTION_NAME(is_numeric, 1), 1 },
 	{ 0 },
 };
+#endif
 
 #if !defined(PHP_NANO)
 ZEND_FUNCTION(set_time_limit);
@@ -2522,6 +2617,7 @@ ZEND_FUNCTION(stream_wrapper_register);
 ZEND_FUNCTION(stream_wrapper_unregister);
 ZEND_FUNCTION(stream_wrapper_restore);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 ZEND_FUNCTION(array_push);
 ZEND_FUNCTION(krsort);
 ZEND_FUNCTION(ksort);
@@ -2553,9 +2649,11 @@ ZEND_FUNCTION(compact);
 ZEND_FUNCTION(array_fill);
 ZEND_FUNCTION(array_fill_keys);
 ZEND_FUNCTION(range);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY)) && !defined(PHP_NANO)
 ZEND_FUNCTION(shuffle);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 ZEND_FUNCTION(array_pop);
 ZEND_FUNCTION(array_shift);
 ZEND_FUNCTION(array_unshift);
@@ -2595,9 +2693,11 @@ ZEND_FUNCTION(array_diff_uassoc);
 ZEND_FUNCTION(array_udiff_assoc);
 ZEND_FUNCTION(array_udiff_uassoc);
 ZEND_FUNCTION(array_multisort);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY)) && !defined(PHP_NANO)
 ZEND_FUNCTION(array_rand);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 ZEND_FUNCTION(array_sum);
 ZEND_FUNCTION(array_product);
 ZEND_FUNCTION(array_reduce);
@@ -2611,28 +2711,33 @@ ZEND_FUNCTION(array_key_exists);
 ZEND_FUNCTION(array_chunk);
 ZEND_FUNCTION(array_combine);
 ZEND_FUNCTION(array_is_list);
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 ZEND_FUNCTION(base64_encode);
 ZEND_FUNCTION(base64_decode);
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE))
 ZEND_FUNCTION(constant);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 ZEND_FUNCTION(ip2long);
 ZEND_FUNCTION(long2ip);
 ZEND_FUNCTION(getenv);
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_PUTENV)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO) && defined(HAVE_PUTENV)
 ZEND_FUNCTION(putenv);
 #endif
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 ZEND_FUNCTION(getopt);
 ZEND_FUNCTION(flush);
 ZEND_FUNCTION(sleep);
 ZEND_FUNCTION(usleep);
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_NANOSLEEP)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO) && defined(HAVE_NANOSLEEP)
 ZEND_FUNCTION(time_nanosleep);
 ZEND_FUNCTION(time_sleep_until);
 #endif
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 ZEND_FUNCTION(get_current_user);
 ZEND_FUNCTION(get_cfg_var);
 ZEND_FUNCTION(error_log);
@@ -2647,16 +2752,20 @@ ZEND_FUNCTION(highlight_file);
 ZEND_FUNCTION(php_strip_whitespace);
 ZEND_FUNCTION(highlight_string);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE))
 ZEND_FUNCTION(ini_get);
 ZEND_FUNCTION(ini_get_all);
 ZEND_FUNCTION(ini_set);
 ZEND_FUNCTION(ini_restore);
 ZEND_FUNCTION(ini_parse_quantity);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 ZEND_FUNCTION(set_include_path);
 ZEND_FUNCTION(get_include_path);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
 ZEND_FUNCTION(print_r);
+#endif
 #if !defined(PHP_NANO)
 ZEND_FUNCTION(connection_aborted);
 ZEND_FUNCTION(connection_status);
@@ -2744,33 +2853,40 @@ ZEND_FUNCTION(http_response_code);
 ZEND_FUNCTION(headers_sent);
 ZEND_FUNCTION(headers_list);
 #endif
-#if defined(PHP_NANO)
+#if defined(PHP_NANO) && (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_HASH))
 ZEND_FUNCTION(md5);
 ZEND_FUNCTION(md5_file);
 ZEND_FUNCTION(sha1);
 ZEND_FUNCTION(sha1_file);
+#endif
+#if defined(PHP_NANO) && (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 ZEND_FUNCTION(sleep);
 ZEND_FUNCTION(usleep);
 ZEND_FUNCTION(time_nanosleep);
 ZEND_FUNCTION(time_sleep_until);
 ZEND_FUNCTION(hrtime);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 ZEND_FUNCTION(htmlspecialchars);
 ZEND_FUNCTION(htmlspecialchars_decode);
 ZEND_FUNCTION(html_entity_decode);
 ZEND_FUNCTION(htmlentities);
 ZEND_FUNCTION(get_html_translation_table);
+#endif
 #if !defined(PHP_NANO)
 ZEND_FUNCTION(assert);
 ZEND_FUNCTION(assert_options);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 ZEND_FUNCTION(bin2hex);
 ZEND_FUNCTION(hex2bin);
 ZEND_FUNCTION(strspn);
 ZEND_FUNCTION(strcspn);
-#if defined(HAVE_NL_LANGINFO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO)
 ZEND_FUNCTION(nl_langinfo);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 ZEND_FUNCTION(strcoll);
 ZEND_FUNCTION(trim);
 ZEND_FUNCTION(rtrim);
@@ -2818,10 +2934,12 @@ ZEND_FUNCTION(hebrev);
 ZEND_FUNCTION(nl2br);
 ZEND_FUNCTION(strip_tags);
 ZEND_FUNCTION(setlocale);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 ZEND_FUNCTION(parse_str);
 ZEND_FUNCTION(str_getcsv);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 ZEND_FUNCTION(str_repeat);
 ZEND_FUNCTION(count_chars);
 ZEND_FUNCTION(strnatcmp);
@@ -2831,30 +2949,37 @@ ZEND_FUNCTION(substr_count);
 ZEND_FUNCTION(str_pad);
 ZEND_FUNCTION(sscanf);
 ZEND_FUNCTION(str_rot13);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 ZEND_FUNCTION(str_shuffle);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 ZEND_FUNCTION(str_word_count);
 ZEND_FUNCTION(str_split);
 ZEND_FUNCTION(strpbrk);
 ZEND_FUNCTION(substr_compare);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 ZEND_FUNCTION(utf8_encode);
 ZEND_FUNCTION(utf8_decode);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(opendir);
 ZEND_FUNCTION(dir);
 ZEND_FUNCTION(closedir);
 ZEND_FUNCTION(chdir);
-#if (defined(HAVE_CHROOT) && !defined(ZTS) && defined(ENABLE_CHROOT_FUNC))
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_CHROOT) && !defined(ZTS) && defined(ENABLE_CHROOT_FUNC))
 ZEND_FUNCTION(chroot);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(getcwd);
 ZEND_FUNCTION(rewinddir);
 ZEND_FUNCTION(readdir);
 ZEND_FUNCTION(scandir);
 ZEND_FUNCTION(glob);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_FUNCTION(exec);
 ZEND_FUNCTION(system);
 ZEND_FUNCTION(passthru);
@@ -2862,23 +2987,28 @@ ZEND_FUNCTION(escapeshellcmd);
 ZEND_FUNCTION(escapeshellarg);
 ZEND_FUNCTION(shell_exec);
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_NICE)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO) && defined(HAVE_NICE)
 ZEND_FUNCTION(proc_nice);
 #endif
-#if !defined(__wasi__)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__)
 ZEND_FUNCTION(flock);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(get_meta_tags);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_FUNCTION(pclose);
 ZEND_FUNCTION(popen);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(readfile);
 ZEND_FUNCTION(rewind);
 ZEND_FUNCTION(rmdir);
-#if !defined(__wasi__)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__)
 ZEND_FUNCTION(umask);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(fclose);
 ZEND_FUNCTION(feof);
 ZEND_FUNCTION(fgetc);
@@ -2907,9 +3037,11 @@ ZEND_FUNCTION(file_put_contents);
 ZEND_FUNCTION(fputcsv);
 ZEND_FUNCTION(fgetcsv);
 ZEND_FUNCTION(realpath);
-#if defined(HAVE_FNMATCH)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(HAVE_FNMATCH)
 ZEND_FUNCTION(fnmatch);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(sys_get_temp_dir);
 ZEND_FUNCTION(fileatime);
 ZEND_FUNCTION(filectime);
@@ -2929,29 +3061,36 @@ ZEND_FUNCTION(is_dir);
 ZEND_FUNCTION(is_link);
 ZEND_FUNCTION(stat);
 ZEND_FUNCTION(lstat);
-#if !defined(__wasi__)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__)
 ZEND_FUNCTION(chown);
 ZEND_FUNCTION(chgrp);
 #endif
-#if !defined(__wasi__) && defined(HAVE_LCHOWN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__) && defined(HAVE_LCHOWN)
 ZEND_FUNCTION(lchown);
 ZEND_FUNCTION(lchgrp);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(chmod);
-#if defined(HAVE_UTIME)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(HAVE_UTIME)
 ZEND_FUNCTION(touch);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(clearstatcache);
 ZEND_FUNCTION(disk_total_space);
 ZEND_FUNCTION(disk_free_space);
 ZEND_FUNCTION(realpath_cache_get);
 ZEND_FUNCTION(realpath_cache_size);
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FORMAT))
 ZEND_FUNCTION(sprintf);
 ZEND_FUNCTION(printf);
 ZEND_FUNCTION(vprintf);
 ZEND_FUNCTION(vsprintf);
 ZEND_FUNCTION(fprintf);
 ZEND_FUNCTION(vfprintf);
+#endif
 #if !defined(PHP_NANO)
 ZEND_FUNCTION(fsockopen);
 ZEND_FUNCTION(pfsockopen);
@@ -2964,6 +3103,7 @@ ZEND_FUNCTION(image_type_to_extension);
 ZEND_FUNCTION(getimagesize);
 ZEND_FUNCTION(getimagesizefromstring);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_INFO))
 ZEND_FUNCTION(phpinfo);
 ZEND_FUNCTION(phpversion);
 ZEND_FUNCTION(phpcredits);
@@ -2971,6 +3111,7 @@ ZEND_FUNCTION(php_sapi_name);
 ZEND_FUNCTION(php_uname);
 ZEND_FUNCTION(php_ini_scanned_files);
 ZEND_FUNCTION(php_ini_loaded_file);
+#endif
 #if !defined(PHP_NANO)
 ZEND_FUNCTION(iptcembed);
 ZEND_FUNCTION(iptcparse);
@@ -2985,6 +3126,7 @@ ZEND_FUNCTION(link);
 #if !defined(PHP_NANO)
 ZEND_FUNCTION(mail);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MATH))
 ZEND_FUNCTION(abs);
 ZEND_FUNCTION(ceil);
 ZEND_FUNCTION(floor);
@@ -3028,6 +3170,7 @@ ZEND_FUNCTION(number_format);
 ZEND_FUNCTION(fmod);
 ZEND_FUNCTION(fdiv);
 ZEND_FUNCTION(fpow);
+#endif
 #if !defined(PHP_NANO) && defined(HAVE_GETTIMEOFDAY)
 ZEND_FUNCTION(microtime);
 ZEND_FUNCTION(gettimeofday);
@@ -3054,8 +3197,11 @@ ZEND_FUNCTION(proc_get_status);
 ZEND_FUNCTION(quoted_printable_decode);
 ZEND_FUNCTION(quoted_printable_encode);
 ZEND_FUNCTION(soundex);
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_FUNCTION(stream_select);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(stream_context_create);
 ZEND_FUNCTION(stream_context_set_params);
 ZEND_FUNCTION(stream_context_get_params);
@@ -3067,7 +3213,8 @@ ZEND_FUNCTION(stream_context_set_default);
 ZEND_FUNCTION(stream_filter_prepend);
 ZEND_FUNCTION(stream_filter_append);
 ZEND_FUNCTION(stream_filter_remove);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_FUNCTION(stream_socket_client);
 ZEND_FUNCTION(stream_socket_server);
 ZEND_FUNCTION(stream_socket_accept);
@@ -3077,49 +3224,60 @@ ZEND_FUNCTION(stream_socket_sendto);
 ZEND_FUNCTION(stream_socket_enable_crypto);
 ZEND_FUNCTION(stream_socket_get_crypto_status);
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_SHUTDOWN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO) && defined(HAVE_SHUTDOWN)
 ZEND_FUNCTION(stream_socket_shutdown);
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_SOCKETPAIR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO) && defined(HAVE_SOCKETPAIR)
 ZEND_FUNCTION(stream_socket_pair);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(stream_copy_to_stream);
 ZEND_FUNCTION(stream_get_contents);
 ZEND_FUNCTION(stream_supports_lock);
 ZEND_FUNCTION(stream_set_write_buffer);
 ZEND_FUNCTION(stream_set_read_buffer);
 ZEND_FUNCTION(stream_set_blocking);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_FUNCTION(stream_set_blocking);
 #endif
-ZEND_FUNCTION(stream_get_meta_data);
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(stream_get_meta_data);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
+ZEND_FUNCTION(stream_get_meta_data);
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(stream_get_line);
 ZEND_FUNCTION(stream_resolve_include_path);
 ZEND_FUNCTION(stream_get_wrappers);
 ZEND_FUNCTION(stream_last_errors);
 ZEND_FUNCTION(stream_clear_errors);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 ZEND_FUNCTION(stream_get_transports);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(stream_is_local);
 ZEND_FUNCTION(stream_isatty);
-#if defined(PHP_WIN32)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(PHP_WIN32)
 ZEND_FUNCTION(sapi_windows_vt100_support);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 ZEND_FUNCTION(stream_set_chunk_size);
-#if (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32))
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32))
 ZEND_FUNCTION(stream_set_timeout);
 #endif
-#if (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32)) && !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32)) && !defined(PHP_NANO)
 ZEND_FUNCTION(stream_set_timeout);
 #endif
-#if defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(PHP_NANO) && (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 ZEND_FUNCTION(microtime);
 ZEND_FUNCTION(gettimeofday);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_TYPE))
 ZEND_FUNCTION(gettype);
 ZEND_FUNCTION(get_debug_type);
 ZEND_FUNCTION(settype);
@@ -3140,14 +3298,17 @@ ZEND_FUNCTION(is_scalar);
 ZEND_FUNCTION(is_callable);
 ZEND_FUNCTION(is_iterable);
 ZEND_FUNCTION(is_countable);
-#if defined(PHP_NANO) || defined(HAVE_GETTIMEOFDAY)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC)) && defined(PHP_NANO) || defined(HAVE_GETTIMEOFDAY)
 ZEND_FUNCTION(uniqid);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 ZEND_FUNCTION(parse_url);
 ZEND_FUNCTION(urlencode);
 ZEND_FUNCTION(urldecode);
 ZEND_FUNCTION(rawurlencode);
 ZEND_FUNCTION(rawurldecode);
+#endif
 #if !defined(PHP_NANO)
 ZEND_FUNCTION(get_headers);
 ZEND_FUNCTION(stream_bucket_make_writeable);
@@ -3159,6 +3320,7 @@ ZEND_FUNCTION(stream_filter_register);
 ZEND_FUNCTION(convert_uuencode);
 ZEND_FUNCTION(convert_uudecode);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
 ZEND_FUNCTION(var_dump);
 ZEND_FUNCTION(var_export);
 ZEND_FUNCTION(debug_zval_dump);
@@ -3167,7 +3329,10 @@ ZEND_FUNCTION(unserialize);
 ZEND_FUNCTION(memory_get_usage);
 ZEND_FUNCTION(memory_get_peak_usage);
 ZEND_FUNCTION(memory_reset_peak_usage);
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 ZEND_FUNCTION(version_compare);
+#endif
 #if !defined(PHP_NANO) && defined(PHP_WIN32)
 ZEND_FUNCTION(sapi_windows_cp_set);
 ZEND_FUNCTION(sapi_windows_cp_get);
@@ -3203,6 +3368,7 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(stream_wrapper_unregister, arginfo_stream_wrapper_unregister)
 	ZEND_FE(stream_wrapper_restore, arginfo_stream_wrapper_restore)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 	ZEND_FE(array_push, arginfo_array_push)
 	ZEND_FE(krsort, arginfo_krsort)
 	ZEND_FE(ksort, arginfo_ksort)
@@ -3244,9 +3410,11 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(array_fill, arginfo_array_fill)
 	ZEND_FE(array_fill_keys, arginfo_array_fill_keys)
 	ZEND_FE(range, arginfo_range)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY)) && !defined(PHP_NANO)
 	ZEND_FE(shuffle, arginfo_shuffle)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 	ZEND_FE(array_pop, arginfo_array_pop)
 	ZEND_FE(array_shift, arginfo_array_shift)
 	ZEND_FE(array_unshift, arginfo_array_unshift)
@@ -3286,9 +3454,11 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(array_udiff_assoc, arginfo_array_udiff_assoc)
 	ZEND_FE(array_udiff_uassoc, arginfo_array_udiff_uassoc)
 	ZEND_FE(array_multisort, arginfo_array_multisort)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY)) && !defined(PHP_NANO)
 	ZEND_FE(array_rand, arginfo_array_rand)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 	ZEND_RAW_FENTRY("array_sum", zif_array_sum, arginfo_array_sum, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("array_product", zif_array_product, arginfo_array_product, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(array_reduce, arginfo_array_reduce)
@@ -3303,28 +3473,33 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("array_chunk", zif_array_chunk, arginfo_array_chunk, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("array_combine", zif_array_combine, arginfo_array_combine, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("array_is_list", zif_array_is_list, arginfo_array_is_list, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 	ZEND_RAW_FENTRY("base64_encode", zif_base64_encode, arginfo_base64_encode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("base64_decode", zif_base64_decode, arginfo_base64_decode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE))
 	ZEND_FE(constant, arginfo_constant)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 	ZEND_FE(ip2long, arginfo_ip2long)
 	ZEND_FE(long2ip, arginfo_long2ip)
 	ZEND_FE(getenv, arginfo_getenv)
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_PUTENV)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO) && defined(HAVE_PUTENV)
 	ZEND_FE(putenv, arginfo_putenv)
 #endif
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 	ZEND_FE(getopt, arginfo_getopt)
 	ZEND_FE(flush, arginfo_flush)
 	ZEND_FE(sleep, arginfo_sleep)
 	ZEND_FE(usleep, arginfo_usleep)
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_NANOSLEEP)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO) && defined(HAVE_NANOSLEEP)
 	ZEND_FE(time_nanosleep, arginfo_time_nanosleep)
 	ZEND_FE(time_sleep_until, arginfo_time_sleep_until)
 #endif
-#if !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 	ZEND_FE(get_current_user, arginfo_get_current_user)
 	ZEND_FE(get_cfg_var, arginfo_get_cfg_var)
 	ZEND_FE(error_log, arginfo_error_log)
@@ -3340,17 +3515,21 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(php_strip_whitespace, arginfo_php_strip_whitespace)
 	ZEND_FE(highlight_string, arginfo_highlight_string)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE))
 	ZEND_FE(ini_get, arginfo_ini_get)
 	ZEND_FE(ini_get_all, arginfo_ini_get_all)
 	ZEND_FE(ini_set, arginfo_ini_set)
 	ZEND_RAW_FENTRY("ini_alter", zif_ini_set, arginfo_ini_alter, 0, NULL, NULL)
 	ZEND_FE(ini_restore, arginfo_ini_restore)
 	ZEND_FE(ini_parse_quantity, arginfo_ini_parse_quantity)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE)) && !defined(PHP_NANO)
 	ZEND_FE(set_include_path, arginfo_set_include_path)
 	ZEND_FE(get_include_path, arginfo_get_include_path)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
 	ZEND_FE(print_r, arginfo_print_r)
+#endif
 #if !defined(PHP_NANO)
 	ZEND_FE(connection_aborted, arginfo_connection_aborted)
 	ZEND_FE(connection_status, arginfo_connection_status)
@@ -3440,33 +3619,40 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(headers_sent, arginfo_headers_sent)
 	ZEND_FE(headers_list, arginfo_headers_list)
 #endif
-#if defined(PHP_NANO)
+#if defined(PHP_NANO) && (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_HASH))
 	ZEND_FE(md5, arginfo_md5)
 	ZEND_FE(md5_file, arginfo_md5_file)
 	ZEND_FE(sha1, arginfo_sha1)
 	ZEND_FE(sha1_file, arginfo_sha1_file)
+#endif
+#if defined(PHP_NANO) && (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 	ZEND_FE(sleep, arginfo_sleep)
 	ZEND_FE(usleep, arginfo_usleep)
 	ZEND_FE(time_nanosleep, arginfo_time_nanosleep)
 	ZEND_FE(time_sleep_until, arginfo_time_sleep_until)
 	ZEND_FE(hrtime, arginfo_hrtime)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 	ZEND_FE(htmlspecialchars, arginfo_htmlspecialchars)
 	ZEND_FE(htmlspecialchars_decode, arginfo_htmlspecialchars_decode)
 	ZEND_FE(html_entity_decode, arginfo_html_entity_decode)
 	ZEND_FE(htmlentities, arginfo_htmlentities)
 	ZEND_FE(get_html_translation_table, arginfo_get_html_translation_table)
+#endif
 #if !defined(PHP_NANO)
 	ZEND_FE(assert, arginfo_assert)
 	ZEND_RAW_FENTRY("assert_options", zif_assert_options, arginfo_assert_options, ZEND_ACC_DEPRECATED, NULL, NULL)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 	ZEND_RAW_FENTRY("bin2hex", zif_bin2hex, arginfo_bin2hex, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("hex2bin", zif_hex2bin, arginfo_hex2bin, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("strspn", zif_strspn, arginfo_strspn, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("strcspn", zif_strcspn, arginfo_strcspn, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
-#if defined(HAVE_NL_LANGINFO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO)
 	ZEND_FE(nl_langinfo, arginfo_nl_langinfo)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 	ZEND_RAW_FENTRY("strcoll", zif_strcoll, arginfo_strcoll, ZEND_ACC_DEPRECATED, NULL, NULL)
 	ZEND_RAW_FENTRY("trim", zif_trim, arginfo_trim, ZEND_ACC_COMPILE_TIME_EVAL, frameless_function_infos_trim, NULL)
 	ZEND_RAW_FENTRY("rtrim", zif_rtrim, arginfo_rtrim, ZEND_ACC_COMPILE_TIME_EVAL, frameless_function_infos_rtrim, NULL)
@@ -3517,10 +3703,12 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("nl2br", zif_nl2br, arginfo_nl2br, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("strip_tags", zif_strip_tags, arginfo_strip_tags, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(setlocale, arginfo_setlocale)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 	ZEND_FE(parse_str, arginfo_parse_str)
 	ZEND_FE(str_getcsv, arginfo_str_getcsv)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 	ZEND_FE(str_repeat, arginfo_str_repeat)
 	ZEND_RAW_FENTRY("count_chars", zif_count_chars, arginfo_count_chars, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(strnatcmp, arginfo_strnatcmp)
@@ -3530,30 +3718,37 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(str_pad, arginfo_str_pad)
 	ZEND_FE(sscanf, arginfo_sscanf)
 	ZEND_RAW_FENTRY("str_rot13", zif_str_rot13, arginfo_str_rot13, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 	ZEND_FE(str_shuffle, arginfo_str_shuffle)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 	ZEND_FE(str_word_count, arginfo_str_word_count)
 	ZEND_RAW_FENTRY("str_split", zif_str_split, arginfo_str_split, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("strpbrk", zif_strpbrk, arginfo_strpbrk, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("substr_compare", zif_substr_compare, arginfo_substr_compare, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 	ZEND_RAW_FENTRY("utf8_encode", zif_utf8_encode, arginfo_utf8_encode, ZEND_ACC_DEPRECATED|ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("utf8_decode", zif_utf8_decode, arginfo_utf8_decode, ZEND_ACC_DEPRECATED|ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(opendir, arginfo_opendir)
 	ZEND_FE(dir, arginfo_dir)
 	ZEND_FE(closedir, arginfo_closedir)
 	ZEND_FE(chdir, arginfo_chdir)
-#if (defined(HAVE_CHROOT) && !defined(ZTS) && defined(ENABLE_CHROOT_FUNC))
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_CHROOT) && !defined(ZTS) && defined(ENABLE_CHROOT_FUNC))
 	ZEND_FE(chroot, arginfo_chroot)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(getcwd, arginfo_getcwd)
 	ZEND_FE(rewinddir, arginfo_rewinddir)
 	ZEND_FE(readdir, arginfo_readdir)
 	ZEND_FE(scandir, arginfo_scandir)
 	ZEND_FE(glob, arginfo_glob)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 	ZEND_FE(exec, arginfo_exec)
 	ZEND_FE(system, arginfo_system)
 	ZEND_FE(passthru, arginfo_passthru)
@@ -3561,23 +3756,28 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(escapeshellarg, arginfo_escapeshellarg)
 	ZEND_FE(shell_exec, arginfo_shell_exec)
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_NICE)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO) && defined(HAVE_NICE)
 	ZEND_FE(proc_nice, arginfo_proc_nice)
 #endif
-#if !defined(__wasi__)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__)
 	ZEND_FE(flock, arginfo_flock)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(get_meta_tags, arginfo_get_meta_tags)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 	ZEND_FE(pclose, arginfo_pclose)
 	ZEND_FE(popen, arginfo_popen)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(readfile, arginfo_readfile)
 	ZEND_FE(rewind, arginfo_rewind)
 	ZEND_FE(rmdir, arginfo_rmdir)
-#if !defined(__wasi__)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__)
 	ZEND_FE(umask, arginfo_umask)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(fclose, arginfo_fclose)
 	ZEND_FE(feof, arginfo_feof)
 	ZEND_FE(fgetc, arginfo_fgetc)
@@ -3607,9 +3807,11 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(fputcsv, arginfo_fputcsv)
 	ZEND_FE(fgetcsv, arginfo_fgetcsv)
 	ZEND_FE(realpath, arginfo_realpath)
-#if defined(HAVE_FNMATCH)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(HAVE_FNMATCH)
 	ZEND_FE(fnmatch, arginfo_fnmatch)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(sys_get_temp_dir, arginfo_sys_get_temp_dir)
 	ZEND_FE(fileatime, arginfo_fileatime)
 	ZEND_FE(filectime, arginfo_filectime)
@@ -3630,30 +3832,37 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(is_link, arginfo_is_link)
 	ZEND_FE(stat, arginfo_stat)
 	ZEND_FE(lstat, arginfo_lstat)
-#if !defined(__wasi__)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__)
 	ZEND_FE(chown, arginfo_chown)
 	ZEND_FE(chgrp, arginfo_chgrp)
 #endif
-#if !defined(__wasi__) && defined(HAVE_LCHOWN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(__wasi__) && defined(HAVE_LCHOWN)
 	ZEND_FE(lchown, arginfo_lchown)
 	ZEND_FE(lchgrp, arginfo_lchgrp)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(chmod, arginfo_chmod)
-#if defined(HAVE_UTIME)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(HAVE_UTIME)
 	ZEND_FE(touch, arginfo_touch)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(clearstatcache, arginfo_clearstatcache)
 	ZEND_FE(disk_total_space, arginfo_disk_total_space)
 	ZEND_FE(disk_free_space, arginfo_disk_free_space)
 	ZEND_RAW_FENTRY("diskfreespace", zif_disk_free_space, arginfo_diskfreespace, 0, NULL, NULL)
 	ZEND_FE(realpath_cache_get, arginfo_realpath_cache_get)
 	ZEND_FE(realpath_cache_size, arginfo_realpath_cache_size)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FORMAT))
 	ZEND_FE(sprintf, arginfo_sprintf)
 	ZEND_FE(printf, arginfo_printf)
 	ZEND_FE(vprintf, arginfo_vprintf)
 	ZEND_FE(vsprintf, arginfo_vsprintf)
 	ZEND_FE(fprintf, arginfo_fprintf)
 	ZEND_FE(vfprintf, arginfo_vfprintf)
+#endif
 #if !defined(PHP_NANO)
 	ZEND_FE(fsockopen, arginfo_fsockopen)
 	ZEND_FE(pfsockopen, arginfo_pfsockopen)
@@ -3666,6 +3875,7 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(getimagesize, arginfo_getimagesize)
 	ZEND_FE(getimagesizefromstring, arginfo_getimagesizefromstring)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_INFO))
 	ZEND_FE(phpinfo, arginfo_phpinfo)
 	ZEND_RAW_FENTRY("phpversion", zif_phpversion, arginfo_phpversion, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(phpcredits, arginfo_phpcredits)
@@ -3673,6 +3883,7 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("php_uname", zif_php_uname, arginfo_php_uname, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(php_ini_scanned_files, arginfo_php_ini_scanned_files)
 	ZEND_FE(php_ini_loaded_file, arginfo_php_ini_loaded_file)
+#endif
 #if !defined(PHP_NANO)
 	ZEND_FE(iptcembed, arginfo_iptcembed)
 	ZEND_FE(iptcparse, arginfo_iptcparse)
@@ -3687,6 +3898,7 @@ static const zend_function_entry ext_functions[] = {
 #if !defined(PHP_NANO)
 	ZEND_FE(mail, arginfo_mail)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MATH))
 	ZEND_RAW_FENTRY("abs", zif_abs, arginfo_abs, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("ceil", zif_ceil, arginfo_ceil, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("floor", zif_floor, arginfo_floor, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
@@ -3730,6 +3942,7 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("fmod", zif_fmod, arginfo_fmod, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("fdiv", zif_fdiv, arginfo_fdiv, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("fpow", zif_fpow, arginfo_fpow, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
+#endif
 #if !defined(PHP_NANO) && defined(HAVE_GETTIMEOFDAY)
 	ZEND_FE(microtime, arginfo_microtime)
 	ZEND_FE(gettimeofday, arginfo_gettimeofday)
@@ -3756,8 +3969,11 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("quoted_printable_decode", zif_quoted_printable_decode, arginfo_quoted_printable_decode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("quoted_printable_encode", zif_quoted_printable_encode, arginfo_quoted_printable_encode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(soundex, arginfo_soundex)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 	ZEND_FE(stream_select, arginfo_stream_select)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(stream_context_create, arginfo_stream_context_create)
 	ZEND_FE(stream_context_set_params, arginfo_stream_context_set_params)
 	ZEND_FE(stream_context_get_params, arginfo_stream_context_get_params)
@@ -3769,7 +3985,8 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(stream_filter_prepend, arginfo_stream_filter_prepend)
 	ZEND_FE(stream_filter_append, arginfo_stream_filter_append)
 	ZEND_FE(stream_filter_remove, arginfo_stream_filter_remove)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 	ZEND_FE(stream_socket_client, arginfo_stream_socket_client)
 	ZEND_FE(stream_socket_server, arginfo_stream_socket_server)
 	ZEND_FE(stream_socket_accept, arginfo_stream_socket_accept)
@@ -3779,12 +3996,13 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(stream_socket_enable_crypto, arginfo_stream_socket_enable_crypto)
 	ZEND_FE(stream_socket_get_crypto_status, arginfo_stream_socket_get_crypto_status)
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_SHUTDOWN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO) && defined(HAVE_SHUTDOWN)
 	ZEND_FE(stream_socket_shutdown, arginfo_stream_socket_shutdown)
 #endif
-#if !defined(PHP_NANO) && defined(HAVE_SOCKETPAIR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO) && defined(HAVE_SOCKETPAIR)
 	ZEND_FE(stream_socket_pair, arginfo_stream_socket_pair)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(stream_copy_to_stream, arginfo_stream_copy_to_stream)
 	ZEND_FE(stream_get_contents, arginfo_stream_get_contents)
 	ZEND_FE(stream_supports_lock, arginfo_stream_supports_lock)
@@ -3792,37 +4010,47 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("set_file_buffer", zif_stream_set_write_buffer, arginfo_set_file_buffer, 0, NULL, NULL)
 	ZEND_FE(stream_set_read_buffer, arginfo_stream_set_read_buffer)
 	ZEND_FE(stream_set_blocking, arginfo_stream_set_blocking)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 	ZEND_RAW_FENTRY("socket_set_blocking", zif_stream_set_blocking, arginfo_socket_set_blocking, 0, NULL, NULL)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(stream_get_meta_data, arginfo_stream_get_meta_data)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 	ZEND_RAW_FENTRY("socket_get_status", zif_stream_get_meta_data, arginfo_socket_get_status, 0, NULL, NULL)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(stream_get_line, arginfo_stream_get_line)
 	ZEND_FE(stream_resolve_include_path, arginfo_stream_resolve_include_path)
 	ZEND_FE(stream_get_wrappers, arginfo_stream_get_wrappers)
 	ZEND_FE(stream_last_errors, arginfo_stream_last_errors)
 	ZEND_FE(stream_clear_errors, arginfo_stream_clear_errors)
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && !defined(PHP_NANO)
 	ZEND_FE(stream_get_transports, arginfo_stream_get_transports)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(stream_is_local, arginfo_stream_is_local)
 	ZEND_FE(stream_isatty, arginfo_stream_isatty)
-#if defined(PHP_WIN32)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(PHP_WIN32)
 	ZEND_FE(sapi_windows_vt100_support, arginfo_sapi_windows_vt100_support)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 	ZEND_FE(stream_set_chunk_size, arginfo_stream_set_chunk_size)
-#if (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32))
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32))
 	ZEND_FE(stream_set_timeout, arginfo_stream_set_timeout)
 #endif
-#if (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32)) && !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32)) && !defined(PHP_NANO)
 	ZEND_RAW_FENTRY("socket_set_timeout", zif_stream_set_timeout, arginfo_socket_set_timeout, ZEND_ACC_DEPRECATED, NULL, NULL)
 #endif
-#if defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && defined(PHP_NANO) && (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 	ZEND_FE(microtime, arginfo_microtime)
 	ZEND_FE(gettimeofday, arginfo_gettimeofday)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_TYPE))
 	ZEND_RAW_FENTRY("gettype", zif_gettype, arginfo_gettype, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("get_debug_type", zif_get_debug_type, arginfo_get_debug_type, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_FE(settype, arginfo_settype)
@@ -3847,14 +4075,17 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(is_callable, arginfo_is_callable)
 	ZEND_RAW_FENTRY("is_iterable", zif_is_iterable, arginfo_is_iterable, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("is_countable", zif_is_countable, arginfo_is_countable, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
-#if defined(PHP_NANO) || defined(HAVE_GETTIMEOFDAY)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC)) && defined(PHP_NANO) || defined(HAVE_GETTIMEOFDAY)
 	ZEND_FE(uniqid, arginfo_uniqid)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 	ZEND_RAW_FENTRY("parse_url", zif_parse_url, arginfo_parse_url, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("urlencode", zif_urlencode, arginfo_urlencode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("urldecode", zif_urldecode, arginfo_urldecode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("rawurlencode", zif_rawurlencode, arginfo_rawurlencode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("rawurldecode", zif_rawurldecode, arginfo_rawurldecode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
+#endif
 #if !defined(PHP_NANO)
 	ZEND_FE(get_headers, arginfo_get_headers)
 	ZEND_FE(stream_bucket_make_writeable, arginfo_stream_bucket_make_writeable)
@@ -3866,6 +4097,7 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("convert_uuencode", zif_convert_uuencode, arginfo_convert_uuencode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("convert_uudecode", zif_convert_uudecode, arginfo_convert_uudecode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
 	ZEND_FE(var_dump, arginfo_var_dump)
 	ZEND_FE(var_export, arginfo_var_export)
 	ZEND_FE(debug_zval_dump, arginfo_debug_zval_dump)
@@ -3874,7 +4106,10 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(memory_get_usage, arginfo_memory_get_usage)
 	ZEND_FE(memory_get_peak_usage, arginfo_memory_get_peak_usage)
 	ZEND_FE(memory_reset_peak_usage, arginfo_memory_reset_peak_usage)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 	ZEND_RAW_FENTRY("version_compare", zif_version_compare, arginfo_version_compare, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
+#endif
 #if !defined(PHP_NANO) && defined(PHP_WIN32)
 	ZEND_FE(sapi_windows_cp_set, arginfo_sapi_windows_cp_set)
 	ZEND_FE(sapi_windows_cp_get, arginfo_sapi_windows_cp_get)
@@ -3904,6 +4139,7 @@ static void register_basic_functions_symbols(int module_number)
 	REGISTER_LONG_CONSTANT("PHP_OUTPUT_HANDLER_DISABLED", PHP_OUTPUT_HANDLER_DISABLED, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PHP_OUTPUT_HANDLER_PROCESSED", PHP_OUTPUT_HANDLER_PROCESSED, CONST_PERSISTENT);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 	REGISTER_LONG_CONSTANT("EXTR_OVERWRITE", PHP_EXTR_OVERWRITE, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("EXTR_SKIP", PHP_EXTR_SKIP, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("EXTR_PREFIX_SAME", PHP_EXTR_PREFIX_SAME, CONST_PERSISTENT);
@@ -3927,6 +4163,7 @@ static void register_basic_functions_symbols(int module_number)
 	REGISTER_LONG_CONSTANT("ARRAY_FILTER_USE_VALUE", ARRAY_FILTER_USE_VALUE, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ARRAY_FILTER_USE_BOTH", ARRAY_FILTER_USE_BOTH, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ARRAY_FILTER_USE_KEY", ARRAY_FILTER_USE_KEY, CONST_PERSISTENT);
+#endif
 #if !defined(PHP_NANO)
 	zend_constant *const_ASSERT_ACTIVE = REGISTER_LONG_CONSTANT("ASSERT_ACTIVE", PHP_ASSERT_ACTIVE, CONST_PERSISTENT | CONST_DEPRECATED);
 	zend_constant *const_ASSERT_CALLBACK = REGISTER_LONG_CONSTANT("ASSERT_CALLBACK", PHP_ASSERT_CALLBACK, CONST_PERSISTENT | CONST_DEPRECATED);
@@ -4026,6 +4263,7 @@ static void register_basic_functions_symbols(int module_number)
 	REGISTER_LONG_CONSTANT("DNS_ANY", PHP_DNS_ANY, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("DNS_ALL", PHP_DNS_ALL, CONST_PERSISTENT);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 	REGISTER_LONG_CONSTANT("HTML_SPECIALCHARS", PHP_HTML_SPECIALCHARS, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("HTML_ENTITIES", PHP_HTML_ENTITIES, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ENT_COMPAT", ENT_COMPAT, CONST_PERSISTENT);
@@ -4038,6 +4276,7 @@ static void register_basic_functions_symbols(int module_number)
 	REGISTER_LONG_CONSTANT("ENT_XML1", ENT_XML1, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ENT_XHTML", ENT_XHTML, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ENT_HTML5", ENT_HTML5, CONST_PERSISTENT);
+#endif
 #if !defined(PHP_NANO)
 	REGISTER_LONG_CONSTANT("IMAGETYPE_GIF", IMAGE_FILETYPE_GIF, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IMAGETYPE_JPEG", IMAGE_FILETYPE_JPEG, CONST_PERSISTENT);
@@ -4132,6 +4371,7 @@ static void register_basic_functions_symbols(int module_number)
 #if !defined(PHP_NANO) && defined(LOG_PERROR)
 	REGISTER_LONG_CONSTANT("LOG_PERROR", LOG_PERROR, CONST_PERSISTENT);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 	REGISTER_LONG_CONSTANT("STR_PAD_LEFT", PHP_STR_PAD_LEFT, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("STR_PAD_RIGHT", PHP_STR_PAD_RIGHT, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("STR_PAD_BOTH", PHP_STR_PAD_BOTH, CONST_PERSISTENT);
@@ -4147,10 +4387,11 @@ static void register_basic_functions_symbols(int module_number)
 	REGISTER_LONG_CONSTANT("LC_COLLATE", LC_COLLATE, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("LC_MONETARY", LC_MONETARY, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("LC_ALL", LC_ALL, CONST_PERSISTENT);
-#if defined(LC_MESSAGES)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(LC_MESSAGES)
 	REGISTER_LONG_CONSTANT("LC_MESSAGES", LC_MESSAGES, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(ABDAY_1)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(ABDAY_1)
 	REGISTER_LONG_CONSTANT("ABDAY_1", ABDAY_1, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ABDAY_2", ABDAY_2, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ABDAY_3", ABDAY_3, CONST_PERSISTENT);
@@ -4159,7 +4400,7 @@ static void register_basic_functions_symbols(int module_number)
 	REGISTER_LONG_CONSTANT("ABDAY_6", ABDAY_6, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ABDAY_7", ABDAY_7, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(DAY_1)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(DAY_1)
 	REGISTER_LONG_CONSTANT("DAY_1", DAY_1, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("DAY_2", DAY_2, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("DAY_3", DAY_3, CONST_PERSISTENT);
@@ -4168,7 +4409,7 @@ static void register_basic_functions_symbols(int module_number)
 	REGISTER_LONG_CONSTANT("DAY_6", DAY_6, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("DAY_7", DAY_7, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(ABMON_1)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(ABMON_1)
 	REGISTER_LONG_CONSTANT("ABMON_1", ABMON_1, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ABMON_2", ABMON_2, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ABMON_3", ABMON_3, CONST_PERSISTENT);
@@ -4182,7 +4423,7 @@ static void register_basic_functions_symbols(int module_number)
 	REGISTER_LONG_CONSTANT("ABMON_11", ABMON_11, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("ABMON_12", ABMON_12, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(MON_1)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(MON_1)
 	REGISTER_LONG_CONSTANT("MON_1", MON_1, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MON_2", MON_2, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MON_3", MON_3, CONST_PERSISTENT);
@@ -4196,118 +4437,118 @@ static void register_basic_functions_symbols(int module_number)
 	REGISTER_LONG_CONSTANT("MON_11", MON_11, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MON_12", MON_12, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(AM_STR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(AM_STR)
 	REGISTER_LONG_CONSTANT("AM_STR", AM_STR, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(PM_STR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(PM_STR)
 	REGISTER_LONG_CONSTANT("PM_STR", PM_STR, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(D_T_FMT)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(D_T_FMT)
 	REGISTER_LONG_CONSTANT("D_T_FMT", D_T_FMT, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(D_FMT)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(D_FMT)
 	REGISTER_LONG_CONSTANT("D_FMT", D_FMT, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(T_FMT)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(T_FMT)
 	REGISTER_LONG_CONSTANT("T_FMT", T_FMT, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(T_FMT_AMPM)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(T_FMT_AMPM)
 	REGISTER_LONG_CONSTANT("T_FMT_AMPM", T_FMT_AMPM, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(ERA)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(ERA)
 	REGISTER_LONG_CONSTANT("ERA", ERA, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(ERA_YEAR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(ERA_YEAR)
 	REGISTER_LONG_CONSTANT("ERA_YEAR", ERA_YEAR, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(ERA_D_T_FMT)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(ERA_D_T_FMT)
 	REGISTER_LONG_CONSTANT("ERA_D_T_FMT", ERA_D_T_FMT, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(ERA_D_FMT)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(ERA_D_FMT)
 	REGISTER_LONG_CONSTANT("ERA_D_FMT", ERA_D_FMT, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(ERA_T_FMT)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(ERA_T_FMT)
 	REGISTER_LONG_CONSTANT("ERA_T_FMT", ERA_T_FMT, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(ALT_DIGITS)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(ALT_DIGITS)
 	REGISTER_LONG_CONSTANT("ALT_DIGITS", ALT_DIGITS, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(INT_CURR_SYMBOL)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(INT_CURR_SYMBOL)
 	REGISTER_LONG_CONSTANT("INT_CURR_SYMBOL", INT_CURR_SYMBOL, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(CURRENCY_SYMBOL)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(CURRENCY_SYMBOL)
 	REGISTER_LONG_CONSTANT("CURRENCY_SYMBOL", CURRENCY_SYMBOL, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(CRNCYSTR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(CRNCYSTR)
 	REGISTER_LONG_CONSTANT("CRNCYSTR", CRNCYSTR, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(MON_DECIMAL_POINT)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(MON_DECIMAL_POINT)
 	REGISTER_LONG_CONSTANT("MON_DECIMAL_POINT", MON_DECIMAL_POINT, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(MON_THOUSANDS_SEP)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(MON_THOUSANDS_SEP)
 	REGISTER_LONG_CONSTANT("MON_THOUSANDS_SEP", MON_THOUSANDS_SEP, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(MON_GROUPING)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(MON_GROUPING)
 	REGISTER_LONG_CONSTANT("MON_GROUPING", MON_GROUPING, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(POSITIVE_SIGN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(POSITIVE_SIGN)
 	REGISTER_LONG_CONSTANT("POSITIVE_SIGN", POSITIVE_SIGN, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(NEGATIVE_SIGN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(NEGATIVE_SIGN)
 	REGISTER_LONG_CONSTANT("NEGATIVE_SIGN", NEGATIVE_SIGN, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(INT_FRAC_DIGITS)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(INT_FRAC_DIGITS)
 	REGISTER_LONG_CONSTANT("INT_FRAC_DIGITS", INT_FRAC_DIGITS, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(FRAC_DIGITS)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(FRAC_DIGITS)
 	REGISTER_LONG_CONSTANT("FRAC_DIGITS", FRAC_DIGITS, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(P_CS_PRECEDES)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(P_CS_PRECEDES)
 	REGISTER_LONG_CONSTANT("P_CS_PRECEDES", P_CS_PRECEDES, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(P_SEP_BY_SPACE)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(P_SEP_BY_SPACE)
 	REGISTER_LONG_CONSTANT("P_SEP_BY_SPACE", P_SEP_BY_SPACE, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(N_CS_PRECEDES)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(N_CS_PRECEDES)
 	REGISTER_LONG_CONSTANT("N_CS_PRECEDES", N_CS_PRECEDES, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(N_SEP_BY_SPACE)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(N_SEP_BY_SPACE)
 	REGISTER_LONG_CONSTANT("N_SEP_BY_SPACE", N_SEP_BY_SPACE, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(P_SIGN_POSN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(P_SIGN_POSN)
 	REGISTER_LONG_CONSTANT("P_SIGN_POSN", P_SIGN_POSN, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(N_SIGN_POSN)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(N_SIGN_POSN)
 	REGISTER_LONG_CONSTANT("N_SIGN_POSN", N_SIGN_POSN, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(DECIMAL_POINT)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(DECIMAL_POINT)
 	REGISTER_LONG_CONSTANT("DECIMAL_POINT", DECIMAL_POINT, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(RADIXCHAR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(RADIXCHAR)
 	REGISTER_LONG_CONSTANT("RADIXCHAR", RADIXCHAR, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(THOUSANDS_SEP)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(THOUSANDS_SEP)
 	REGISTER_LONG_CONSTANT("THOUSANDS_SEP", THOUSANDS_SEP, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(THOUSEP)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(THOUSEP)
 	REGISTER_LONG_CONSTANT("THOUSEP", THOUSEP, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(GROUPING)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(GROUPING)
 	REGISTER_LONG_CONSTANT("GROUPING", GROUPING, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(YESEXPR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(YESEXPR)
 	REGISTER_LONG_CONSTANT("YESEXPR", YESEXPR, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(NOEXPR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(NOEXPR)
 	REGISTER_LONG_CONSTANT("NOEXPR", NOEXPR, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(YESSTR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(YESSTR)
 	REGISTER_LONG_CONSTANT("YESSTR", YESSTR, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(NOSTR)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(NOSTR)
 	REGISTER_LONG_CONSTANT("NOSTR", NOSTR, CONST_PERSISTENT);
 #endif
-#if defined(HAVE_NL_LANGINFO) && defined(CODESET)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && defined(HAVE_NL_LANGINFO) && defined(CODESET)
 	REGISTER_LONG_CONSTANT("CODESET", CODESET, CONST_PERSISTENT);
 #endif
 
@@ -4337,6 +4578,7 @@ static void register_basic_functions_symbols(int module_number)
 	ZVAL_STR(&attribute_Deprecated_func_assert_options_0->args[0].value, ZSTR_KNOWN(ZEND_STR_8_DOT_3));
 	attribute_Deprecated_func_assert_options_0->args[0].name = ZSTR_KNOWN(ZEND_STR_SINCE);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 
 	zend_attribute *attribute_Deprecated_func_strcoll_0 = zend_add_function_attribute(zend_hash_str_find_ptr(CG(function_table), "strcoll", sizeof("strcoll") - 1), ZSTR_KNOWN(ZEND_STR_DEPRECATED_CAPITALIZED), 2);
 	zend_string *attribute_Deprecated_func_strcoll_0_arg0_str = zend_string_init("use Collator::compare() instead", strlen("use Collator::compare() instead"), 1);
@@ -4344,7 +4586,8 @@ static void register_basic_functions_symbols(int module_number)
 	attribute_Deprecated_func_strcoll_0->args[0].name = ZSTR_KNOWN(ZEND_STR_MESSAGE);
 	ZVAL_STR(&attribute_Deprecated_func_strcoll_0->args[1].value, ZSTR_KNOWN(ZEND_STR_8_DOT_6));
 	attribute_Deprecated_func_strcoll_0->args[1].name = ZSTR_KNOWN(ZEND_STR_SINCE);
-#if !defined(PHP_NANO)
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING)) && !defined(PHP_NANO)
 
 	zend_attribute *attribute_Deprecated_func_utf8_encode_0 = zend_add_function_attribute(zend_hash_str_find_ptr(CG(function_table), "utf8_encode", sizeof("utf8_encode") - 1), ZSTR_KNOWN(ZEND_STR_DEPRECATED_CAPITALIZED), 2);
 	ZVAL_STR(&attribute_Deprecated_func_utf8_encode_0->args[0].value, ZSTR_KNOWN(ZEND_STR_8_DOT_2));
@@ -4359,12 +4602,14 @@ static void register_basic_functions_symbols(int module_number)
 	zend_string *attribute_Deprecated_func_utf8_decode_0_arg1_str = zend_string_init("visit the php.net documentation for various alternatives", strlen("visit the php.net documentation for various alternatives"), 1);
 	ZVAL_STR(&attribute_Deprecated_func_utf8_decode_0->args[1].value, attribute_Deprecated_func_utf8_decode_0_arg1_str);
 	attribute_Deprecated_func_utf8_decode_0->args[1].name = ZSTR_KNOWN(ZEND_STR_MESSAGE);
+#endif
+#if !defined(PHP_NANO)
 
 	zend_add_parameter_attribute(zend_hash_str_find_ptr(CG(function_table), "password_hash", sizeof("password_hash") - 1), 0, ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
 
 	zend_add_parameter_attribute(zend_hash_str_find_ptr(CG(function_table), "password_verify", sizeof("password_verify") - 1), 0, ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
 #endif
-#if (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32)) && !defined(PHP_NANO)
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM)) && (defined(HAVE_SYS_TIME_H) || defined(PHP_WIN32)) && !defined(PHP_NANO)
 
 	zend_attribute *attribute_Deprecated_func_socket_set_timeout_0 = zend_add_function_attribute(zend_hash_str_find_ptr(CG(function_table), "socket_set_timeout", sizeof("socket_set_timeout") - 1), ZSTR_KNOWN(ZEND_STR_DEPRECATED_CAPITALIZED), 2);
 	ZVAL_STR(&attribute_Deprecated_func_socket_set_timeout_0->args[0].value, ZSTR_KNOWN(ZEND_STR_8_DOT_5));
@@ -4373,6 +4618,7 @@ static void register_basic_functions_symbols(int module_number)
 	ZVAL_STR(&attribute_Deprecated_func_socket_set_timeout_0->args[1].value, attribute_Deprecated_func_socket_set_timeout_0_arg1_str);
 	attribute_Deprecated_func_socket_set_timeout_0->args[1].name = ZSTR_KNOWN(ZEND_STR_MESSAGE);
 #endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_TYPE))
 
 	zend_attribute *attribute_Deprecated_func_doubleval_0 = zend_add_function_attribute(zend_hash_str_find_ptr(CG(function_table), "doubleval", sizeof("doubleval") - 1), ZSTR_KNOWN(ZEND_STR_DEPRECATED_CAPITALIZED), 2);
 	zend_string *attribute_Deprecated_func_doubleval_0_arg0_str = zend_string_init("use floatval() instead", strlen("use floatval() instead"), 1);
@@ -4389,7 +4635,8 @@ static void register_basic_functions_symbols(int module_number)
 	attribute_Deprecated_func_is_integer_0->args[1].name = ZSTR_KNOWN(ZEND_STR_SINCE);
 
 	zend_attribute *attribute_Deprecated_func_is_long_0 = zend_add_function_attribute(zend_hash_str_find_ptr(CG(function_table), "is_long", sizeof("is_long") - 1), ZSTR_KNOWN(ZEND_STR_DEPRECATED_CAPITALIZED), 2);
-	ZVAL_STR_COPY(&attribute_Deprecated_func_is_long_0->args[0].value, attribute_Deprecated_func_is_integer_0_arg0_str);
+	zend_string *attribute_Deprecated_func_is_long_0_arg0_str = zend_string_init("use is_int() instead", strlen("use is_int() instead"), 1);
+	ZVAL_STR(&attribute_Deprecated_func_is_long_0->args[0].value, attribute_Deprecated_func_is_long_0_arg0_str);
 	attribute_Deprecated_func_is_long_0->args[0].name = ZSTR_KNOWN(ZEND_STR_MESSAGE);
 	ZVAL_STR(&attribute_Deprecated_func_is_long_0->args[1].value, ZSTR_KNOWN(ZEND_STR_8_DOT_6));
 	attribute_Deprecated_func_is_long_0->args[1].name = ZSTR_KNOWN(ZEND_STR_SINCE);
@@ -4400,6 +4647,8 @@ static void register_basic_functions_symbols(int module_number)
 	attribute_Deprecated_func_is_double_0->args[0].name = ZSTR_KNOWN(ZEND_STR_MESSAGE);
 	ZVAL_STR(&attribute_Deprecated_func_is_double_0->args[1].value, ZSTR_KNOWN(ZEND_STR_8_DOT_6));
 	attribute_Deprecated_func_is_double_0->args[1].name = ZSTR_KNOWN(ZEND_STR_SINCE);
+#endif
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 
 	zend_attribute *attribute_Deprecated_const_SORT_LOCALE_STRING_0 = zend_add_global_constant_attribute(const_SORT_LOCALE_STRING, ZSTR_KNOWN(ZEND_STR_DEPRECATED_CAPITALIZED), 2);
 	zend_string *attribute_Deprecated_const_SORT_LOCALE_STRING_0_arg0_str = zend_string_init("use one of the Collator::*sort*() methods instead", strlen("use one of the Collator::*sort*() methods instead"), 1);
@@ -4408,6 +4657,7 @@ static void register_basic_functions_symbols(int module_number)
 	zend_string *attribute_Deprecated_const_SORT_LOCALE_STRING_0_arg1_str = zend_string_init("8.6", strlen("8.6"), 1);
 	ZVAL_STR(&attribute_Deprecated_const_SORT_LOCALE_STRING_0->args[1].value, attribute_Deprecated_const_SORT_LOCALE_STRING_0_arg1_str);
 	attribute_Deprecated_const_SORT_LOCALE_STRING_0->args[1].name = ZSTR_KNOWN(ZEND_STR_SINCE);
+#endif
 #if !defined(PHP_NANO)
 
 	zend_attribute *attribute_Deprecated_const_ASSERT_ACTIVE_0 = zend_add_global_constant_attribute(const_ASSERT_ACTIVE, ZSTR_KNOWN(ZEND_STR_DEPRECATED_CAPITALIZED), 2);
@@ -4447,6 +4697,7 @@ static void register_basic_functions_symbols(int module_number)
 #endif
 }
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 static zend_class_entry *register_class_SortDirection(void)
 {
 	zend_class_entry *class_entry = zend_register_internal_enum("SortDirection", IS_UNDEF, NULL);
@@ -4457,7 +4708,9 @@ static zend_class_entry *register_class_SortDirection(void)
 
 	return class_entry;
 }
+#endif
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
 static zend_class_entry *register_class___PHP_Incomplete_Class(void)
 {
 	zend_class_entry ce, *class_entry;
@@ -4471,6 +4724,7 @@ static zend_class_entry *register_class___PHP_Incomplete_Class(void)
 
 	return class_entry;
 }
+#endif
 
 #if !defined(PHP_NANO)
 static zend_class_entry *register_class_AssertionError(zend_class_entry *class_entry_Error)

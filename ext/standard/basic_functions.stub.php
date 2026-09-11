@@ -81,6 +81,8 @@ const PHP_OUTPUT_HANDLER_PROCESSED = UNKNOWN;
 
 /* array.c */
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
+
 /**
  * @var int
  * @cvalue PHP_EXTR_OVERWRITE
@@ -207,6 +209,8 @@ const ARRAY_FILTER_USE_BOTH = UNKNOWN;
  * @cvalue ARRAY_FILTER_USE_KEY
  */
 const ARRAY_FILTER_USE_KEY = UNKNOWN;
+
+#endif
 
 /* assert.c */
 
@@ -551,7 +555,10 @@ const DNS_ALL = UNKNOWN;
 #endif
 
 /* html.c */
+
 #endif
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 
 /**
 * @var int
@@ -613,6 +620,8 @@ const ENT_XHTML = UNKNOWN;
 * @cvalue ENT_HTML5
 */
 const ENT_HTML5 = UNKNOWN;
+
+#endif
 
 /* image.c */
 
@@ -1019,7 +1028,10 @@ const LOG_PERROR = UNKNOWN;
 #endif
 
 /* string.c */
+
 #endif
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 
 /**
  * @var int
@@ -1573,11 +1585,15 @@ const CODESET = UNKNOWN;
 #endif
 #endif
 
+#endif
+
 /** @undocumentable */
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
 #[AllowDynamicProperties]
 final class __PHP_Incomplete_Class
 {
 }
+#endif
 
 #ifndef PHP_NANO
 class AssertionError extends Error
@@ -1652,6 +1668,8 @@ function stream_wrapper_restore(string $protocol): bool {}
 #endif
 
 /* array.c */
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ARRAY))
 
 function array_push(array &$array, mixed ...$values): int {}
 
@@ -2015,7 +2033,11 @@ function array_combine(array $keys, array $values): array {}
 /** @compile-time-eval */
 function array_is_list(array $array): bool {}
 
+#endif
+
 /* base64.c */
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 
 /**
  * @compile-time-eval
@@ -2029,7 +2051,11 @@ function base64_encode(string $string): string {}
  */
 function base64_decode(string $string, bool $strict = false): string|false {}
 
+#endif
+
 /* basic_functions.c */
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_CORE))
 
 function constant(string $name): mixed {}
 
@@ -2135,8 +2161,12 @@ function get_include_path(): string|false {}
 
 #endif
 
+#endif
+
 /** @refcount 1 */
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
 function print_r(mixed $value, bool $return = false): string|true {}
+#endif
 
 #ifndef PHP_NANO
 function connection_aborted(): int {}
@@ -2368,6 +2398,7 @@ function headers_list(): array {}
 
 #ifdef PHP_NANO
 /* Digest functions backed by the built-in file-only stream layer. */
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_HASH))
 /** @refcount 1 */
 function md5(string $string, bool $binary = false): string {}
 
@@ -2379,8 +2410,10 @@ function sha1(string $string, bool $binary = false): string {}
 
 /** @refcount 1 */
 function sha1_file(string $filename, bool $binary = false): string|false {}
+#endif
 
 /* Implemented with the C++17 chrono/thread library by src/time.cpp. */
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 function sleep(int $seconds): int {}
 
 function usleep(int $microseconds): void {}
@@ -2395,8 +2428,11 @@ function time_sleep_until(float $timestamp): bool {}
 
 function hrtime(bool $as_number = false): array|int|float|false {}
 #endif
+#endif
 
 /* {{{ html.c */
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 
 /** @refcount 1 */
 function htmlspecialchars(string $string, int $flags = ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, ?string $encoding = null, bool $double_encode = true): string {}
@@ -2416,6 +2452,8 @@ function get_html_translation_table(int $table = HTML_SPECIALCHARS, int $flags =
 
 /* }}} */
 
+#endif
+
 /* assert.c */
 
 #ifndef PHP_NANO
@@ -2426,6 +2464,8 @@ function assert_options(int $option, mixed $value = UNKNOWN): mixed {}
 #endif
 
 /* string.c */
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_STRING))
 
 /**
  * @compile-time-eval
@@ -2815,7 +2855,11 @@ function utf8_encode(string $string): string {}
 function utf8_decode(string $string): string {}
 #endif
 
+#endif
+
 /* dir.c */
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 
 /**
  * @param resource|null $context
@@ -3149,7 +3193,11 @@ function realpath_cache_get(): array {}
 
 function realpath_cache_size(): int {}
 
+#endif
+
 /* formatted_print.c */
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FORMAT))
 
 /** @refcount 1 */
 function sprintf(string $format, mixed ...$values): string {}
@@ -3166,6 +3214,8 @@ function fprintf($stream, string $format, mixed ...$values): int {}
 
 /** @param resource $stream */
 function vfprintf($stream, string $format, array $values): int {}
+
+#endif
 
 /* fsock.c */
 
@@ -3233,6 +3283,8 @@ function getimagesizefromstring(string $string, &$image_info = null): array|fals
 
 /* info.c */
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_INFO))
+
 function phpinfo(int $flags = INFO_ALL): true {} // make return type void
 
 /**
@@ -3260,6 +3312,8 @@ function php_ini_scanned_files(): string|false {}
 
 /** @refcount 1 */
 function php_ini_loaded_file(): string|false {}
+
+#endif
 
 #ifndef PHP_NANO
 
@@ -3298,6 +3352,8 @@ function mail(string $to, string $subject, string $message, array|string $additi
 
 /* math.c */
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MATH))
+
 /** @compile-time-eval */
 function abs(int|float $num): int|float {}
 
@@ -3307,6 +3363,10 @@ function ceil(int|float $num): float {}
 /** @compile-time-eval */
 function floor(int|float $num): float {}
 
+#endif
+
+/* The C enum is part of php_math.h/libbcmath's ABI even when the standard
+ * math function group is not registered. */
 enum RoundingMode {
     case HalfAwayFromZero;
     case HalfTowardsZero;
@@ -3317,6 +3377,8 @@ enum RoundingMode {
     case NegativeInfinity;
     case PositiveInfinity;
 }
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MATH))
 
 /** @compile-time-eval */
 function round(int|float $num, int $precision = 0, int|RoundingMode $mode = RoundingMode::HalfAwayFromZero): float {}
@@ -3460,6 +3522,8 @@ function fdiv(float $num1, float $num2): float {}
  */
 function fpow(float $num, float $exponent): float {}
 
+#endif
+
 /* microtime.c */
 
 #ifndef PHP_NANO
@@ -3565,6 +3629,8 @@ function soundex(string $string): string {}
 /* streamsfuncs.c */
 
 #endif
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_FILESYSTEM))
 
 /**
  * @param resource|null $context
@@ -3804,6 +3870,7 @@ function socket_set_timeout($stream, int $seconds, int $microseconds = 0): bool 
 #endif
 
 #ifdef PHP_NANO
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 /** @refcount 1 */
 function microtime(bool $as_float = false): string|float {}
 
@@ -3813,8 +3880,13 @@ function microtime(bool $as_float = false): string|float {}
  */
 function gettimeofday(bool $as_float = false): array|float {}
 #endif
+#endif
+
+#endif
 
 /* type.c */
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_TYPE))
 
 /**
  * @compile-time-eval
@@ -3928,14 +4000,20 @@ function is_iterable(mixed $value): bool {}
  */
 function is_countable(mixed $value): bool {}
 
+#endif
+
 /* uniqid.c */
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 #if defined(PHP_NANO) || defined(HAVE_GETTIMEOFDAY)
 /** @refcount 1 */
 function uniqid(string $prefix = "", bool $more_entropy = false): string {}
 #endif
+#endif
 
 /* url.c */
+
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_ENCODING))
 
 /**
  * @return int|string|array<string, int|string>|null|false
@@ -3967,6 +4045,8 @@ function rawurlencode(string $string): string {}
  * @refcount 1
  */
 function rawurldecode(string $string): string {}
+
+#endif
 
 /**
  * @param resource|null $context
@@ -4022,6 +4102,8 @@ function convert_uudecode(string $string): string|false {}
 
 /* var.c */
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_VAR))
+
 function var_dump(mixed $value, mixed ...$values): void {}
 
 /** @refcount 1 */
@@ -4043,10 +4125,14 @@ function memory_get_peak_usage(bool $real_usage = false): int {}
 
 function memory_reset_peak_usage(): void {}
 
+#endif
+
 /* versioning.c */
 
+#if (!defined(PHP_NANO_SELECTIVE) || defined(PHP_NANO_STANDARD_MISC))
 /** @compile-time-eval */
 function version_compare(string $version1, string $version2, ?string $operator = null): int|bool {}
+#endif
 
 /* win32/codepage.c */
 

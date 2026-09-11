@@ -14,16 +14,6 @@
 
 namespace {
 
-extern "C" zend_module_entry basic_functions_module;
-extern "C" zend_module_entry json_module_entry;
-extern "C" zend_module_entry date_module_entry;
-extern "C" zend_module_entry hash_module_entry;
-extern "C" zend_module_entry pcre_module_entry;
-extern "C" zend_module_entry spl_module_entry;
-extern "C" zend_module_entry reflection_module_entry;
-extern "C" zend_module_entry random_module_entry;
-extern "C" zend_module_entry filter_module_entry;
-
 std::vector<zend_module_entry *> &started_extensions() {
     static std::vector<zend_module_entry *> extensions;
     return extensions;
@@ -111,16 +101,7 @@ PHP_NANO_API zend_result php_nano_startup_extensions(
     }
 
     std::vector<zend_module_entry *> available;
-    available.reserve(count + 9);
-    available.push_back(&basic_functions_module);
-    available.push_back(&date_module_entry);
-    available.push_back(&hash_module_entry);
-    available.push_back(&json_module_entry);
-    available.push_back(&pcre_module_entry);
-    available.push_back(&spl_module_entry);
-    available.push_back(&reflection_module_entry);
-    available.push_back(&random_module_entry);
-    available.push_back(&filter_module_entry);
+    available.reserve(count);
     available.insert(available.end(), extensions, extensions + count);
 
     const size_t available_count = available.size();
