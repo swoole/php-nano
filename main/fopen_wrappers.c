@@ -32,7 +32,6 @@
 #include <sys/param.h>
 #endif
 
-#include "ext/standard/head.h"
 #include "ext/standard/php_standard.h"
 #include "zend_compile.h"
 #include "php_network.h"

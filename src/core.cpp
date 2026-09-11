@@ -48,6 +48,9 @@ php_core_globals core_globals;
 sapi_globals_struct sapi_globals;
 SAPI_API sapi_module_struct sapi_module;
 
+static char php_nano_sapi_name[] = "nano";
+static char php_nano_sapi_pretty_name[] = "PHP Nano";
+
 const char php_build_date[] = __DATE__ " " __TIME__;
 
 ZEND_ATTRIBUTE_CONST PHPAPI const char *php_build_provider(void)
@@ -90,6 +93,10 @@ ZEND_API void zend_html_puts(const char *value, size_t length)
 PHPAPI void php_html_puts(const char *value, size_t length)
 {
     zend_html_puts(value, length);
+}
+
+PHPAPI bool php_header(void) {
+    return false;
 }
 
 PHPAPI ZEND_COLD void php_verror(
@@ -220,8 +227,8 @@ PHP_NANO_API zend_result php_nano_startup_core(void) {
     std::memset(&compiler_globals, 0, sizeof(compiler_globals));
     std::memset(&executor_globals, 0, sizeof(executor_globals));
     core_globals.serialize_precision = -1;
-    sapi_module.name = "nano";
-    sapi_module.pretty_name = "PHP Nano";
+    sapi_module.name = php_nano_sapi_name;
+    sapi_module.pretty_name = php_nano_sapi_pretty_name;
     sapi_module.phpinfo_as_text = true;
     start_memory_manager();
     gc_globals_ctor();

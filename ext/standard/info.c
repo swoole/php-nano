@@ -17,7 +17,6 @@
 #include "php.h"
 #include "php_ini.h"
 #include "php_globals.h"
-#include "ext/standard/head.h"
 #include "ext/standard/html.h"
 #include "info.h"
 #include "credits.h"

@@ -239,6 +239,13 @@ void test_started_extensions() {
         "print_r",
         "uniqid",
         "strlen",
+        "phpinfo",
+        "phpversion",
+        "phpcredits",
+        "php_sapi_name",
+        "php_uname",
+        "php_ini_scanned_files",
+        "php_ini_loaded_file",
     };
     for (const char *name : supported_functions) {
         assert(zend_hash_str_exists(EG(function_table), name, strlen(name)));
