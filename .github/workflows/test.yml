@@ -8,6 +8,33 @@ permissions:
   contents: read
 
 jobs:
+  upstream-audit:
+    name: php-src divergence audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read recorded upstream metadata
+        id: upstream
+        run: php tools/upstream.php metadata >> "$GITHUB_OUTPUT"
+
+      - name: Download recorded php-src baseline
+        env:
+          PHP_SRC_URL: ${{ steps.upstream.outputs.archive_url }}
+          PHP_SRC_SHA256: ${{ steps.upstream.outputs.archive_sha256 }}
+        run: |
+          curl --fail --location --retry 3 \
+            --output "$RUNNER_TEMP/php-src.tar.gz" \
+            "$PHP_SRC_URL"
+          echo "$PHP_SRC_SHA256  $RUNNER_TEMP/php-src.tar.gz" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/php-src"
+          tar -xzf "$RUNNER_TEMP/php-src.tar.gz" \
+            -C "$RUNNER_TEMP/php-src" --strip-components=1
+
+      - name: Audit vendored php-src changes
+        run: php tools/upstream.php audit --source="$RUNNER_TEMP/php-src"
+
   native-smoke:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}

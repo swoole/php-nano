@@ -9,7 +9,8 @@
   upstream implements it by compiling a new op-array (and optionally caching
   it in Opcache).
 - Zend MM retains its upstream allocation algorithms, but its platform page
-  allocator is replaced by C11 `aligned_alloc()`/`free()`. Huge-page advice and
+  allocator is replaced by the POSIX `posix_memalign()`/`free()` boundary.
+  Huge-page advice and
   in-place mapping growth/truncation are unavailable.
 - Zend bailout uses C11 `setjmp()`/`longjmp()` instead of POSIX
   `sigsetjmp()`/`siglongjmp()`.
@@ -31,8 +32,8 @@
 - PHP output buffering is retained, but its final writer is the native/WASI
   console writer; SAPI headers and URL output rewriting are absent.
 - Standard functions and arginfo are generated from PHP 8.6's guarded
-  `basic_functions.stub.php`. `ini_set()` omits the `open_basedir` path checks because
-  Nano exposes neither `open_basedir` nor filesystem access.
+  `basic_functions.stub.php`. Nano retains local filesystem access, but does not
+  expose or configure PHP's `open_basedir` policy.
 - Runtime constant AST values and complex arginfo defaults that require the
   PHP parser are rejected. Generated Nano arginfo uses literals handled
   without AST parsing.

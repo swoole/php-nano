@@ -451,7 +451,6 @@ typedef struct {
 static void user_shutdown_function_dtor(zval *zv);
 static void user_tick_function_dtor(user_tick_function_entry *tick_function_entry);
 
-#ifndef PHP_NANO
 static const zend_module_dep standard_deps[] = { /* {{{ */
 	ZEND_MOD_REQUIRED("random")
 	ZEND_MOD_REQUIRED("uri")
@@ -459,21 +458,8 @@ static const zend_module_dep standard_deps[] = { /* {{{ */
 	ZEND_MOD_END
 };
 /* }}} */
-#endif
 
 zend_module_entry basic_functions_module = { /* {{{ */
-#ifdef PHP_NANO
-	STANDARD_MODULE_HEADER,
-	"standard",
-	ext_functions,
-	PHP_MINIT(basic),
-	PHP_MSHUTDOWN(basic),
-	NULL,
-	NULL,
-	NULL,
-	PHP_STANDARD_VERSION,
-	STANDARD_MODULE_PROPERTIES
-#else
 	STANDARD_MODULE_HEADER_EX,
 	NULL,
 	standard_deps,
@@ -486,7 +472,6 @@ zend_module_entry basic_functions_module = { /* {{{ */
 	PHP_MINFO(basic),			/* extension info */
 	PHP_STANDARD_VERSION,		/* extension version */
 	STANDARD_MODULE_PROPERTIES
-#endif
 };
 /* }}} */
 
@@ -604,17 +589,6 @@ PHPAPI double php_get_inf(void) /* {{{ */
 
 PHP_MINIT_FUNCTION(basic) /* {{{ */
 {
-#ifdef PHP_NANO
-#ifdef ZTS
-	ts_allocate_id(&basic_globals_id, sizeof(php_basic_globals), (ts_allocate_ctor) basic_globals_ctor, (ts_allocate_dtor) basic_globals_dtor);
-#else
-	basic_globals_ctor(&basic_globals);
-#endif
-	register_basic_functions_symbols(module_number);
-	rounding_mode_ce = register_class_RoundingMode();
-	sort_direction_ce = register_class_SortDirection();
-	return PHP_MINIT(array)(INIT_FUNC_ARGS_PASSTHRU);
-#else
 #ifdef ZTS
 	ts_allocate_id(&basic_globals_id, sizeof(php_basic_globals), (ts_allocate_ctor) basic_globals_ctor, (ts_allocate_dtor) basic_globals_dtor);
 # ifdef PHP_WIN32
@@ -687,21 +661,11 @@ PHP_MINIT_FUNCTION(basic) /* {{{ */
 	php_register_url_stream_wrapper("ftp", &php_stream_ftp_wrapper);
 
 	return SUCCESS;
-#endif
 }
 /* }}} */
 
 PHP_MSHUTDOWN_FUNCTION(basic) /* {{{ */
 {
-#ifdef PHP_NANO
-	zend_result result = PHP_MSHUTDOWN(array)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
-#ifdef ZTS
-	ts_free_id(basic_globals_id);
-#else
-	basic_globals_dtor(&basic_globals);
-#endif
-	return result;
-#else
 #ifdef ZTS
 	ts_free_id(basic_globals_id);
 #ifdef PHP_WIN32
@@ -732,7 +696,6 @@ PHP_MSHUTDOWN_FUNCTION(basic) /* {{{ */
 	BASIC_MSHUTDOWN_SUBMODULE(image)
 
 	return SUCCESS;
-#endif
 }
 /* }}} */
 
@@ -2365,8 +2328,7 @@ PHP_FUNCTION(ini_set)
 	zend_string *new_value_tmp_str;
 	zend_string *new_value_str = zval_get_tmp_string(new_value, &new_value_tmp_str);
 
-	/* open_basedir is a filesystem capability and is not present in Nano. */
-#ifndef PHP_NANO
+	/* open basedir check */
 	if (PG(open_basedir)) {
 		if (
 			zend_string_equals_literal(varname, "java.class.path")
@@ -2381,7 +2343,6 @@ PHP_FUNCTION(ini_set)
 			}
 		}
 	}
-#endif
 
 	if (zend_alter_ini_entry_ex(varname, new_value_str, PHP_INI_USER, PHP_INI_STAGE_RUNTIME, 0) == FAILURE) {
 		zval_ptr_dtor_str(return_value);

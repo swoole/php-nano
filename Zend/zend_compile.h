@@ -953,7 +953,7 @@ zend_string *zval_make_interned_string(zval *zv);
 #define INITIAL_OP_ARRAY_SIZE 64
 
 
-/* Full-PHP compiler entry points retained in the public ABI declarations. */
+/* helper functions in zend_language_scanner.l */
 struct _zend_arena;
 
 ZEND_API zend_op_array *compile_file(zend_file_handle *file_handle, int type);

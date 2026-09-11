@@ -60,13 +60,14 @@ PHP Nano MUST NOT expose or internally call APIs that provide:
   and `madvise`.
 
 Wall-clock access, monotonic-clock access, and sleeping are intentional
-capabilities. Their PHP APIs MUST be implemented through C++17 `<chrono>` and
-`<thread>` rather than direct platform calls.
+capabilities. Hosted builds use C++17 `<chrono>` and `<thread>`. A
+`PHP_NANO_NO_LIBC` embedder supplies the equivalent narrow host hooks; PHP Nano
+MUST NOT embed that host's platform implementation.
 
-Cryptographic random-byte access is an intentional capability. PHP's random
-extension MUST obtain entropy through C++17 `std::random_device`, never through
-direct operating-system calls in PHP Nano source. Failure of that standard
-library interface MUST remain observable as a PHP random exception.
+Cryptographic random-byte access is an intentional capability. Hosted builds
+obtain entropy through C++17 `std::random_device`. A `PHP_NANO_NO_LIBC`
+embedder supplies the random-byte and seed hooks. Failure of either provider
+MUST remain observable as a PHP random exception.
 
 Local filesystem access is an intentional capability. PHP Nano retains PHP's
 stream core with only the `file` and `glob` wrappers, plus file/directory/stat

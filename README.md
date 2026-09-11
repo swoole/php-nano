@@ -14,7 +14,7 @@ are not linked into the generated native program.
 - PHP 8.6 `zval`, `zend_string`, `Bucket`, and `zend_array` definitions;
 - PHP 8.6 implementations of strings, HashTable, variables, sorting,
   operators, numeric conversion, GC, and resource lists; the allocator keeps
-  Zend's API and algorithms but selects a C11 `malloc` backend instead of the
+  Zend's API and algorithms but selects a POSIX aligned-allocation backend instead of the
   upstream mmap/page-management backend;
 - native class metadata and `zend_call_function`-compatible virtual method
   dispatch through compiler-generated C++ trampolines;

@@ -103,7 +103,7 @@ struct _zend_compiler_globals {
 
 	HashTable *auto_globals;
 
-	/* Parser error state retained as part of zend_compiler_globals ABI layout. */
+	/* Refer to zend_yytnamerr() in zend_language_parser.y for meaning of values */
 	uint8_t parse_error;
 	bool in_compilation;
 	bool short_tags;

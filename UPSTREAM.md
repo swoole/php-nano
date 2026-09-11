@@ -9,19 +9,21 @@ The initial runtime is derived from PHP 8.6.0beta3:
   `d28ad1a28c28d1f32795ab048a2494b4417f4c941b1584d46aafde731b6947db`
 - local integration source: `/home/swoole/soft/php/php-8.6.0beta3`
 
-Imported files remain in their php-src relative directories. The central value
-and container algorithms below are kept byte-identical to that release:
+Imported files remain in their php-src relative directories. Except for files
+recorded in `tools/upstream-sync.json`, the imported tree is kept byte-identical
+to that release. In particular, the central value and container algorithms
+below are unchanged:
 
-- top-level `Zend/*.h` and `TSRM/*.h` headers;
-- `Zend/zend_string.c` and `zend_hash.c`;
+- `Zend/zend_hash.c`;
 - `Zend/zend_sort.c`, `zend_operators.c`, `zend_gc.c`, and `zend_strtod.c`;
 - `Zend/zend_list.c`.
 - `main/spprintf.c`, `main/spprintf.h`, `main/snprintf.h`, and
   `main/php_globals.h`.
-- `ext/bcmath/libbcmath`, including its original source, headers, tests,
-  README, and license, is copied from the same PHP 8.6.0beta3 tree. Nano uses
+- `ext/bcmath/libbcmath`, including its original source, headers, README, and
+  license, is copied from the same PHP 8.6.0beta3 tree. Nano uses
   the library internally for PHPX high-precision fallback arithmetic; the
-  public bcmath extension is not registered.
+  public bcmath extension is not registered. As with the rest of Nano, PHPT
+  tests are intentionally not imported.
 
 Files that select out the VM, SAPI, or operating-system branches carry narrow
 `PHP_NANO` guards while retaining the upstream implementation on the normal PHP
@@ -43,3 +45,7 @@ php-src translation unit, not by replacing Zend algorithms locally. Interpreter,
 compiler, SAPI, dynamic-loading, and unsupported host-capability units are not
 selected into the final application. All derived source is distributed under
 the bundled BSD-3-Clause license.
+
+The synchronization procedure and the machine-readable divergence allowlist
+are documented in [UPSTREAM_SYNC.md](UPSTREAM_SYNC.md). Run its audit before
+and after changing any copied php-src file.
