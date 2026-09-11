@@ -1,28 +1,18 @@
 # PHP Nano core constraints
 
-## Freestanding kernel profile
+## Host integration
 
-The optional `kernel` Composer profile is a long-running experimental target
-and a smaller source composition than the normal Nano runtime. It has no hosted libc, operating-system service, SAPI,
-ZendVM, dynamic loader, filesystem, socket, process, or shell dependency.
-TypePHP selects it through `tpc.php --kernel` and always generates 64-bit
-runtime code; architecture bootstrap code may use a narrower mode only long
-enough to enter the 64-bit kernel.
+PHP Nano has one source composition. It MUST NOT contain a special kernel
+profile, reduced kernel source list, or kernel-owned libc/POSIX implementation.
+Freestanding projects compile the ordinary Nano composition and satisfy its
+host ABI in their own project. TypePHP OS is one such consumer, not a PHP Nano
+build mode.
 
-Copied PHP sources SHOULD remain byte-for-byte compatible with upstream. A
-kernel MUST satisfy their required C/POSIX calls in `kernel/` instead of adding
-bare-metal branches throughout Zend. The initial compatibility arena exists
-only to supply aligned physical chunks to upstream `zend_alloc`; application
-allocations MUST continue to use `emalloc`/`efree`. Runtime enablement follows
-the dependency order `zend_alloc`, `zend_gc`, `zend_string`/`zend_hash`, then
-Zend objects/classes and PHPX containers.
-
-Kernel integration MUST be additive and profile-driven. Kernel-only host
-adapters belong in `kernel/` directories and MUST be selected through Composer
-source profiles; copied Zend sources MUST NOT accumulate kernel conditionals.
-Reusable PHPX portability abstractions, such as its exception policy, MUST
-preserve the existing behavior by default and expose the kernel behavior only
-when the kernel profile explicitly selects it.
+Copied PHP sources SHOULD remain byte-for-byte compatible with upstream.
+Host-specific behavior MUST be expressed through small, generally named
+portability contracts such as `PHP_NANO_NO_LIBC`, never through product- or
+kernel-specific conditionals in copied Zend or extension sources. A hosted
+build remains the default when no portability contract is selected.
 
 This file is normative. An implementation or extension that violates a
 `MUST NOT` rule below is not compatible with PHP Nano, even when the same code
@@ -131,12 +121,11 @@ built-in layer and are subject to this same file.
   retained Zend helper creates an exception outside an internal-call frame,
   Nano MUST leave it in `EG(exception)` so the PHPX boundary can translate it
   into the C++ `zend_object*` unwind used by generated `try`/`catch` code.
-- The kernel profile MUST compose the original Zend class table, object store,
-  object handlers, inheritance, interfaces, and exception classes as source
-  units. These are in-memory runtime structures and algorithms, not host
-  facilities. Kernel adapters MUST NOT replace PHP exception construction or
-  PHPX argument/return type-error semantics; only the final PHPX propagation
-  policy changes from a C++ throw to the kernel panic hook.
+- The ordinary Nano composition includes the original Zend class table, object
+  store, object handlers, inheritance, interfaces, and exception classes.
+  These are in-memory runtime structures and algorithms, not host facilities.
+  A freestanding host MUST NOT replace PHP exception construction or PHPX
+  argument/return type-error semantics.
 - PHP's output buffer stack and `PHPWRITE` remain available. SAPI headers,
   HTTP headers, and URL output rewriting are not part of Nano output.
 - It does not contain `Zend/Optimizer`, which only optimizes ZendVM op_arrays.

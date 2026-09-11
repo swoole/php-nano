@@ -34,6 +34,15 @@ PHP_NANO_API void php_nano_system_time(int64_t *seconds, int32_t *microseconds);
 PHP_NANO_API zend_string *php_nano_unique_id(zend_string *prefix, bool more_entropy);
 PHP_NANO_API zend_result php_nano_random_bytes(void *bytes, size_t size);
 PHP_NANO_API uint64_t php_nano_random_seed(void);
+#ifdef PHP_NANO_NO_LIBC
+/* Freestanding embedders supply entropy without pulling in a hosted C++
+ * runtime. The provider may return FAILURE when no entropy source exists. */
+PHP_NANO_API zend_result php_nano_host_random_bytes(void *bytes, size_t size);
+PHP_NANO_API uint64_t php_nano_host_random_seed(void);
+PHP_NANO_API void php_nano_host_system_time(int64_t *seconds, int32_t *microseconds);
+PHP_NANO_API uint64_t php_nano_host_monotonic_nanoseconds(void);
+PHP_NANO_API void php_nano_host_sleep(uint64_t seconds, uint32_t nanoseconds);
+#endif
 PHP_NANO_API zend_result php_nano_startup_bcmath(void);
 PHP_NANO_API void php_nano_shutdown_bcmath(void);
 

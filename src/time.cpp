@@ -14,26 +14,54 @@ extern "C" {
 #include "ext/random/php_random.h"
 }
 
-#include <chrono>
 #include <cinttypes>
 #include <cmath>
 #include <cstdint>
+#ifndef PHP_NANO_NO_LIBC
+#include <chrono>
 #include <thread>
+#endif
 
 namespace {
 
-using SystemClock = std::chrono::system_clock;
-using SteadyClock = std::chrono::steady_clock;
-
-std::chrono::nanoseconds system_time_since_epoch()
+int64_t system_time_nanoseconds()
 {
+#ifdef PHP_NANO_NO_LIBC
+    int64_t seconds;
+    int32_t microseconds;
+    php_nano_host_system_time(&seconds, &microseconds);
+    return seconds * INT64_C(1000000000) + microseconds * INT64_C(1000);
+#else
+    using SystemClock = std::chrono::system_clock;
     return std::chrono::duration_cast<std::chrono::nanoseconds>(
-        SystemClock::now().time_since_epoch());
+        SystemClock::now().time_since_epoch()).count();
+#endif
 }
 
 double system_time_seconds()
 {
-    return std::chrono::duration<double>(SystemClock::now().time_since_epoch()).count();
+    return static_cast<double>(system_time_nanoseconds()) / 1000000000.0;
+}
+
+void sleep_for(uint64_t seconds, uint32_t nanoseconds)
+{
+#ifdef PHP_NANO_NO_LIBC
+    php_nano_host_sleep(seconds, nanoseconds);
+#else
+    std::this_thread::sleep_for(
+        std::chrono::seconds(seconds) + std::chrono::nanoseconds(nanoseconds));
+#endif
+}
+
+uint64_t monotonic_nanoseconds()
+{
+#ifdef PHP_NANO_NO_LIBC
+    return php_nano_host_monotonic_nanoseconds();
+#else
+    using SteadyClock = std::chrono::steady_clock;
+    return static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::nanoseconds>(
+        SteadyClock::now().time_since_epoch()).count());
+#endif
 }
 
 } // namespace
@@ -42,18 +70,15 @@ extern "C" {
 
 PHP_NANO_API int64_t php_nano_system_time_seconds(void)
 {
-    return std::chrono::duration_cast<std::chrono::seconds>(
-        SystemClock::now().time_since_epoch()).count();
+    return system_time_nanoseconds() / INT64_C(1000000000);
 }
 
 PHP_NANO_API void php_nano_system_time(int64_t *seconds, int32_t *microseconds)
 {
-    const auto elapsed = system_time_since_epoch();
-    const auto whole_seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed);
-    const auto fractional = std::chrono::duration_cast<std::chrono::microseconds>(
-        elapsed - whole_seconds);
-    *seconds = whole_seconds.count();
-    *microseconds = static_cast<int32_t>(fractional.count());
+    const int64_t elapsed = system_time_nanoseconds();
+    *seconds = elapsed / INT64_C(1000000000);
+    *microseconds = static_cast<int32_t>(
+        (elapsed % INT64_C(1000000000)) / INT64_C(1000));
 }
 
 PHP_NANO_API zend_string *php_nano_unique_id(zend_string *prefix, bool more_entropy)
@@ -116,7 +141,7 @@ ZEND_FUNCTION(sleep)
         RETURN_THROWS();
     }
 
-    std::this_thread::sleep_for(std::chrono::seconds(seconds));
+    sleep_for(static_cast<uint64_t>(seconds), 0);
     RETURN_LONG(0);
 }
 
@@ -133,7 +158,9 @@ ZEND_FUNCTION(usleep)
         RETURN_THROWS();
     }
 
-    std::this_thread::sleep_for(std::chrono::microseconds(microseconds));
+    sleep_for(
+        static_cast<uint64_t>(microseconds / 1000000),
+        static_cast<uint32_t>((microseconds % 1000000) * 1000));
 }
 
 ZEND_FUNCTION(time_nanosleep)
@@ -155,8 +182,7 @@ ZEND_FUNCTION(time_nanosleep)
         RETURN_THROWS();
     }
 
-    std::this_thread::sleep_for(
-        std::chrono::seconds(seconds) + std::chrono::nanoseconds(nanoseconds));
+    sleep_for(static_cast<uint64_t>(seconds), static_cast<uint32_t>(nanoseconds));
     RETURN_TRUE;
 }
 
@@ -174,8 +200,9 @@ ZEND_FUNCTION(time_sleep_until)
         RETURN_THROWS();
     }
 
-    std::this_thread::sleep_until(SystemClock::time_point(
-        std::chrono::duration_cast<SystemClock::duration>(std::chrono::duration<double>(timestamp))));
+    const double delay = timestamp - now;
+    const uint64_t seconds = static_cast<uint64_t>(delay);
+    sleep_for(seconds, static_cast<uint32_t>((delay - seconds) * 1000000000.0));
     RETURN_TRUE;
 }
 
@@ -188,8 +215,7 @@ ZEND_FUNCTION(hrtime)
         Z_PARAM_BOOL(as_number)
     ZEND_PARSE_PARAMETERS_END();
 
-    const auto nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(
-        SteadyClock::now().time_since_epoch()).count();
+    const uint64_t nanoseconds = monotonic_nanoseconds();
 
     if (as_number) {
         RETURN_LONG(static_cast<zend_long>(nanoseconds));
@@ -211,20 +237,20 @@ ZEND_FUNCTION(microtime)
         Z_PARAM_BOOL(as_float)
     ZEND_PARSE_PARAMETERS_END();
 
-    const auto elapsed = system_time_since_epoch();
-    const auto seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed);
-    const auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed - seconds);
+    const int64_t elapsed = system_time_nanoseconds();
+    const int64_t seconds = elapsed / INT64_C(1000000000);
+    const int64_t microseconds = (elapsed % INT64_C(1000000000)) / INT64_C(1000);
 
     if (as_float) {
-        RETURN_DOUBLE(static_cast<double>(seconds.count())
-            + static_cast<double>(microseconds.count()) / 1000000.0);
+        RETURN_DOUBLE(static_cast<double>(seconds)
+            + static_cast<double>(microseconds) / 1000000.0);
     }
 
     RETURN_STR(zend_strpprintf(
         0,
         "%.8F %lld",
-        static_cast<double>(microseconds.count()) / 1000000.0,
-        static_cast<long long>(seconds.count())));
+        static_cast<double>(microseconds) / 1000000.0,
+        static_cast<long long>(seconds)));
 }
 
 ZEND_FUNCTION(gettimeofday)
@@ -236,18 +262,18 @@ ZEND_FUNCTION(gettimeofday)
         Z_PARAM_BOOL(as_float)
     ZEND_PARSE_PARAMETERS_END();
 
-    const auto elapsed = system_time_since_epoch();
-    const auto seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed);
-    const auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed - seconds);
+    const int64_t elapsed = system_time_nanoseconds();
+    const int64_t seconds = elapsed / INT64_C(1000000000);
+    const int64_t microseconds = (elapsed % INT64_C(1000000000)) / INT64_C(1000);
 
     if (as_float) {
-        RETURN_DOUBLE(static_cast<double>(seconds.count())
-            + static_cast<double>(microseconds.count()) / 1000000.0);
+        RETURN_DOUBLE(static_cast<double>(seconds)
+            + static_cast<double>(microseconds) / 1000000.0);
     }
 
     array_init(return_value);
-    add_assoc_long(return_value, "sec", static_cast<zend_long>(seconds.count()));
-    add_assoc_long(return_value, "usec", static_cast<zend_long>(microseconds.count()));
+    add_assoc_long(return_value, "sec", static_cast<zend_long>(seconds));
+    add_assoc_long(return_value, "usec", static_cast<zend_long>(microseconds));
     /* Nano's process-independent default timezone is UTC. */
     add_assoc_long(return_value, "minuteswest", 0);
     add_assoc_long(return_value, "dsttime", 0);
