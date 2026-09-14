@@ -17,35 +17,6 @@
 
 #include <php.h>
 
-#ifdef PHP_NANO
-
-/*
- * File streams share PHP's historical socket error formatter and descriptor
- * type. Nano keeps only those two ABI details; no network declarations or
- * transport implementation are exposed.
- */
-#include <errno.h>
-#include <stdio.h>
-#include <string.h>
-
-typedef int php_socket_t;
-#define SOCK_ERR (-1)
-#define PHP_SOCK_CHUNK_SIZE 8192
-#define php_socket_errno() errno
-#define PHP_IS_TRANSIENT_ERROR(err) ((err) == EAGAIN)
-
-static inline char *php_socket_strerror_s(long err, char *buf, size_t bufsize)
-{
-	const char *message = strerror((int) err);
-	if (buf == NULL || bufsize == 0) {
-		return estrdup(message != NULL ? message : "Unknown error");
-	}
-	snprintf(buf, bufsize, "%s", message != NULL ? message : "Unknown error");
-	return buf;
-}
-
-#else
-
 #ifndef PHP_WIN32
 # undef closesocket
 # define closesocket close
@@ -434,7 +405,5 @@ END_EXTERN_C()
 #ifndef MAXFQDNLEN
 #define MAXFQDNLEN 255
 #endif
-
-#endif /* !PHP_NANO */
 
 #endif /* _PHP_NETWORK_H */

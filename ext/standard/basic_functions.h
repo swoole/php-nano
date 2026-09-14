@@ -16,16 +16,14 @@
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
 
+#include <sys/stat.h>
 #include <wchar.h>
 
-#ifndef PHP_NANO
-#include <sys/stat.h>
 #include "php_filestat.h"
 
 #include "zend_highlight.h"
 
 #include "url_scanner_ex.h"
-#endif
 
 #include "basic_functions_decl.h"
 
@@ -42,7 +40,6 @@ PHP_RINIT_FUNCTION(basic);
 PHP_RSHUTDOWN_FUNCTION(basic);
 PHP_MINFO_FUNCTION(basic);
 
-#ifndef PHP_NANO
 ZEND_API void php_get_highlight_struct(zend_syntax_highlighter_ini *syntax_highlighter_ini);
 
 PHP_MINIT_FUNCTION(poll);
@@ -51,7 +48,6 @@ PHP_RSHUTDOWN_FUNCTION(user_filters);
 PHP_RSHUTDOWN_FUNCTION(browscap);
 
 PHPAPI zend_result _php_error_log(int opt_err, const zend_string *message, const zend_string *opt, const zend_string *headers);
-#endif
 
 typedef struct _php_basic_globals {
 	HashTable *user_shutdown_function_names;
@@ -64,29 +60,6 @@ typedef struct _php_basic_globals {
 	size_t strtok_len;
 	zend_fcall_info user_compare_fci;
 	zend_fcall_info_cache user_compare_fci_cache;
-
-	/* var.c */
-	unsigned serialize_lock; /* whether to use the locally supplied var_hash instead (__sleep/__wakeup) */
-	struct {
-		struct php_serialize_data *data;
-		unsigned level;
-	} serialize;
-	struct {
-		struct php_unserialize_data *data;
-		unsigned level;
-	} unserialize;
-	zend_long unserialize_max_depth;
-
-	/* filestat.c && main/streams/streams.c */
-	zend_string *CurrentStatFile, *CurrentLStatFile;
-	php_stream_statbuf ssb, lssb;
-
-	/* file.c */
-#if defined(_REENTRANT)
-	mbstate_t mblen_state;
-#endif
-	int umask;
-#ifndef PHP_NANO
 	zend_llist *user_tick_functions;
 
 	zval active_ini_file_section;
@@ -100,8 +73,23 @@ typedef struct _php_basic_globals {
 	zend_long page_inode;
 	time_t page_mtime;
 
+	/* filestat.c && main/streams/streams.c */
+	zend_string *CurrentStatFile, *CurrentLStatFile;
+	php_stream_statbuf ssb, lssb;
+
 	/* syslog.c */
 	char *syslog_device;
+
+	/* var.c */
+	unsigned serialize_lock; /* whether to use the locally supplied var_hash instead (__sleep/__wakeup) */
+	struct {
+		struct php_serialize_data *data;
+		unsigned level;
+	} serialize;
+	struct {
+		struct php_unserialize_data *data;
+		unsigned level;
+	} unserialize;
 
 	/* url_scanner_ex.re */
 	url_adapt_state_ex_t url_adapt_session_ex;
@@ -110,7 +98,13 @@ typedef struct _php_basic_globals {
 	HashTable url_adapt_output_hosts_ht;
 	HashTable *user_filter_map;
 
+	/* file.c */
+#if defined(_REENTRANT)
+	mbstate_t mblen_state;
 #endif
+
+	int umask;
+	zend_long unserialize_max_depth;
 } php_basic_globals;
 
 #ifdef ZTS
@@ -126,7 +120,6 @@ PHPAPI zend_string *php_getenv(const char *str, size_t str_len);
 PHPAPI double php_get_nan(void);
 PHPAPI double php_get_inf(void);
 
-#ifndef PHP_NANO
 typedef struct _php_shutdown_function_entry {
 	zend_fcall_info_cache fci_cache;
 	zval *params;
@@ -139,7 +132,6 @@ PHPAPI extern bool append_user_shutdown_function(php_shutdown_function_entry *sh
 
 PHPAPI void php_call_shutdown_functions(void);
 PHPAPI void php_free_shutdown_functions(void);
-#endif
 
 
 #endif /* BASIC_FUNCTIONS_H */

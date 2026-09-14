@@ -2347,11 +2347,6 @@ void php_stream_context_unset_option(php_stream_context *context,
 
 PHPAPI const struct php_uri_parser *php_stream_context_get_uri_parser(const char *wrappername, php_stream_context *context)
 {
-#ifdef PHP_NANO
-	(void) wrappername;
-	(void) context;
-	return NULL;
-#else
 	if (context == NULL) {
 		return php_uri_get_parser(NULL);
 	}
@@ -2366,7 +2361,6 @@ PHPAPI const struct php_uri_parser *php_stream_context_get_uri_parser(const char
 	}
 
 	return php_uri_get_parser(Z_STR_P(uri_parser_name));
-#endif
 }
 
 /* {{{ php_stream_dirent_alphasort */
