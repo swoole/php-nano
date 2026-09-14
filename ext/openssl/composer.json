@@ -1,0 +1,47 @@
+{
+  "name": "swoole/php-ext-openssl",
+  "description": "PHP OpenSSL extension sources for TypePHP native builds",
+  "type": "library",
+  "license": "PHP-3.01",
+  "require": {
+    "php": ">=8.4",
+    "swoole/php-nano": "^1.0 || dev-master || dev-main"
+  },
+  "extra": {
+    "typephp-native": {
+      "kind": "extension",
+      "abi": 80600,
+      "c-standard": 11,
+      "cxx-standard": 17,
+      "include-dirs": ["."],
+      "sources": [
+        "openssl.c",
+        "openssl_pwhash.c",
+        "openssl_backend_common.c",
+        "openssl_backend_v1.c",
+        "openssl_backend_v3.c",
+        "xp_ssl.c"
+      ],
+      "components": {
+        "openssl": {
+          "extension": "openssl",
+          "module-entry": "openssl_module_entry",
+          "defines": ["HAVE_OPENSSL_EXT=1", "HAVE_TLS12=1", "HAVE_TLS13=1", "HAVE_TLS_ALPN=1", "HAVE_TLS_SNI=1"],
+          "requires": ["uri", "standard.url-stream", "standard.info", "standard.hash"],
+          "sources": [
+            "openssl.c",
+            "openssl_pwhash.c",
+            "openssl_backend_common.c",
+            "openssl_backend_v1.c",
+            "openssl_backend_v3.c",
+            "xp_ssl.c"
+          ]
+        }
+      },
+      "extension": {
+        "name": "openssl",
+        "module-entry": "openssl_module_entry"
+      }
+    }
+  }
+}

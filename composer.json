@@ -217,6 +217,7 @@
         "ext/spl/spl_observer.c",
         "main/spprintf.c",
         "main/snprintf.c",
+        "main/network.c",
         "main/strlcpy.c",
         "main/explicit_bzero.c",
         "main/fopen_wrappers.c",
@@ -369,6 +370,7 @@
           "extension": "standard",
           "requires": ["standard.core", "standard.filesystem", "uri"],
           "sources": [
+            "main/network.c",
             "main/streams/xp_socket.c",
             "ext/standard/http_fopen_wrapper.c",
             "ext/standard/ftp_fopen_wrapper.c"
