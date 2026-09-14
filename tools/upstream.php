@@ -86,6 +86,32 @@ function upstreamOwnedFiles(string $repository, array $roots, string $base): arr
     return $files;
 }
 
+/** @return list<string> */
+function localFiles(string $repository, array $roots): array
+{
+    $files = [];
+    foreach ($roots as $root) {
+        $directory = $repository . '/' . $root;
+        if (!is_dir($directory)) {
+            continue;
+        }
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS),
+        );
+        foreach ($iterator as $file) {
+            if ($file->isFile()) {
+                $files[] = str_replace(
+                    '\\',
+                    '/',
+                    substr($file->getPathname(), strlen($repository) + 1),
+                );
+            }
+        }
+    }
+    sort($files, SORT_STRING);
+    return $files;
+}
+
 function contentEqual(string $left, string $right): bool
 {
     return filesize($left) === filesize($right)
@@ -96,6 +122,16 @@ function matchesAny(string $path, array $patterns): bool
 {
     foreach ($patterns as $pattern) {
         if (fnmatch($pattern, basename($path))) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function matchesPathAny(string $path, array $patterns): bool
+{
+    foreach ($patterns as $pattern) {
+        if (fnmatch($pattern, $path)) {
             return true;
         }
     }
@@ -157,6 +193,13 @@ function audit(string $repository, array $configuration, array $options): never
             $forbidden[] = $relative;
         }
     }
+    foreach (localFiles($repository, $configuration['roots'] ?? []) as $relative) {
+        if (matchesPathAny($relative, $configuration['forbidden_import_patterns'] ?? [])) {
+            $forbidden[] = $relative;
+        }
+    }
+    $forbidden = array_values(array_unique($forbidden));
+    sort($forbidden, SORT_STRING);
 
     echo 'PHP Nano upstream audit', PHP_EOL;
     echo '  source:                ', $source, PHP_EOL;
@@ -170,7 +213,7 @@ function audit(string $repository, array $configuration, array $options): never
 
     printGroup('Unexpected divergences', $unexpected);
     printGroup('Stale allowlist entries', $stale);
-    printGroup('Forbidden VM/parser/compiler imports', $forbidden);
+    printGroup('Forbidden VM/parser/compiler/test imports', $forbidden);
     if ($unexpected !== [] || $stale !== [] || $forbidden !== []) {
         exit(1);
     }

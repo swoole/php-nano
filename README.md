@@ -2,7 +2,7 @@
 
 `php-nano` is TypePHP's small native runtime. It preserves the
 PHP/Zend names and data structures needed by PHPX while removing the PHP
-interpreter, Zend VM, SAPI, network streams, and general operating-system service APIs. Its
+  interpreter, Zend VM, SAPI, and general operating-system service APIs. Its
 sources are compiled directly into a TypePHP native executable in
 place of `libphp`.
 
@@ -19,20 +19,22 @@ are not linked into the generated native program.
 - native class metadata and `zend_call_function`-compatible virtual method
   dispatch through compiler-generated C++ trampolines;
 - PHP output buffering with a native/WASI console writer;
-- PHP's stream core restricted to local `file` and `glob` wrappers, including
-  standard file/directory/stat and hash file/stream APIs;
+- PHP's stream core, including local file wrappers and source-selectable URI,
+  socket transport, HTTP, FTP, and TLS support;
 - PHP 8.6 timelib and DateTime APIs, with clocks and sleeps supplied through
   the C++17 standard library;
 - generated target configuration plus the original PHP 8.6 `php.h`;
 - direct native and `wasm32-wasip2` source builds;
 - no application dependency beyond the selected C/C++ toolchain runtime.
 
-PHP Nano contains a fixed built-in PHP layer: Core, date, hash, json, pcre,
-random, Reflection, SPL, standard, and filter. Their PHP 8.6 source trees
-are vendored directly. Nano registers only the subset that satisfies its host
-capability boundary. Other PHP extensions are Composer source packages using
-the `swoole/php-ext-*` naming convention. The final extension set is fixed at
-build time; dynamic libraries and runtime extension loading are not supported.
+PHP Nano vendors php-src extension source trees directly, including Core,
+date, hash, json, pcre, random, Reflection, SPL, standard, filter, URI, curl,
+and OpenSSL. TypePHP selects only the components used by a program and the
+transitive dependencies declared in `composer.json`; merely being present in
+php-nano does not add an extension to an executable. Extensions that are not
+part of php-src are installed with PIE as vendor packages. The final extension
+set is fixed at build time; dynamic libraries and runtime extension loading are
+not supported.
 The Zend INI registry and module-defined settings are retained, while automatic
 discovery/loading of `php.ini` remains disabled. Application file access does
 not imply runtime configuration or extension discovery.
@@ -84,6 +86,9 @@ builds, WASI Preview 2 build/execution, plus iPhoneOS `arm64` and Android
 `arm64-v8a` cross-compilation. Windows is intentionally not a php-nano runtime
 target: TypePHP uses its full PHP/PHPX DLL distribution and applies the Nano
 restrictions in the compiler.
+
+No php-src `tests/` directory or `.phpt` file is shipped. Nano's own small C++
+smoke tests remain because they validate the source manifest and runtime ABI.
 
 For a standalone repository check:
 

@@ -1,14 +1,18 @@
-# Static Composer extensions
+# Static extension composition
 
 PHP Nano retains an extension lifecycle but has no dynamic loader. The set of
 extensions is fully determined by Composer before compilation.
 
-Core, date, hash, json, pcre, random, Reflection, SPL, standard, and
-filter belong to PHP Nano's fixed built-in layer. They are not Composer
-extension packages and cannot be replaced by one. Their registered API is
-restricted by [CONSTRAINTS.md](CONSTRAINTS.md).
+Every extension shipped by php-src belongs in PHP Nano's vendored `ext/` tree.
+It is not split into another Git repository or installed as a separate
+Composer dependency. The top-level `composer.json` assigns its unchanged
+source files to a component, records dependencies and the original
+`zend_module_entry`, and allows TypePHP to omit the whole extension when it is
+unused. This includes optional php-src extensions such as curl and OpenSSL as
+well as Core, date, hash, json, pcre, random, Reflection, SPL, standard, URI,
+and filter.
 
-The source-composition build registers the complete fixed layer. Standard
+The source-composition build registers the selected built-in layer. Standard
 arginfo and function tables are generated from PHP's guarded
 `basic_functions.stub.php`; date retains PHP's timelib and generated DateTime
 class tables; hash retains the in-memory and file/stream algorithms; JSON uses PHP 8.6's
@@ -46,17 +50,15 @@ Capability-dependent APIs are absent rather than registered as failing stubs:
 - `parse_str` is not registered because PHP implements it through SAPI input
   handling; URL encoding and `parse_url` remain available without SAPI.
 
-Native extension packages must:
+Extensions that are genuinely independent of php-src are installed by the
+latest PIE tooling as vendor packages. A vendor package participating in a
+TypePHP native build must:
 
-- use the package name `swoole/php-ext-*`;
 - require an ABI-compatible `swoole/php-nano`;
 - publish `extra.typephp-native` with `kind: extension`;
 - list exact source and include paths;
 - export the original `zend_module_entry` symbol named by
   `extension.module-entry`.
-
-The package suffix matches the extension name, with underscores represented as
-hyphens: extension `pdo_mysql` is packaged as `swoole/php-ext-pdo-mysql`.
 
 For example:
 
@@ -80,7 +82,7 @@ For example:
 }
 ```
 
-TypePHP discovers all installed packages with this metadata, validates their
+TypePHP discovers PIE-installed vendor packages with this metadata, validates their
 ABI, compiles their sources into the application, and generates a fixed
 extension table. Startup follows table order; shutdown runs in reverse order.
 Both `.c` and C++ source entries are accepted; PHP extension `.c` files remain C

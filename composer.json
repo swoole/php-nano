@@ -32,7 +32,9 @@
         "ext/date/lib",
         "ext/pcre/pcre2lib",
         "ext/lexbor",
-        "ext/uri/uriparser/include"
+        "ext/uri/uriparser/include",
+        "ext/curl",
+        "ext/openssl"
       ],
       "sources": [
         "Zend/zend_alloc.c",
@@ -307,6 +309,16 @@
         "ext/uri/uriparser/src/UriSetUserInfo.c",
         "ext/uri/uriparser/src/UriShorten.c",
         "ext/uri/uriparser/src/UriVersion.c",
+        "ext/curl/interface.c",
+        "ext/curl/multi.c",
+        "ext/curl/share.c",
+        "ext/curl/curl_file.c",
+        "ext/openssl/openssl.c",
+        "ext/openssl/openssl_pwhash.c",
+        "ext/openssl/openssl_backend_common.c",
+        "ext/openssl/openssl_backend_v1.c",
+        "ext/openssl/openssl_backend_v3.c",
+        "ext/openssl/xp_ssl.c",
         "src/bcmath.c",
         "src/core.cpp",
         "src/extension.cpp",
@@ -374,6 +386,47 @@
             "main/streams/xp_socket.c",
             "ext/standard/http_fopen_wrapper.c",
             "ext/standard/ftp_fopen_wrapper.c"
+          ]
+        },
+        "curl": {
+          "extension": "curl",
+          "module-entry": "curl_module_entry",
+          "defines": ["HAVE_CURL=1", "CURL_STATICLIB=1"],
+          "requires": [
+            "standard.info",
+            "standard.filesystem",
+            "random"
+          ],
+          "sources": [
+            "ext/curl/interface.c",
+            "ext/curl/multi.c",
+            "ext/curl/share.c",
+            "ext/curl/curl_file.c"
+          ]
+        },
+        "openssl": {
+          "extension": "openssl",
+          "module-entry": "openssl_module_entry",
+          "defines": [
+            "HAVE_OPENSSL_EXT=1",
+            "HAVE_TLS12=1",
+            "HAVE_TLS13=1",
+            "HAVE_TLS_ALPN=1",
+            "HAVE_TLS_SNI=1"
+          ],
+          "requires": [
+            "uri",
+            "standard.url-stream",
+            "standard.info",
+            "standard.hash"
+          ],
+          "sources": [
+            "ext/openssl/openssl.c",
+            "ext/openssl/openssl_pwhash.c",
+            "ext/openssl/openssl_backend_common.c",
+            "ext/openssl/openssl_backend_v1.c",
+            "ext/openssl/openssl_backend_v3.c",
+            "ext/openssl/xp_ssl.c"
           ]
         },
         "standard.core": {

@@ -34,6 +34,10 @@
     "Zend/zend_vm_trace_lines.h",
     "Zend/zend_vm_trace_map.h"
   ],
+  "forbidden_import_patterns": [
+    "*.phpt",
+    "ext/*/tests/*"
+  ],
   "intentional_divergences": {
     "Zend/zend.c": "aot-runtime",
     "Zend/zend_API.c": "aot-runtime",
@@ -70,7 +74,6 @@
     "ext/spl/php_spl.c": "capability-selection",
     "ext/spl/php_spl.stub.php": "api-selection",
     "ext/standard/basic_functions.c": "standard-module-adapter",
-    "ext/standard/basic_functions.h": "capability-selection",
     "ext/standard/basic_functions.stub.php": "api-selection",
     "ext/standard/dir.c": "filesystem-portability",
     "ext/standard/file.c": "filesystem-portability",
@@ -87,7 +90,6 @@
     "main/output.c": "output-host-boundary",
     "main/php_ini.c": "filesystem-portability",
     "main/php_glob.c": "filesystem-portability",
-    "main/php_network.h": "network-removal",
     "main/php_open_temporary_file.c": "filesystem-portability",
     "main/streams/php_stream_transport.h": "network-removal",
     "main/streams/plain_wrapper.c": "filesystem-portability",

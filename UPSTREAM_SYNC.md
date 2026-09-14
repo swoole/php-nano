@@ -60,6 +60,11 @@ data structures require them; they do not provide a VM or parser. New upstream
 files are imported only when a selected translation unit or public ABI header
 requires them.
 
+PHP Nano never imports php-src's `tests/` directories, `.phpt` files, or their
+fixtures. Nano cannot execute PHPT, and retaining those files only increases
+the source package size. The audit checks `forbidden_import_patterns` so a
+future php-src synchronization fails if tests are copied back accidentally.
+
 ## Patch placement rules
 
 Use this order when resolving a difference:
