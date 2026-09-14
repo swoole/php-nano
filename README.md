@@ -71,11 +71,14 @@ It compiles PHP `.c` files as C11, compiles PHPX and generated TypePHP
 sources as C++17, and performs the final link with the C++ linker.
 
 The repository's `CMakeLists.txt` is only a CI/developer test harness. It reads
-the same Composer manifest and compiles all production sources into the
-`php-nano-runtime` test archive. Host builds also link `php-nano-smoke` and run
-it through CTest; WASI Preview 2 links the same smoke program and executes it
-with Wasmtime. iOS and Android CI compile-check the complete archive without
-trying to execute a cross-compiled program. The smoke executable uses a
+the same Composer manifest, validates that every listed source exists, and
+compiles the dependency-free core into the `php-nano-runtime` test archive.
+Network transports, curl, and OpenSSL are selected and built by the consuming
+TypePHP application because their native SDKs are target-specific. Host builds
+also link `php-nano-smoke` and run it through CTest; WASI Preview 2 links the
+same smoke program and executes it with Wasmtime. iOS and Android CI
+compile-check the core archive without trying to execute a cross-compiled
+program. The smoke executable uses a
 non-dispatching test host for the two dynamic-call ABI hooks that PHPX
 implements in a real TypePHP program. It is not installed or invoked by
 TypePHP applications. There is no CMake,

@@ -23,6 +23,11 @@
         "android",
         "wasip2"
       ],
+      "standalone-test-exclude-components": [
+        "standard.url-stream",
+        "curl",
+        "openssl"
+      ],
       "include-dirs": [
         ".",
         "Zend",
@@ -309,6 +314,7 @@
         "ext/uri/uriparser/src/UriSetUserInfo.c",
         "ext/uri/uriparser/src/UriShorten.c",
         "ext/uri/uriparser/src/UriVersion.c",
+        "src/network_fallback.c",
         "ext/curl/interface.c",
         "ext/curl/multi.c",
         "ext/curl/share.c",
@@ -379,7 +385,8 @@
           ]
         },
         "standard.url-stream": {
-          "extension": "standard",
+          "extension": "network",
+          "defines": ["PHP_NANO_STREAM_TRANSPORT=1"],
           "requires": ["standard.core", "standard.filesystem", "uri"],
           "sources": [
             "main/network.c",

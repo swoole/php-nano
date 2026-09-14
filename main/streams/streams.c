@@ -1764,6 +1764,7 @@ void php_init_stream_wrappers(int module_number)
 
 	zend_hash_init(&url_stream_wrappers_hash, 8, NULL, NULL, 1);
 	zend_hash_init(php_get_stream_filters_hash_global(), 8, NULL, NULL, 1);
+#ifdef PHP_NANO_STREAM_TRANSPORT
 	zend_hash_init(php_stream_xport_get_hash(), 8, NULL, NULL, 1);
 
 	php_stream_xport_register("tcp", php_stream_generic_socket_factory);
@@ -1772,13 +1773,16 @@ void php_init_stream_wrappers(int module_number)
 	php_stream_xport_register("unix", php_stream_generic_socket_factory);
 	php_stream_xport_register("udg", php_stream_generic_socket_factory);
 #endif
+#endif
 }
 
 void php_shutdown_stream_wrappers(int module_number)
 {
 	zend_hash_destroy(&url_stream_wrappers_hash);
 	zend_hash_destroy(php_get_stream_filters_hash_global());
+#ifdef PHP_NANO_STREAM_TRANSPORT
 	zend_hash_destroy(php_stream_xport_get_hash());
+#endif
 }
 
 /* Validate protocol scheme names during registration
