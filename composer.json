@@ -632,7 +632,7 @@
         "spl": {
           "extension": "spl",
           "module-entry": "spl_module_entry",
-          "requires": ["json"],
+          "requires": ["json", "pcre", "standard.var"],
           "sources": [
             "ext/spl/php_spl.c", "ext/spl/spl_array.c", "ext/spl/spl_dllist.c",
             "ext/spl/spl_exceptions.c", "ext/spl/spl_fixedarray.c", "ext/spl/spl_functions.c",
