@@ -64,7 +64,9 @@
 #	define PHP_DIR_SEPARATOR '\\'
 #	define PHP_EOL "\r\n"
 #else
-#	if defined(__GNUC__) && __GNUC__ >= 4
+#	if defined(PHP_NANO)
+#		define PHPAPI
+#	elif defined(__GNUC__) && __GNUC__ >= 4
 #		define PHPAPI __attribute__ ((visibility("default")))
 #	else
 #		define PHPAPI

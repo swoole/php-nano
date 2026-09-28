@@ -87,6 +87,7 @@
     "ext/standard/url.c": "capability-selection",
     "main/explicit_bzero.c": "portable-host-boundary",
     "main/fopen_wrappers.c": "network-removal",
+    "main/php.h": "portable-host-boundary",
     "main/output.c": "output-host-boundary",
     "main/php_ini.c": "filesystem-portability",
     "main/php_glob.c": "filesystem-portability",

@@ -10,6 +10,9 @@
 #if defined(_WIN32)
 # define ZEND_API
 # define ZEND_DLEXPORT
+#elif defined(PHP_NANO)
+# define ZEND_API
+# define ZEND_DLEXPORT
 #elif defined(__GNUC__) || defined(__clang__)
 # define ZEND_API __attribute__((visibility("default")))
 # define ZEND_DLEXPORT __attribute__((visibility("default")))

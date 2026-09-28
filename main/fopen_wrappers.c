@@ -14,6 +14,12 @@
  */
 
 /* {{{ includes */
+#ifndef _WIN32
+/* POSIX libc implementations may expose SHUT_RD/SHUT_WR/SHUT_RDWR as enum
+ * constants rather than preprocessor macros. Include their declaration before
+ * PHP headers can load php_network.h and install its portable fallback macros. */
+#include <sys/socket.h>
+#endif
 #include "php.h"
 #include "php_globals.h"
 #include "SAPI.h"
