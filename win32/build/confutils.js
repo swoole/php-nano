@@ -17,6 +17,65 @@ var STDOUT = WScript.StdOut;
 var STDERR = WScript.StdErr;
 var WshShell = WScript.CreateObject("WScript.Shell");
 var FSO = WScript.CreateObject("Scripting.FileSystemObject");
+
+function create_utf8_text_file(path)
+{
+	var stream = WScript.CreateObject("ADODB.Stream");
+	stream.Type = 2; // adTypeText
+	stream.Charset = "utf-8";
+	stream.Open();
+	return {
+		Write: function(text) { stream.WriteText(text); },
+		WriteLine: function(text) { stream.WriteText(text + "\r\n"); },
+		WriteBlankLines: function(count) {
+			for (var i = 0; i < count; i++) {
+				stream.WriteText("\r\n");
+			}
+		},
+		Close: function() {
+			stream.SaveToFile(path, 2); // adSaveCreateOverWrite
+			stream.Close();
+		}
+	};
+}
+
+function read_config_pickle_lines(path)
+{
+	var probe = WScript.CreateObject("ADODB.Stream");
+	probe.Type = 1; // adTypeBinary
+	probe.Open();
+	probe.LoadFromFile(path);
+	var prefix = probe.Size >= 3 ? (new VBArray(probe.Read(3))).toArray() : new Array();
+	probe.Close();
+
+	if (prefix.length == 3 && prefix[0] == 0xef && prefix[1] == 0xbb && prefix[2] == 0xbf) {
+		var stream = WScript.CreateObject("ADODB.Stream");
+		stream.Type = 2;
+		stream.Charset = "utf-8";
+		stream.Open();
+		stream.LoadFromFile(path);
+		var contents = stream.ReadText();
+		stream.Close();
+		if (contents.charCodeAt(0) == 0xfeff) {
+			contents = contents.substr(1);
+		}
+		var lines = contents.split(/\r\n|\r|\n/);
+		if (lines.length && lines[lines.length - 1] == "") {
+			lines.pop();
+		}
+		return lines;
+	}
+
+	// Older SDKs wrote this file in the active Windows code page.
+	var infile = FSO.OpenTextFile(path, 1);
+	var lines = new Array();
+	while (!infile.AtEndOfStream) {
+		lines.push(infile.ReadLine());
+	}
+	infile.Close();
+	return lines;
+}
+
 var MFO = null;
 var SYSTEM_DRIVE = WshShell.Environment("Process").Item("SystemDrive");
 var PROGRAM_FILES = WshShell.Environment("Process").Item("ProgramFiles");
@@ -2274,11 +2333,11 @@ function generate_config_pickle_h()
 	STDOUT.WriteLine("Generating main/config.pickle.h");
 
 	if (FSO.FileExists(dest + "/config.pickle.h")) {
-		outfile = FSO.OpenTextFile(dest + "/config.pickle.h", 1);
+		var old_lines = read_config_pickle_lines(dest + "/config.pickle.h");
 
-		while (!outfile.AtEndOfStream) {
+		for (var line_index in old_lines) {
 			var found = false;
-			var ln = outfile.ReadLine();
+			var ln = old_lines[line_index];
 
 			for (var i in keys) {
 				var reg = new RegExp("#define[\s ]+" + keys[i] + "[\s ]*.*|#undef[\s ]+" + keys[i], "g");
@@ -2311,12 +2370,7 @@ function generate_config_pickle_h()
 		lines.push("#define " + keys[i] + " " + item[0]);
 	}
 
-	if (outfile) {
-		outfile.Close();
-		outfile = null;
-	}
-
-	outfile = FSO.CreateTextFile(dest + "/config.pickle.h", true);
+	outfile = create_utf8_text_file(dest + "/config.pickle.h");
 
 	for (var k in lines) {
 		outfile.WriteLine(lines[k]);
@@ -2339,7 +2393,7 @@ function generate_config_h()
 	indata = infile.ReadAll();
 	infile.Close();
 
-	outfile = FSO.CreateTextFile("main/config.w32.h", true);
+	outfile = create_utf8_text_file("main/config.w32.h");
 
 	outfile.WriteLine("#ifndef CONFIG_W32_H");
 	outfile.WriteLine("#define CONFIG_W32_H");
@@ -2385,7 +2439,13 @@ function generate_config_h()
 			}
 		}
 
+		if (keys[i] == "PHP_BUILD_SYSTEM") {
+			outfile.WriteLine("#ifndef PHP_BUILD_SYSTEM");
+		}
 		outfile.WriteLine("#define " + keys[i] + " " + pieces);
+		if (keys[i] == "PHP_BUILD_SYSTEM") {
+			outfile.WriteLine("#endif");
+		}
 	}
 
 	outfile.WriteBlankLines(1);
