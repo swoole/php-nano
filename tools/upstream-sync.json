@@ -104,6 +104,7 @@
     "main/streams/php_stream_transport.h": "network-removal",
     "main/streams/plain_wrapper.c": "filesystem-portability",
     "main/streams/streams.c": "capability-selection",
+    "win32/build/confutils.js": "windows-build-configuration",
     "win32/globals.c": "signal-and-syslog-removal",
     "win32/codepage.c": "windows-debug-portability",
     "win32/codepage.h": "windows-static-nano-api",
