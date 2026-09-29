@@ -14,6 +14,9 @@ extern "C" {
 #include "php_output.h"
 #include "php_streams.h"
 #include "spprintf.h"
+#ifdef PHP_WIN32
+#include "win32/codepage.h"
+#endif
 
 #include <zend_exceptions.h>
 #include <zend_ast.h>
@@ -38,6 +41,7 @@ extern "C" {
 #include <cstdarg>
 #include <cstdlib>
 #include <cstring>
+
 
 extern "C" {
 zend_result zend_startup_builtin_functions(void);
@@ -217,6 +221,10 @@ size_t nano_printf(const char *format, ...) {
 
 extern "C" {
 
+PHPAPI bool php_get_module_initialized(void) {
+    return core_started;
+}
+
 PHP_NANO_API zend_result php_nano_startup_core(void) {
     if (core_started) {
         return SUCCESS;
@@ -259,6 +267,9 @@ PHP_NANO_API zend_result php_nano_startup_core(void) {
     zend_object_handlers_startup();
     zend_init_rsrc_list_dtors();
     zend_init_rsrc_plist();
+#ifdef PHP_WIN32
+    php_win32_cp_set_by_id(65001);
+#endif
     virtual_cwd_startup();
     php_init_stream_wrappers(0);
     zend_printf = nano_printf;

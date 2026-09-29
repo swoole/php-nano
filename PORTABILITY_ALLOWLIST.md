@@ -5,15 +5,20 @@ profile is a strict subset of Native.
 
 ## Native standards baseline
 
-Native PHP Nano targets Linux, macOS, iOS, and Android. Windows is deliberately
-outside the php-nano runtime target set; TypePHP uses the complete PHP/PHPX DLL
-runtime there and applies Nano language/capability restrictions in the compiler.
+Native PHP Nano targets Windows, Linux, macOS, iOS, and Android. Every target
+uses the same source-composed runtime and public capability policy; Windows does
+not import the complete PHP/PHPX DLL runtime.
 
 Native runtime source may use:
 
 - ISO C11;
 - ISO C++17; and
 - POSIX.1-2008 interfaces supplied by the target platform.
+
+Windows may use Win32 system APIs that implement those same retained runtime
+facilities, such as local filesystem and console I/O, clocks, entropy, and
+memory allocation. This platform mapping does not grant additional public PHP
+capabilities.
 
 POSIX is an implementation baseline, not an automatic grant of every POSIX
 capability. The forbidden categories below remain forbidden even when POSIX

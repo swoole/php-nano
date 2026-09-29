@@ -42,6 +42,27 @@ ZEND_API zend_compiler_globals compiler_globals;
 ZEND_API zend_executor_globals executor_globals;
 #endif
 
+ZEND_API zend_op_array *(*zend_compile_file)(zend_file_handle *file_handle, int type) = NULL;
+ZEND_API zend_op_array *(*zend_compile_string)(zend_string *source_string, const char *filename, zend_compile_position position) = NULL;
+
+ZEND_API void function_add_ref(zend_function *function) /* {{{ */
+{
+	if (function->type == ZEND_USER_FUNCTION) {
+		zend_op_array *op_array = &function->op_array;
+		if (op_array->refcount) {
+			(*op_array->refcount)++;
+		}
+
+		ZEND_MAP_PTR_INIT(op_array->run_time_cache, NULL);
+		ZEND_MAP_PTR_INIT(op_array->static_variables_ptr, NULL);
+	}
+
+	if (function->common.function_name) {
+		zend_string_addref(function->common.function_name);
+	}
+}
+/* }}} */
+
 static bool zend_get_unqualified_name(const zend_string *name, const char **result, size_t *result_len) /* {{{ */
 {
 	const char *ns_separator = zend_memrchr(ZSTR_VAL(name), '\\', ZSTR_LEN(name));

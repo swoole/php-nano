@@ -4317,7 +4317,9 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_fcall_interrupt(zend_execute_data *ca
 {
 	zend_atomic_bool_store_ex(&EG(vm_interrupt), false);
 	if (zend_atomic_bool_load_ex(&EG(timed_out))) {
+#ifndef PHP_NANO
 		zend_timeout();
+#endif
 	} else if (zend_interrupt_function) {
 		zend_interrupt_function(call);
 	}

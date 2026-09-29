@@ -9,6 +9,7 @@
 
 #define SUPPORT_UNICODE 1
 #define SUPPORT_PCRE2_8 1
+#define PCRE2_CODE_UNIT_WIDTH 8
 
 #if defined(__GNUC__) && __GNUC__ >= 4
 # ifdef __cplusplus

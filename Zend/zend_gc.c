@@ -1855,6 +1855,7 @@ static void zend_get_gc_buffer_release(void);
 static void zend_gc_check_root_tmpvars(void);
 static void zend_gc_remove_root_tmpvars(void);
 
+#ifndef PHP_NANO
 static zend_internal_function gc_destructor_fiber;
 
 static ZEND_COLD ZEND_NORETURN void gc_create_destructor_fiber_error(void)
@@ -1866,6 +1867,7 @@ static ZEND_COLD ZEND_NORETURN void gc_start_destructor_fiber_error(void)
 {
 	zend_error_noreturn(E_ERROR, "Unable to start destructor fiber");
 }
+#endif
 
 /* Call destructors for garbage in the buffer. */
 static zend_always_inline zend_result gc_call_destructors(uint32_t idx, uint32_t end, zend_fiber *fiber)
@@ -1908,6 +1910,7 @@ static zend_always_inline zend_result gc_call_destructors(uint32_t idx, uint32_t
 	return SUCCESS;
 }
 
+#ifndef PHP_NANO
 static zend_fiber *gc_create_destructor_fiber(void)
 {
 	zval zobj;
@@ -1989,6 +1992,7 @@ static zend_never_inline void gc_call_destructors_in_fiber(void)
 
 	EG(exception) = exception;
 }
+#endif
 
 /* Perform a garbage collection run. The default implementation of gc_collect_cycles. */
 ZEND_API int zend_gc_collect_cycles(void)
@@ -2091,11 +2095,15 @@ rerun_gc:
 
 			/* Actually call destructors. */
 			zend_hrtime_t dtor_start_time = zend_hrtime();
+			#ifdef PHP_NANO
+			gc_call_destructors(GC_FIRST_ROOT, end, NULL);
+			#else
 			if (EXPECTED(!EG(active_fiber))) {
 				gc_call_destructors(GC_FIRST_ROOT, end, NULL);
 			} else {
 				gc_call_destructors_in_fiber();
 			}
+			#endif
 			GC_G(dtor_time) += zend_hrtime() - dtor_start_time;
 
 			if (GC_G(gc_protected)) {
@@ -2317,6 +2325,7 @@ size_t zend_gc_globals_size(void)
 }
 #endif
 
+#ifndef PHP_NANO
 static ZEND_FUNCTION(gc_destructor_fiber)
 {
 	uint32_t idx, end;
@@ -2357,11 +2366,14 @@ static zend_internal_function gc_destructor_fiber = {
 	.fn_flags = ZEND_ACC_PUBLIC,
 	.handler = ZEND_FN(gc_destructor_fiber),
 };
+#endif
 
 void gc_init(void)
 {
+#ifndef PHP_NANO
 	gc_destructor_fiber.function_name = zend_string_init_interned(
 			"gc_destructor_fiber",
 			strlen("gc_destructor_fiber"),
 			true);
+#endif
 }

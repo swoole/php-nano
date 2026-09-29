@@ -26,7 +26,9 @@
 #define SAPI_POST_BLOCK_SIZE 0x4000
 
 #ifdef PHP_WIN32
-#	ifdef SAPI_EXPORTS
+#	if defined(PHP_NANO)
+#		define SAPI_API
+#	elif defined(SAPI_EXPORTS)
 #		define SAPI_API __declspec(dllexport)
 #	else
 #		define SAPI_API __declspec(dllimport)

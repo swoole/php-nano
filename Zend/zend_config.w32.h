@@ -41,13 +41,19 @@
 #define strcasecmp(s1, s2) _stricmp(s1, s2)
 #define strncasecmp(s1, s2, n) _strnicmp(s1, s2, n)
 
-#ifdef LIBZEND_EXPORTS
+#if defined(PHP_NANO)
+#	define ZEND_API
+#elif defined(LIBZEND_EXPORTS)
 #	define ZEND_API __declspec(dllexport)
 #else
 #	define ZEND_API __declspec(dllimport)
 #endif
 
-#define ZEND_DLEXPORT		__declspec(dllexport)
+#if defined(PHP_NANO)
+# define ZEND_DLEXPORT
+#else
+# define ZEND_DLEXPORT		__declspec(dllexport)
+#endif
 #define ZEND_DLIMPORT		__declspec(dllimport)
 
 #endif /* ZEND_CONFIG_W32_H */

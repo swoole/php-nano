@@ -1,0 +1,57 @@
+/*
+   +----------------------------------------------------------------------+
+   | Copyright © The PHP Group and Contributors.                          |
+   +----------------------------------------------------------------------+
+   | This source file is subject to the Modified BSD License that is      |
+   | bundled with this package in the file LICENSE, and is available      |
+   | through the World Wide Web at <https://www.php.net/license/>.        |
+   |                                                                      |
+   | SPDX-License-Identifier: BSD-3-Clause                                |
+   +----------------------------------------------------------------------+
+ */
+
+#ifndef PHP_WIN32_WINUTIL_H
+#define PHP_WIN32_WINUTIL_H
+
+#if defined(PHP_NANO)
+# define PHP_WINUTIL_API
+#elif defined(PHP_EXPORTS)
+# define PHP_WINUTIL_API __declspec(dllexport)
+#else
+# define PHP_WINUTIL_API __declspec(dllimport)
+#endif
+
+PHP_WINUTIL_API char *php_win32_error_to_msg(HRESULT error);
+PHP_WINUTIL_API void php_win32_error_msg_free(char *msg);
+
+#define php_win_err()	php_win32_error_to_msg(GetLastError())
+#define php_win_err_free(err) php_win32_error_msg_free(err)
+int php_win32_check_trailing_space(const char * path, const size_t path_len);
+PHP_WINUTIL_API int php_win32_get_random_bytes(unsigned char *buf, size_t size);
+#if defined(PHP_EXPORTS) || defined(PHP_NANO)
+BOOL php_win32_init_random_bytes(void);
+BOOL php_win32_shutdown_random_bytes(void);
+#endif
+
+#if !defined(ECURDIR)
+# define ECURDIR        EACCES
+#endif /* !ECURDIR */
+#if !defined(ENOSYS)
+# define ENOSYS         EPERM
+#endif /* !ENOSYS */
+
+PHP_WINUTIL_API int php_win32_code_to_errno(unsigned long w32Err);
+
+#define SET_ERRNO_FROM_WIN32_CODE(err) \
+	do { \
+	int ern = php_win32_code_to_errno(err); \
+	SetLastError(err); \
+	_set_errno(ern); \
+	} while (0)
+
+PHP_WINUTIL_API char *php_win32_get_username(void);
+
+PHP_WINUTIL_API BOOL php_win32_image_compatible(HMODULE handle, char **err);
+PHP_WINUTIL_API BOOL php_win32_crt_compatible(char **err);
+
+#endif

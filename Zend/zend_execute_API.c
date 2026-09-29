@@ -1101,7 +1101,9 @@ cleanup_args:
 		 * So see whether interrupt flag was set while the function was running... */
 		if (zend_atomic_bool_exchange_ex(&EG(vm_interrupt), false)) {
 			if (zend_atomic_bool_load_ex(&EG(timed_out))) {
+#ifndef PHP_NANO
 				zend_timeout();
+#endif
 			} else if (zend_interrupt_function) {
 				zend_interrupt_function(EG(current_execute_data));
 			}
@@ -1378,6 +1380,13 @@ ZEND_API zend_object *zend_get_this_object(const zend_execute_data *ex) /* {{{ *
 
 ZEND_API zend_result zend_eval_stringl(const char *str, size_t str_len, zval *retval_ptr, const char *string_name) /* {{{ */
 {
+#ifdef PHP_NANO
+	(void) str;
+	(void) str_len;
+	(void) retval_ptr;
+	(void) string_name;
+	return FAILURE;
+#else
 	zend_op_array *new_op_array;
 	uint32_t original_compiler_options;
 	zend_result retval;
@@ -1435,6 +1444,7 @@ ZEND_API zend_result zend_eval_stringl(const char *str, size_t str_len, zval *re
 	}
 	zend_string_release(code_str);
 	return retval;
+#endif
 }
 /* }}} */
 

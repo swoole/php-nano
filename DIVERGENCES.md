@@ -8,10 +8,10 @@
 - Runtime AST conversion to partial/first-class callables is rejected because
   upstream implements it by compiling a new op-array (and optionally caching
   it in Opcache).
-- Zend MM retains its upstream allocation algorithms, but its platform page
-  allocator is replaced by the POSIX `posix_memalign()`/`free()` boundary.
-  Huge-page advice and
-  in-place mapping growth/truncation are unavailable.
+- Zend MM retains its upstream allocation algorithms. POSIX Nano targets use a
+  `posix_memalign()`/`free()` boundary; Windows retains php-src's VirtualAlloc
+  implementation. Huge-page advice and in-place mapping growth/truncation are
+  unavailable on the POSIX Nano path.
 - Zend bailout uses C11 `setjmp()`/`longjmp()` instead of POSIX
   `sigsetjmp()`/`siglongjmp()`.
 - Execution timers and signal handling are not compiled for Nano targets.
@@ -19,8 +19,8 @@
   `<chrono>` and `<thread>` APIs. PHP's date parsing, calendar arithmetic,
   timezone database, and DateTime classes continue to use the vendored PHP
   8.6 timelib sources.
-- Zend allocation uses the C11 allocation API for Nano targets; OS virtual
-  memory mapping and page-advice paths are not compiled.
+- Zend allocation uses the reviewed target allocator; OS page-advice paths are
+  not compiled for POSIX Nano targets.
 - WASI builds do not link the SDK's mmap or signal emulation libraries.
 - Non-standard libc case-insensitive string helpers are implemented by the
   Nano C11 portability unit.

@@ -14,8 +14,8 @@ are not linked into the generated native program.
 - PHP 8.6 `zval`, `zend_string`, `Bucket`, and `zend_array` definitions;
 - PHP 8.6 implementations of strings, HashTable, variables, sorting,
   operators, numeric conversion, GC, and resource lists; the allocator keeps
-  Zend's API and algorithms but selects a POSIX aligned-allocation backend instead of the
-  upstream mmap/page-management backend;
+  Zend's API and algorithms while using the reviewed target allocation backend
+  (aligned allocation on POSIX targets and upstream VirtualAlloc on Windows);
 - native class metadata and `zend_call_function`-compatible virtual method
   dispatch through compiler-generated C++ trampolines;
 - PHP output buffering with a native/WASI console writer;
@@ -24,8 +24,9 @@ are not linked into the generated native program.
 - PHP 8.6 timelib and DateTime APIs, with clocks and sleeps supplied through
   the C++17 standard library;
 - generated target configuration plus the original PHP 8.6 `php.h`;
-- direct native and `wasm32-wasip2` source builds;
-- no application dependency beyond the selected C/C++ toolchain runtime.
+- direct Windows, Linux, macOS, mobile, and `wasm32-wasip2` source builds;
+- no application dependency beyond the selected C/C++ toolchain runtime and
+  operating-system libraries.
 
 PHP Nano vendors php-src extension source trees directly, including Core,
 date, hash, json, pcre, random, Reflection, SPL, standard, filter, URI, curl,
@@ -84,11 +85,11 @@ implements in a real TypePHP program. It is not installed or invoked by
 TypePHP applications. There is no CMake,
 Autoconf, Automake, `configure`, or intermediate runtime archive in the native
 application build path. The current TypePHP source builder exposes
-the host-native and `wasm32-wasip2` targets. CI exercises Linux and macOS host
-builds, WASI Preview 2 build/execution, plus iPhoneOS `arm64` and Android
-`arm64-v8a` cross-compilation. Windows is intentionally not a php-nano runtime
-target: TypePHP uses its full PHP/PHPX DLL distribution and applies the Nano
-restrictions in the compiler.
+the host-native and `wasm32-wasip2` targets. CI exercises Windows, Linux, and
+macOS host builds, WASI Preview 2 build/execution, plus iPhoneOS `arm64` and
+Android `arm64-v8a` cross-compilation. Windows uses the same source-composition
+contract: PHP Nano, PHPX, and generated TypePHP sources are linked into the
+final PE artifact without importing `php.dll` or `phpx.dll`.
 
 No php-src `tests/` directory or `.phpt` file is shipped. Nano's own small C++
 smoke tests remain because they validate the source manifest and runtime ABI.

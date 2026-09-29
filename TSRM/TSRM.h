@@ -25,7 +25,9 @@
 #include <stdbool.h>
 
 #ifdef TSRM_WIN32
-#	ifdef TSRM_EXPORTS
+#	if defined(PHP_NANO)
+#		define TSRM_API
+#	elif defined(TSRM_EXPORTS)
 #		define TSRM_API __declspec(dllexport)
 #	else
 #		define TSRM_API __declspec(dllimport)

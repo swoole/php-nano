@@ -872,14 +872,15 @@ try_again:
 			goto try_again;
 		}
 
-		if (EXPECTED(cache_slot
+		bool simple_get = cache_slot
 #ifndef PHP_NANO
 		 && zend_execute_ex == execute_ex
 #endif
 		 && ce->default_object_handlers->read_property == zend_std_read_property
 		 && !ce->create_object
 		 && !zend_is_in_hook(prop_info)
-		 && !(prop_info->hooks[ZEND_PROPERTY_HOOK_GET]->common.fn_flags & ZEND_ACC_RETURN_REFERENCE))) {
+		 && !(prop_info->hooks[ZEND_PROPERTY_HOOK_GET]->common.fn_flags & ZEND_ACC_RETURN_REFERENCE);
+		if (EXPECTED(simple_get)) {
 			ZEND_SET_PROPERTY_HOOK_SIMPLE_GET(cache_slot);
 		}
 

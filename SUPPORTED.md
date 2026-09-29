@@ -3,16 +3,18 @@
 The currently implemented and tested targets compile the source directly into
 the final application as C11 and C++17 translation units:
 
-- host-native Linux;
+- host-native Windows, Linux, and macOS;
 - `wasm32-wasip2` through WASI SDK.
 
-The Native runtime contract targets Linux, macOS, Android NDK, and Apple SDK
-toolchains. Cross-toolchain profiles require their own build and execution
-tests before they are listed as implemented. Windows deliberately uses the
-complete PHP/PHPX DLL runtime instead of php-nano.
+The Native runtime contract targets Windows, Linux, macOS, Android NDK, and
+Apple SDK toolchains. Cross-toolchain profiles require their own build and
+execution tests before they are listed as implemented. All Native targets
+compile PHP Nano, PHPX, and application sources into the final artifact rather
+than importing a PHP or PHPX runtime library.
 
-Only C11, C++17, POSIX.1-2008, and compiler runtime facilities are permitted;
-the runtime may not add third-party link dependencies. CMake and other project
+Only C11, C++17, the reviewed POSIX.1-2008 or Windows system equivalents, and
+compiler runtime facilities are permitted; the runtime may not add third-party
+link dependencies. CMake and other project
 generators are not build dependencies. The WASI target is a smaller capability
 subset and does not use mmap or signal emulation libraries. PHP Nano exposes
 local filesystem access through its file-only PHP stream layer and target

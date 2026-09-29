@@ -16,9 +16,14 @@
       "abi": 80600,
       "c-standard": 11,
       "cxx-standard": 17,
+      "defines": [
+        "PCRE2_CODE_UNIT_WIDTH=8",
+        "HAVE_BUNDLED_PCRE=1"
+      ],
       "targets": [
         "linux",
         "macos",
+        "windows",
         "ios",
         "android",
         "wasip2"
@@ -41,6 +46,30 @@
         "ext/curl",
         "ext/openssl"
       ],
+      "platforms": {
+        "windows": {
+          "defines": [
+            "PCRE2_STATIC=1",
+            "NOMINMAX=1"
+          ],
+          "sources": [
+            "TSRM/tsrm_win32.c",
+            "Zend/zend_cpuinfo.c",
+            "ext/standard/flock_compat.c",
+            "win32/codepage.c",
+            "win32/console.c",
+            "win32/fnmatch.c",
+            "win32/getrusage.c",
+            "win32/globals.c",
+            "win32/ioutil.c",
+            "win32/nice.c",
+            "win32/readdir.c",
+            "win32/registry.c",
+            "win32/time.c",
+            "win32/winutil.c"
+          ]
+        }
+      },
       "sources": [
         "Zend/zend_alloc.c",
         "Zend/zend_string.c",
@@ -60,6 +89,7 @@
         "Zend/zend_closures.c",
         "Zend/zend_constants.c",
         "src/zend_compile_runtime.c",
+        "src/zend_ini_parser_runtime.c",
         "Zend/zend_default_classes.c",
         "Zend/zend_enum.c",
         "Zend/zend_exceptions.c",
@@ -84,6 +114,8 @@
         "Zend/zend_ptr_stack.c",
         "Zend/zend_smart_str.c",
         "Zend/zend_stack.c",
+        "Zend/zend_stream.c",
+        "src/zend_system_id_runtime.c",
         "Zend/zend_virtual_cwd.c",
         "Zend/zend_weakrefs.c",
         "ext/standard/array.c",
@@ -226,6 +258,7 @@
         "main/snprintf.c",
         "main/network.c",
         "main/strlcpy.c",
+        "main/strlcat.c",
         "main/explicit_bzero.c",
         "main/fopen_wrappers.c",
         "main/php_ini.c",
@@ -361,7 +394,7 @@
         "uri": {
           "extension": "uri",
           "module-entry": "uri_module_entry",
-          "defines": ["URI_STATIC_BUILD=1", "URI_ENABLE_ANSI=1", "URI_NO_UNICODE=1"],
+          "defines": ["PHP_NANO_URI=1", "URI_STATIC_BUILD=1", "URI_ENABLE_ANSI=1", "URI_NO_UNICODE=1"],
           "requires": ["lexbor.url", "standard.core", "standard.encoding"],
           "sources": [
             "ext/uri/php_uri.c", "ext/uri/php_uri_common.c",

@@ -11,7 +11,8 @@
     "Zend",
     "main",
     "ext",
-    "TSRM"
+    "TSRM",
+    "win32"
   ],
   "generated_patterns": [
     "*_arginfo.h",
@@ -39,21 +40,27 @@
     "ext/*/tests/*"
   ],
   "intentional_divergences": {
+    "TSRM/TSRM.h": "windows-static-nano-api",
     "Zend/zend.c": "aot-runtime",
     "Zend/zend_API.c": "aot-runtime",
     "Zend/zend_alloc.c": "allocator-host-boundary",
     "Zend/zend_builtin_functions.c": "aot-runtime",
+    "Zend/zend_config.w32.h": "windows-static-nano-api",
     "Zend/zend_default_classes.c": "aot-runtime",
     "Zend/zend_exceptions.c": "aot-runtime",
     "Zend/zend_execute.c": "vm-removal",
     "Zend/zend_execute_API.c": "vm-removal",
+    "Zend/zend_gc.c": "fiber-removal",
+    "Zend/zend_multibyte.c": "scanner-removal",
     "Zend/zend_object_handlers.c": "aot-runtime",
     "Zend/zend_observer.c": "vm-removal",
     "Zend/zend_opcode.c": "vm-removal",
     "Zend/zend_portability.h": "portable-host-boundary",
     "Zend/zend_string.c": "portable-host-boundary",
+    "Zend/zend_stream.c": "portable-host-boundary",
     "Zend/zend_variables.c": "vm-removal",
     "Zend/zend_virtual_cwd.c": "filesystem-portability",
+    "Zend/zend_virtual_cwd.h": "windows-static-nano-api",
     "ext/date/lib/timelib.h": "portable-host-boundary",
     "ext/date/lib/timelib_private.h": "portable-host-boundary",
     "ext/date/php_date.c": "capability-selection",
@@ -64,6 +71,7 @@
     "ext/hash/hash_sha.c": "portable-host-boundary",
     "ext/hash/php_hash_sha.h": "portable-host-boundary",
     "ext/json/json.c": "aot-runtime",
+    "ext/pcre/pcre2lib/config.h": "source-composed-pcre-configuration",
     "ext/pcre/pcre2lib/pcre2_config.c": "portable-host-boundary",
     "ext/pcre/pcre2lib/pcre2_internal.h": "portable-host-boundary",
     "ext/pcre/php_pcre.c": "capability-selection",
@@ -86,6 +94,7 @@
     "ext/standard/string.c": "portable-host-boundary",
     "ext/standard/url.c": "capability-selection",
     "main/explicit_bzero.c": "portable-host-boundary",
+    "main/SAPI.h": "windows-static-nano-api",
     "main/fopen_wrappers.c": "network-removal",
     "main/php.h": "portable-host-boundary",
     "main/output.c": "output-host-boundary",
@@ -94,6 +103,14 @@
     "main/php_open_temporary_file.c": "filesystem-portability",
     "main/streams/php_stream_transport.h": "network-removal",
     "main/streams/plain_wrapper.c": "filesystem-portability",
-    "main/streams/streams.c": "capability-selection"
+    "main/streams/streams.c": "capability-selection",
+    "win32/globals.c": "signal-and-syslog-removal",
+    "win32/codepage.c": "windows-debug-portability",
+    "win32/codepage.h": "windows-static-nano-api",
+    "win32/console.h": "windows-static-nano-api",
+    "win32/ioutil.h": "windows-static-nano-api",
+    "win32/ipc.h": "windows-static-nano-api",
+    "win32/winutil.c": "windows-static-nano-api",
+    "win32/winutil.h": "windows-static-nano-api"
   }
 }

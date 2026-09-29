@@ -439,7 +439,7 @@ static void stderr_last_error(char *msg)
 /* OS Allocation */
 /*****************/
 
-#ifdef PHP_NANO
+#if defined(PHP_NANO) && !defined(_WIN32)
 
 static void zend_mm_munmap(void *addr, size_t size)
 {

@@ -22,7 +22,11 @@
 #include "zend_compile.h"
 #include "zend_stream.h"
 
+#ifdef PHP_NANO
+extern int isatty(int fd);
+#else
 ZEND_DLIMPORT int isatty(int fd);
+#endif
 
 static ssize_t zend_stream_stdio_reader(void *handle, char *buf, size_t len) /* {{{ */
 {

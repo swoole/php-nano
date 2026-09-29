@@ -166,7 +166,11 @@ ZEND_API const zend_encoding *zend_multibyte_get_internal_encoding(void)
 
 ZEND_API const zend_encoding *zend_multibyte_get_script_encoding(void)
 {
+#ifdef PHP_NANO
+	return NULL;
+#else
 	return LANG_SCNG(script_encoding);
+#endif
 }
 
 ZEND_API zend_result zend_multibyte_set_script_encoding(const zend_encoding **encoding_list, size_t encoding_list_size)

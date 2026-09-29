@@ -937,11 +937,15 @@ void zend_startup(zend_utility_functions *utility_functions) /* {{{ */
 #ifdef ZTS
 	zend_compiler_globals *compiler_globals;
 	zend_executor_globals *executor_globals;
+#ifndef PHP_NANO
 	extern ZEND_API ts_rsrc_id ini_scanner_globals_id;
 	extern ZEND_API ts_rsrc_id language_scanner_globals_id;
+#endif
 #else
+#ifndef PHP_NANO
 	extern zend_ini_scanner_globals ini_scanner_globals;
 	extern zend_php_scanner_globals language_scanner_globals;
+#endif
 #endif
 
 	zend_cpu_startup();
@@ -989,6 +993,12 @@ void zend_startup(zend_utility_functions *utility_functions) /* {{{ */
 
 	zend_interrupt_function = NULL;
 
+#ifdef PHP_NANO
+	zend_compile_file = NULL;
+	zend_compile_string = NULL;
+	zend_execute_ex = NULL;
+	zend_execute_internal = NULL;
+#else
 #ifdef HAVE_DTRACE
 /* build with dtrace support */
 	{
@@ -1013,6 +1023,7 @@ void zend_startup(zend_utility_functions *utility_functions) /* {{{ */
 	zend_execute_internal = NULL;
 #endif /* HAVE_DTRACE */
 	zend_compile_string = compile_string;
+#endif
 	zend_throw_exception_hook = NULL;
 
 	/* Set up the default garbage collection implementation. */
@@ -1042,10 +1053,14 @@ void zend_startup(zend_utility_functions *utility_functions) /* {{{ */
 #ifdef ZTS
 	ts_allocate_fast_id_at(&compiler_globals_id, &compiler_globals_offset, ZEND_CG_OFFSET, sizeof(zend_compiler_globals), (ts_allocate_ctor) compiler_globals_ctor, (ts_allocate_dtor) compiler_globals_dtor);
 	ts_allocate_fast_id_at(&executor_globals_id, &executor_globals_offset, ZEND_EG_OFFSET, sizeof(zend_executor_globals), (ts_allocate_ctor) executor_globals_ctor, (ts_allocate_dtor) executor_globals_dtor);
+#ifndef PHP_NANO
 	ts_allocate_tls_id(&language_scanner_globals_id, language_scanner_globals_tls_addr, sizeof(zend_php_scanner_globals), (ts_allocate_ctor) php_scanner_globals_ctor, NULL);
+#endif
 	ZEND_ASSERT(compiler_globals_offset == ZEND_CG_OFFSET);
 	ZEND_ASSERT(executor_globals_offset == ZEND_EG_OFFSET);
+#ifndef PHP_NANO
 	ts_allocate_fast_id(&ini_scanner_globals_id, &ini_scanner_globals_offset, sizeof(zend_ini_scanner_globals), (ts_allocate_ctor) ini_scanner_globals_ctor, NULL);
+#endif
 	compiler_globals = ts_resource(compiler_globals_id);
 	executor_globals = ts_resource(executor_globals_id);
 
@@ -1061,8 +1076,10 @@ void zend_startup(zend_utility_functions *utility_functions) /* {{{ */
 	zend_hash_destroy(executor_globals->zend_constants);
 	*executor_globals->zend_constants = *GLOBAL_CONSTANTS_TABLE;
 #else
+#ifndef PHP_NANO
 	ini_scanner_globals_ctor(&ini_scanner_globals);
 	php_scanner_globals_ctor(&language_scanner_globals);
+#endif
 	zend_set_default_compile_time_values();
 #ifdef ZEND_WIN32
 	zend_get_windows_version_info(&EG(windows_version_info));
@@ -1350,9 +1367,13 @@ ZEND_API void zend_activate(void) /* {{{ */
 	virtual_cwd_activate();
 #endif
 	gc_reset();
+#ifndef PHP_NANO
 	init_compiler();
+#endif
 	init_executor();
+#ifndef PHP_NANO
 	startup_scanner();
+#endif
 	if (CG(map_ptr_last)) {
 		memset((void **)CG(map_ptr_real_base) + zend_map_ptr_static_size, 0, CG(map_ptr_last) * sizeof(void*));
 	}
@@ -1374,9 +1395,11 @@ ZEND_API void zend_deactivate(void) /* {{{ */
 	/* we're no longer executing anything */
 	EG(current_execute_data) = NULL;
 
+#ifndef PHP_NANO
 	zend_try {
 		shutdown_scanner();
 	} zend_end_try();
+#endif
 
 	/* shutdown_executor() takes care of its own bailout handling */
 	shutdown_executor();
@@ -1385,9 +1408,11 @@ ZEND_API void zend_deactivate(void) /* {{{ */
 		zend_ini_deactivate();
 	} zend_end_try();
 
+#ifndef PHP_NANO
 	zend_try {
 		shutdown_compiler();
 	} zend_end_try();
+#endif
 
 	zend_destroy_rsrc_list(&EG(regular_list));
 
@@ -1989,6 +2014,12 @@ ZEND_API ZEND_COLD void zend_user_exception_handler(void) /* {{{ */
 
 ZEND_API zend_result zend_execute_script(int type, zval *retval, zend_file_handle *file_handle)
 {
+#ifdef PHP_NANO
+	(void) type;
+	(void) retval;
+	(void) file_handle;
+	return FAILURE;
+#else
 	zend_op_array *op_array = zend_compile_file(file_handle, type);
 	if (file_handle->opened_path) {
 		zend_hash_add_empty_element(&EG(included_files), file_handle->opened_path);
@@ -2013,6 +2044,7 @@ ZEND_API zend_result zend_execute_script(int type, zval *retval, zend_file_handl
 	}
 
 	return ret;
+#endif
 }
 
 ZEND_API zend_result zend_execute_scripts(int type, zval *retval, int file_count, ...) /* {{{ */

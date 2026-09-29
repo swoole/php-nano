@@ -132,7 +132,9 @@ typedef unsigned short mode_t;
 #endif
 
 #ifdef ZEND_WIN32
-#	ifdef CWD_EXPORTS
+#	if defined(PHP_NANO)
+#		define CWD_API
+#	elif defined(CWD_EXPORTS)
 #		define CWD_API __declspec(dllexport)
 #	else
 #		define CWD_API __declspec(dllimport)

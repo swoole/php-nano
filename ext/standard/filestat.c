@@ -914,7 +914,7 @@ PHPAPI void php_stat(zend_string *filename, int type, zval *return_value)
 		if (S_ISLNK(stat_sb->st_mode)) {
 			RETURN_STRING("link");
 		}
-#ifdef PHP_NANO
+#if defined(PHP_NANO) && !defined(PHP_WIN32)
 		if (S_ISFIFO(stat_sb->st_mode)) RETURN_STRING("fifo");
 		if (S_ISCHR(stat_sb->st_mode)) RETURN_STRING("char");
 		if (S_ISDIR(stat_sb->st_mode)) RETURN_STRING("dir");

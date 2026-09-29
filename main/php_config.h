@@ -23,10 +23,7 @@
 #define PHP_CONFIG_FILE_SCAN_DIR ""
 #endif
 
-#if defined(_WIN32)
-#error "php-nano does not target Windows; use TypePHP --nano with the full PHP/PHPX DLL runtime"
-#endif
-
+#if !defined(_WIN32)
 #define HAVE_DIRENT_H 1
 #define HAVE_UNISTD_H 1
 #define HAVE_SYS_STAT_H 1
@@ -44,13 +41,25 @@
 #define HAVE_SCANDIR 1
 #define HAVE_ALPHASORT 1
 #define HAVE_MKSTEMP 1
+#else
+#define HAVE_WINDOWS_H 1
+#define HAVE_IO_H 1
+#define HAVE_SYS_STAT_H 1
+#define HAVE_SYS_TYPES_H 1
+#define HAVE_SYS_UTIME_H 1
+#define HAVE_UTIME 1
+#endif
 #ifndef __wasi__
 #define HAVE_GRP_H 1
 #define HAVE_PWD_H 1
 #endif
 #include <stdlib.h>
 #include <string.h>
+#ifndef _WIN32
 #include <strings.h>
+#endif
+#ifndef _WIN32
 #define _exit _Exit
+#endif
 
 #endif
