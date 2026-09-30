@@ -53,6 +53,14 @@ DependencyState dependency_state(
          ++dependency) {
         zend_module_entry *available = find_available(
             extensions, count, dependency->name);
+        if (available == nullptr) {
+            // The Core module is registered and started before the Composer
+            // extension list. Module registry keys are lowercase.
+            zend_string *key = zend_string_init(dependency->name, std::strlen(dependency->name), false);
+            zend_str_tolower(ZSTR_VAL(key), ZSTR_LEN(key));
+            available = static_cast<zend_module_entry *>(zend_hash_find_ptr(&module_registry, key));
+            zend_string_release(key);
+        }
         if (dependency->type == MODULE_DEP_CONFLICTS) {
             if (available != nullptr) {
                 return DependencyState::Invalid;

@@ -80,7 +80,7 @@ static inline void jump(php_random_status_state_xoshiro256starstar *state, const
 	state->state[3] = s3;
 }
 
-PHPAPI inline void php_random_xoshiro256starstar_seed256(php_random_status_state_xoshiro256starstar *state, uint64_t s0, uint64_t s1, uint64_t s2, uint64_t s3)
+PHPAPI void php_random_xoshiro256starstar_seed256(php_random_status_state_xoshiro256starstar *state, uint64_t s0, uint64_t s1, uint64_t s2, uint64_t s3)
 {
 	state->state[0] = s0;
 	state->state[1] = s1;
@@ -88,7 +88,7 @@ PHPAPI inline void php_random_xoshiro256starstar_seed256(php_random_status_state
 	state->state[3] = s3;
 }
 
-PHPAPI inline void php_random_xoshiro256starstar_seed64(php_random_status_state_xoshiro256starstar *state, uint64_t seed)
+PHPAPI void php_random_xoshiro256starstar_seed64(php_random_status_state_xoshiro256starstar *state, uint64_t seed)
 {
 	uint64_t s[4];
 

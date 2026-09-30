@@ -399,7 +399,7 @@ ZEND_API void zend_interned_strings_switch_storage(bool request)
 	}
 }
 
-#if defined(PHP_NANO) && (defined(__i386__) || (defined(__x86_64__) && !defined(__ILP32__)))
+#if defined(PHP_NANO) && defined(__GNUC__) && (defined(__i386__) || (defined(__x86_64__) && !defined(__ILP32__)))
 /*
  * The upstream assembly implementation compares complete machine words and
  * masks bytes beyond the logical string length.  Those bytes are part of the

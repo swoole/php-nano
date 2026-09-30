@@ -33,7 +33,7 @@ static inline void step(php_random_status_state_pcgoneseq128xslrr64 *s)
 	);
 }
 
-PHPAPI inline void php_random_pcgoneseq128xslrr64_seed128(php_random_status_state_pcgoneseq128xslrr64 *s, php_random_uint128_t seed)
+PHPAPI void php_random_pcgoneseq128xslrr64_seed128(php_random_status_state_pcgoneseq128xslrr64 *s, php_random_uint128_t seed)
 {
 	s->state = php_random_uint128_constant(0ULL, 0ULL);
 	step(s);

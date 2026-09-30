@@ -123,7 +123,7 @@ static inline void mt19937_reload(php_random_status_state_mt19937 *state)
 	state->count = 0;
 }
 
-PHPAPI inline void php_random_mt19937_seed32(php_random_status_state_mt19937 *state, uint32_t seed)
+PHPAPI void php_random_mt19937_seed32(php_random_status_state_mt19937 *state, uint32_t seed)
 {
 	uint32_t i, prev_state;
 
