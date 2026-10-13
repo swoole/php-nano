@@ -13,6 +13,19 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Exercise the Windows compatibility header on every CI host. Compiling both
+# languages catches a shim that works for C11 but hides Clang's C++ feature macros.
+add_library(
+    php-nano-stdalign-check
+    OBJECT
+    tests/stdalign_test.c
+    tests/stdalign_test.cpp
+)
+target_include_directories(
+    php-nano-stdalign-check
+    BEFORE PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/win32/c11"
+)
+
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/composer.json" PHP_NANO_COMPOSER_JSON)
 
 # Reads a path array. The member is optional, so a platform block the manifest
