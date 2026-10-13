@@ -57,6 +57,22 @@ jobs:
       - name: Run smoke test
         run: ctest --test-dir build/tests --output-on-failure
 
+  windows-smoke:
+    name: windows-latest
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure test build
+        run: cmake -S . -B build/tests -A x64
+
+      - name: Build runtime and smoke test
+        run: cmake --build build/tests --config Release --parallel 4
+
+      - name: Run smoke test
+        run: ctest --test-dir build/tests -C Release --output-on-failure
+
   ios-compile:
     name: iOS arm64
     runs-on: macos-latest

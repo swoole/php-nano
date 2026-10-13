@@ -25,6 +25,10 @@
 /* PHP Runtime Configuration */
 #define DEFAULT_SHORT_OPEN_TAG "1"
 
+/* Use PHP's portable C SHA-3 implementation on every Nano target. This mirrors
+ * main/php_config.h, which a Windows build never reaches. */
+#define HAVE_SLOW_HASH3 1
+
 /* MSVC 19.44 / linker 14.44. */
 #define PHP_LINKER_MAJOR 14
 #define PHP_LINKER_MINOR 44

@@ -7810,6 +7810,7 @@ ZEND_METHOD(ReflectionEnumBackedCase, getBackingValue)
 	ZVAL_COPY_OR_DUP(return_value, member_p);
 }
 
+#ifndef PHP_NANO
 /* {{{ proto ReflectionFiber::__construct(Fiber $fiber) */
 ZEND_METHOD(ReflectionFiber, __construct)
 {
@@ -7933,6 +7934,7 @@ ZEND_METHOD(ReflectionFiber, getCallable)
 
 	RETURN_COPY(&fiber->fci.function_name);
 }
+#endif
 
 /* {{{ _reflection_write_property */
 static zval *_reflection_write_property(zend_object *object, zend_string *name, zval *value, void **cache_slot)

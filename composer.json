@@ -49,12 +49,21 @@
       "platforms": {
         "windows": {
           "defines": [
+            "ZEND_WIN32=1",
+            "PHP_WIN32=1",
+            "ZEND_DEBUG=0",
+            "ENABLE_INTSAFE_SIGNED_FUNCTIONS=1",
             "PCRE2_STATIC=1",
+            "LEXBOR_STATIC=1",
             "NOMINMAX=1"
+          ],
+          "include-dirs": [
+            "win32/c11"
           ],
           "sources": [
             "TSRM/tsrm_win32.c",
             "Zend/zend_cpuinfo.c",
+            "ext/standard/crc32_x86.c",
             "ext/standard/flock_compat.c",
             "win32/codepage.c",
             "win32/console.c",

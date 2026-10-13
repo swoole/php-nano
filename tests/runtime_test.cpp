@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 
+extern "C" {
 #include "php.h"
 #include "php_nano_extension.h"
 #include "zend_exceptions.h"
-extern "C" {
 #include "ext/bcmath/libbcmath/src/bcmath.h"
 #include "ext/standard/php_var.h"
 }

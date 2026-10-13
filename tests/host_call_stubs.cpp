@@ -7,8 +7,10 @@
  * fails instead of silently executing interpreter code.
  */
 
+extern "C" {
 #include "php.h"
 #include "zend_API.h"
+}
 
 extern "C" ZEND_API zend_result zend_call_function(
     zend_fcall_info *fci, zend_fcall_info_cache *)
